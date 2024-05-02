@@ -1,0 +1,284 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - Perfil{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/admProductList.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h2 class="text-h2 text-start pt-5  text-uppercase m-0 text-wrap" >Perfil</h2>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="bg-light pt-2 rounded shadow">
+            <form method="post" class="m-4" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id="q-app" style="min-height: auto;"> 
+                    <div class="q-pa-md">
+                        <q-input name="email" outlined ref="mailRef" v-model="mail" :rules="[mailRules]" label="Email" :dense="dense"></q-input>
+                    </div>
+                    <div class="q-pa-md">
+                        <q-input name="username" outlined ref="usuarioRef" v-model="usuario" :rules="[usuarioRules]" label="Usuario" :dense="dense"></q-input>
+                    </div>
+                    <div class="q-pa-md">
+                        <q-input name="nombre"  outlined ref="nombreRef" v-model="nombre" label="Nombre" :rules="[ nombreRules ]"></q-input>
+                    </div>
+                    <div class="q-pa-md">
+                        <q-input name="apellidos"  outlined ref="apellidosRef" v-model="apellidos" label="Apellidos" :rules="[ apellidosRules ]"></q-input>
+                    </div>
+                    <div class="q-pa-md">
+                        <q-input name="dni"  outlined ref="dniRef" mask="########-A" v-model="dni" label="DNI" :rules="[ dniRules ]"></q-input>
+                    </div>
+                    <div class="q-pa-md">
+                        <q-input name="telefono"  outlined ref="telefonoRef" mask="#########" v-model="telefono" label="Teléfono" :rules="[ telefonoRules ]"></q-input>
+                    </div>
+                    <div class="q-pa-md">
+                        <q-input name="calle" outlined ref="calleRef" v-model="calle" label="Calle" :rules="[ calleRules ]" :dense="dense"></q-input>
+                    </div>
+                    <div class="q-pa-md">
+                        <q-input name="ciudad" outlined ref="ciudadRef" v-model="ciudad" label="Ciudad" :rules="[ ciudadRules ]" :dense="dense"></q-input>
+                    </div>
+                    <div class="q-pa-md">
+                        <q-input name="cPostal" outlined ref="codigoPostalRef" mask="#####" v-model="codigoPostal" mask="#####" :rules="[codigoPostalRules]" label="Código Postal" :dense="dense"></q-input>
+                    </div>
+                    <div class="q-pa-md">
+                        <input type="hidden" name="provincia">
+                        <q-select input-name="provincia" filled ref="provinciaRef" v-model="provincia" :options="PROVINCIAS_ESPANA" :rules="[provinciaRules]" label="Provincia"></q-select>
+                    </div>
+                </div>
+                {% for field in form %}
+                <div class="mb-3">
+                    {% if field.errors %}
+                        <ul>
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                {% endfor %}  
+                <div class="w-100 text-end">
+                    <button type="submit" class="btn btn-success mb-4">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+<script>
+    const { ref, createApp } = Vue
+    const app = Vue.createApp({
+      setup () {
+        const nombreRef = ref(null);
+        const usuarioRef = ref(null);
+        const apellidosRef = ref(null);
+        const dniRef = ref(null);
+        const telefonoRef = ref(null);
+        const calleRef = ref(null);
+        const ciudadRef = ref(null);
+        const codigoPostalRef = ref(null);
+        const provinciaRef = ref(null);
+        const mailRef = ref(null);
+        return {
+            nombreRef,
+            nombre: ref('{{usuario.nombre}}'),
+            nombreRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('El nombre es requerido.');
+                    } else if (val.length >= 20) {
+                        resolve('El nombre debe tener menos de 20 caracteres.');
+                    } else {
+                        resolve(true);
+                    }
+                  })
+                },
+
+            apellidosRef,
+            apellidos: ref('{{usuario.apellidos}}'),
+            apellidosRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('Los apellidos son requeridos.');
+                    } else if (val.length > 30) {
+                        resolve('Los apellidos deben tener menos de 30 caracteres.');
+                    } else {
+                        resolve(true); 
+                    }
+                  })
+                },
+
+            dniRef,
+            dni: ref('{{usuario.dni}}'),
+            dniRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('El DNI es requerido.');
+                    } else if (!/^\d{8}-[A-Z]$/i.test(val)) {
+                        resolve('El formato del DNI no es válido.');
+                    } else {
+                        resolve(true); 
+                    }
+                  })
+                },
+            
+            telefonoRef,
+            telefono: ref('{{usuario.telefono}}'),
+            telefonoRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('El teléfono es requerido.');
+                    } else if (val.length != 9 ) {
+                        resolve('El teléfono debe de ser de 9 cifras.');
+                    } else {
+                        resolve(true); 
+                    }
+                  })
+                },
+
+            calleRef,
+            calle: ref('{{usuario.calle}}'),
+            calleRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('La calle es requerida.');
+                    } else {
+                        resolve(true); 
+                    }
+                  })
+                },
+
+            ciudadRef,
+            ciudad: ref('{{usuario.ciudad}}'),
+            ciudadRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('La ciudad es requerida.');
+                    } else {
+                        resolve(true); 
+                    }
+                  })
+                },
+
+            codigoPostalRef,
+            codigoPostal: ref('{{usuario.cPostal}}'),
+            codigoPostalRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('El código postal es requerido.');
+                    } else if (val.length !== 5) {
+                        resolve('El código postal debe tener una longitud de 5 caracteres.');
+                    } else {
+                        resolve(true);
+                    }
+                  })
+                },
+
+            provinciaRef,
+            provincia: ref('{{usuario.get_nombre_provincia}}'),
+            provinciaRules (val){
+                
+                document.querySelector('input[name="provincia"]').value = val.value
+                
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('La provincia es requerida.');
+                    } else {
+                        resolve(true); 
+                    }
+                  })
+                },
+            
+            mailRef,
+            mail: ref('{{usuario.email}}'),
+            mailRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('El email es requerida.');
+                    } else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)){
+                        resolve('Formato de email no válido.');
+                    } else {
+                        resolve(true); 
+                    }
+                  })
+                },
+
+            usuarioRef,
+            usuario: ref('{{usuario.username}}'),
+            usuarioRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('El usuario es requerida.');
+                    } else {
+                        resolve(true); 
+                    }
+                  })
+                },
+
+          dense: ref(false),
+          PROVINCIAS_ESPANA: [
+                  { label: 'Almería', value: 'AL' },
+                  { label: 'Cádiz', value: 'CA' },
+                  { label: 'Córdoba', value: 'CO' },
+                  { label: 'Granada', value: 'GR' },
+                  { label: 'Huelva', value: 'HU' },
+                  { label: 'Jaén', value: 'JA' },
+                  { label: 'Málaga', value: 'MA' },
+                  { label: 'Sevilla', value: 'SE' },
+                  { label: 'Albacete', value: 'AB' },
+                  { label: 'Ciudad Real', value: 'CR' },
+                  { label: 'Cuenca', value: 'CU' },
+                  { label: 'Guadalajara', value: 'GU' },
+                  { label: 'Toledo', value: 'TO' },
+                  { label: 'Ávila', value: 'AV' },
+                  { label: 'Burgos', value: 'BU' },
+                  { label: 'León', value: 'LE' },
+                  { label: 'Palencia', value: 'P' },
+                  { label: 'Salamanca', value: 'SA' },
+                  { label: 'Segovia', value: 'SG' },
+                  { label: 'Soria', value: 'SO' },
+                  { label: 'Valladolid', value: 'VA' },
+                  { label: 'Zamora', value: 'ZA' },
+                  { label: 'Huesca', value: 'HU' },
+                  { label: 'Teruel', value: 'TE' },
+                  { label: 'Zaragoza', value: 'Z' },
+                  { label: 'Asturias', value: 'O' },
+                  { label: 'Cantabria', value: 'C' },
+                  { label: 'Álava', value: 'VI' },
+                  { label: 'Bizkaia', value: 'BI' },
+                  { label: 'Gipuzkoa', value: 'SS' },
+                  { label: 'A Coruña', value: 'C' },
+                  { label: 'Lugo', value: 'LU' },
+                  { label: 'Ourense', value: 'OU' },
+                  { label: 'Pontevedra', value: 'PO' },
+                  { label: 'Badajoz', value: 'BA' },
+                  { label: 'Cáceres', value: 'CC' },
+                  { label: 'Santa Cruz de Tenerife', value: 'TF' },
+                  { label: 'Las Palmas', value: 'GC' },
+                  { label: 'Ceuta', value: 'CE' },
+                  { label: 'Melilla', value: 'ML' },
+                  { label: 'Murcia', value: 'MU' },
+                  { label: 'Madrid', value: 'MD' },
+                  { label: 'La Rioja', value: 'LO' },
+                  { label: 'Navarra', value: 'NA' },
+                  { label: 'País Vasco', value: 'PV' },
+                ]
+        }
+      }
+    })
+
+    app.use(Quasar)
+    app.mount('#q-app')
+</script>
+{% endblock %}
+

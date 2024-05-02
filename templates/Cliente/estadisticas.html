@@ -1,0 +1,21 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - Estadisticas{% endblock %}
+
+{% block styles %}
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid pb-3">
+    <div class="position-relative">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Algunas estadísticas aleatorias</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="w-100 bg-light pt-2 rounded shadow">
+            hola
+            {{ statsSorteo|safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}

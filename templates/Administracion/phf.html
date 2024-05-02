@@ -1,0 +1,86 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Personalizar{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/pHeaderFooter.css' %}">
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid">
+    <div class="container">
+        <h1 class="text-start pt-5  text-uppercase m-0">Editar Header y Footer</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="bg-light pt-2 rounded p-4 ">
+            <div class="w-100 d-flex justify-content-between align-content-center cabecera" style="height: auto; background-image: url({{ imagenCabecera.url }}); background-color: {{ administracion.color_primario }};">
+                <div class="mx-4">
+                    <img src="{{ imagenLogo.url }}" alt="Logo actual" style="max-width: 100px; height: auto;">
+                </div>
+                <div class=" d-flex align-items-center justify-content-end ">
+                    <div id="menu-icons" class="d-flex  align-items-center flex-shrink-0" style="color: {{ administracion.color_secundario }};">
+                      <span class="px-3 d-flex flex-wrap align-items-center justify-content-center"><i class="icon-nav-menu-b bi bi-person"></i></span>
+                      <span class="px-3 d-flex flex-wrap align-items-center justify-content-center"><i class="icon-nav-menu-b2 bi bi-bag"></i></span>
+                      <span id="menu-icon" class="px-3 d-flex flex-wrap align-items-center justify-content-center"><i class="bi bi-list fs-3" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample"></i></span>
+                    </div>
+                </div>
+            </div>
+            <form method="post" enctype="multipart/form-data" class="py-3">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mb-5">
+                    <label for="" class="form-label fw-bolder">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger">
+                            {% for error in field.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="mb-3">
+                    <p class="fw-light form-label">(Ayuda) Informate de los codigos hexadecimales de los colores:</p>
+                    <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color">
+                </div>
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn btn-success text-end" type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById("logo-clear_id").addEventListener("click", function () {
+            document.getElementById("id_logo").value = "";
+        }, false);
+        document.getElementById("imagen_cabecera-clear_id").addEventListener("click", function () {
+            document.getElementById("id_imagen_cabecera").value = "";
+        }, false);
+        document.addEventListener("DOMContentLoaded", function() {
+            var logoClearCheckbox = document.getElementById("logo-clear_id");
+            var logoInput = document.getElementById("id_logo");
+            var imagenCabeceraClearCheckbox = document.getElementById("imagen_cabecera-clear_id");
+            var imagenCabeceraInput = document.getElementById("id_imagen_cabecera");
+            
+            logoClearCheckbox.addEventListener("click", function() {
+                if (logoClearCheckbox.checked) {
+                    logoInput.disabled = true;
+                } else {
+                    logoInput.disabled = false;
+                }
+            });
+            imagenCabeceraClearCheckbox.addEventListener("click", function() {
+                if (imagenCabeceraClearCheckbox.checked) {
+                    imagenCabeceraInput.disabled = true;
+                } else {
+                    imagenCabeceraInput.disabled = false;
+                }
+            });
+        });
+    </script>
+</div>
+{% endblock %}
+

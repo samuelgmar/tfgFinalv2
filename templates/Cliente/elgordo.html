@@ -1,0 +1,848 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - El Gordo de la primitiva{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'Cliente/css/sorteos/elgordo.css' %}">
+
+{% endblock %}
+{% block extrascripts %}
+
+{% endblock %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+<div class="w-100">
+  <div class="container-fluid">
+      <div class="text-center py-4 d-flex flex-row justify-content-center align-items-center">
+          <div class="img-sorteo" style="background-image: url('{% static 'imgs/sorteos/cabecera_ElGordo.png' %}');"></div>
+      </div>
+      <div class="w-75 m-auto mb-5 border-bottom border-black"></div>
+      
+      <div class="d-flex flex-column justify-content-center align-items-center pb-5">
+        <div class="container-fluid" style="max-width: 50em;">
+          <div class="d-flex justify-content-center align-items-center pb-3">
+            <input type="hidden" name="mode" id="multi" value="Sencilla">
+            <button id="sencilloBtn" onclick="botonModo(this)" class="btn-m-seleccionado mx-2" type="button">Sencilla</button>
+            <button id="multipleBtn" onclick="botonModo(this)" class="btn-m mx-2" type="button">Multiple</button>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center pb-3">
+            <input type="hidden" name="dia" id="diario" value="Domingo">
+            <button id="dia" onclick="botonDia(this)" class="btn-d-seleccionado mx-2" type="button">Domingo</button>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center mx-1 pb-3">
+            <select id="autouno" class="form-select mx-4" aria-label="Default select example" onchange="auto(this)">
+              <option selected>AUTOMATICAS</option>
+              <option value="1">1 bloque (1,5€)</option>
+              <option value="2">2 bloque (3€)</option>
+              <option value="3">3 bloque (4,5€)</option>
+              <option value="4">4 bloque (6€)</option>
+              <option value="5">5 bloque (7,5€)</option>
+              <option value="6">6 bloque (9€)</option>
+            </select>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center mx-1">
+            <select id="autodos" class="form-select mx-4" aria-label="Default select example" onchange="autom(this)">
+              <option selected>AUTOMAT. MULTIPLES</option>
+              <option value="6">Multiple 6 (9€)</option>
+              <option value="7">Multiple 21 (31,5€)</option>
+              <option value="8">Multiple 56 (84€)</option>
+              <option value="9">Multiple 126 (189€)</option>
+              <option value="10">Multiple 252 (378€)</option>
+              <option value="11">Multiple 462 (693€)</option>
+            </select>
+          </div>
+          
+          <div class="d-flex flex-wrap-reverse justify-content-center align-items-center">
+            <div class="d-inline-block modulo-botonera">
+              <div class="botonera pb-3">
+                <button onclick="boton(this)" value="1" name="" class="boton-boleto">1</button>
+                <button onclick="boton(this)" value="2" name="" class="boton-boleto">2</button>
+                <button onclick="boton(this)" value="3" name="" class="boton-boleto">3</button>
+                <button onclick="boton(this)" value="4" name="" class="boton-boleto">4</button>
+                <button onclick="boton(this)" value="5" name="" class="boton-boleto">5</button>
+                <button onclick="boton(this)" value="6" name="" class="boton-boleto">6</button>
+                <button onclick="boton(this)" value="7" name="" class="boton-boleto">7</button>
+                <button onclick="boton(this)" value="8" name="" class="boton-boleto">8</button>
+                <button onclick="boton(this)" value="9" name="" class="boton-boleto">9</button>
+                <button onclick="boton(this)" value="10" name="" class="boton-boleto">10</button>
+                <button onclick="boton(this)" value="11" name="" class="boton-boleto">11</button>
+                <button onclick="boton(this)" value="12" name="" class="boton-boleto">12</button>
+                <button onclick="boton(this)" value="13" name="" class="boton-boleto">13</button>
+                <button onclick="boton(this)" value="14" name="" class="boton-boleto">14</button>
+                <button onclick="boton(this)" value="15" name="" class="boton-boleto">15</button>
+                <button onclick="boton(this)" value="16" name="" class="boton-boleto">16</button>
+                <button onclick="boton(this)" value="17" name="" class="boton-boleto">17</button>
+                <button onclick="boton(this)" value="18" name="" class="boton-boleto">18</button>
+                <button onclick="boton(this)" value="19" name="" class="boton-boleto">19</button>
+                <button onclick="boton(this)" value="20" name="" class="boton-boleto">20</button>
+                <button onclick="boton(this)" value="21" name="" class="boton-boleto">21</button>
+                <button onclick="boton(this)" value="22" name="" class="boton-boleto">22</button>
+                <button onclick="boton(this)" value="23" name="" class="boton-boleto">23</button>
+                <button onclick="boton(this)" value="24" name="" class="boton-boleto">24</button>
+                <button onclick="boton(this)" value="25" name="" class="boton-boleto">25</button>
+                <button onclick="boton(this)" value="26" name="" class="boton-boleto">26</button>
+                <button onclick="boton(this)" value="27" name="" class="boton-boleto">27</button>
+                <button onclick="boton(this)" value="28" name="" class="boton-boleto">28</button>
+                <button onclick="boton(this)" value="29" name="" class="boton-boleto">29</button>
+                <button onclick="boton(this)" value="30" name="" class="boton-boleto">30</button>
+                <button onclick="boton(this)" value="31" name="" class="boton-boleto">31</button>
+                <button onclick="boton(this)" value="32" name="" class="boton-boleto">32</button>
+                <button onclick="boton(this)" value="33" name="" class="boton-boleto">33</button>
+                <button onclick="boton(this)" value="34" name="" class="boton-boleto">34</button>
+                <button onclick="boton(this)" value="35" name="" class="boton-boleto">35</button>
+                <button onclick="boton(this)" value="36" name="" class="boton-boleto">36</button>
+                <button onclick="boton(this)" value="37" name="" class="boton-boleto">37</button>
+                <button onclick="boton(this)" value="38" name="" class="boton-boleto">38</button>
+                <button onclick="boton(this)" value="39" name="" class="boton-boleto">39</button>
+                <button onclick="boton(this)" value="40" name="" class="boton-boleto">40</button>
+                <button onclick="boton(this)" value="41" name="" class="boton-boleto">41</button>
+                <button onclick="boton(this)" value="42" name="" class="boton-boleto">42</button>
+                <button onclick="boton(this)" value="43" name="" class="boton-boleto">43</button>
+                <button onclick="boton(this)" value="44" name="" class="boton-boleto">44</button>
+                <button onclick="boton(this)" value="45" name="" class="boton-boleto">45</button>
+                <button onclick="boton(this)" value="46" name="" class="boton-boleto">46</button>
+                <button onclick="boton(this)" value="47" name="" class="boton-boleto">47</button>
+                <button onclick="boton(this)" value="48" name="" class="boton-boleto">48</button>
+                <button onclick="boton(this)" value="49" name="" class="boton-boleto">49</button>
+                <button onclick="boton(this)" value="50" name="" class="boton-boleto">50</button>
+                <button onclick="boton(this)" value="51" name="" class="boton-boleto">51</button>
+                <button onclick="boton(this)" value="52" name="" class="boton-boleto">52</button>
+                <button onclick="boton(this)" value="53" name="" class="boton-boleto">53</button>
+                <button onclick="boton(this)" value="54" name="" class="boton-boleto">54</button>
+              </div>
+              <div class="fw-light"><p>Nº CLAVE</p></div>
+              <div class="claves">
+                <button onclick="boton(this)" value="0" name="" class="boton-boleto">0</button>
+                <button onclick="boton(this)" value="1" name="" class="boton-boleto">1</button>
+                <button onclick="boton(this)" value="2" name="" class="boton-boleto">2</button>
+                <button onclick="boton(this)" value="3" name="" class="boton-boleto">3</button>
+                <button onclick="boton(this)" value="4" name="" class="boton-boleto">4</button>
+                <button onclick="boton(this)" value="5" name="" class="boton-boleto">5</button>
+                <button onclick="boton(this)" value="6" name="" class="boton-boleto">6</button>
+                <button onclick="boton(this)" value="7" name="" class="boton-boleto">7</button>
+                <button onclick="boton(this)" value="8" name="" class="boton-boleto">8</button>
+                <button onclick="boton(this)" value="9" name="" class="boton-boleto">9</button>
+              </div>
+            </div>
+            <div class="d-inline-block contenedor-combinaciones pt-5"> 
+              <div class="combinaciones">
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">1.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="listado-num-clave">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-clave"  readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">2.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="listado-num-clave">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-clave"  readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">3.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="listado-num-clave">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-clave"  readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">4.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="listado-num-clave">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-clave"  readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">5.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="listado-num-clave">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-clave"  readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">6.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="listado-num-clave">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-clave"  readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-none justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">1.</strong>
+                  <div class="list-combinacion-multiple">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="listado-num-clave">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-clave"  readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center pb-3">
+        <button class="btn-m-seleccionado mx-2 mb-3" onclick="reset()" style="max-width: 80em; background-color: #dc3f47; color: white;">
+          Volver a empezar
+        </button>
+      </div>
+      <div class="total-block d-flex flex-column justify-content-center align-items-center">
+        <div class="modulo-total-compra">
+          <strong>Total</strong>	
+          <span class="total-compra">0,00 €</span>
+        </div>
+        <input type="hidden" name="sorteo" value="elgordo">
+        <input type="hidden" id="precioinput" name="precio" value="0.00">
+        <input type="hidden" id="variable" name="variable">
+        <button class="boton-confirmar" disabled="disabled">CONFIRMA TU APUESTA</button>
+      </div>
+      <div class="d-flex justify-content-center flex-wrap pb-5">
+        <p class="">
+          <button class="btn" style="max-width: 50em; background-color: #dc3f47; color: white;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            ¿Como Jugar?
+          </button>
+        </p>
+        <div class="collapse w-100" id="collapseExample">
+          <div class="card card-body fw-light lh-sm" style="font-size: small;">
+            Cada apuesta de El Gordo de La Primitiva consiste en seleccionar 5 números de una tabla de 54 (números del 1 al 54) y uno más (número clave) de una tabla de 10 (del 0 al 9). En El Gordo se destina el 55% de la recaudación a premios.
+            <br><br>
+            Para participar solamente tienes que:<br><br>
+            1.- Elegir la combinación de 5 números y número clave que deseas jugar o dejar que el sistema te ofrezca una aleatoria.<br><br>
+
+            2.- Puedes jugar hasta 6 combinaciones de 5 números y número clave (apuestas sencillas de varios bloques) de una sola vez o una combinación de más números (por ejemplo 6 números, que corresponde a 6 apuestas, o 7 números, que corresponde a 21 apuestas).<br><br>
+
+            3.- Añadir la combinación o combinaciones deseadas a tu compra.<br><br>
+
+            4.- Continuar y decidir si quieres realizar la misma compra en semanas sucesivas o no.<br>
+
+            5.- Revisar todas las opciones y jugar.<br><br>
+
+            Las probabilidades aproximadas de acertar en El Gordo de La Primitiva son las siguientes:<br><br>
+            
+            <pre>
+Categoría      Posibilidades aproximadas de acertar
+
+1ª (5+1)       1 entre 31.625.100
+
+2ª (5+0)       1 entre 3.513.900
+
+3ª (4+1)       1 entre 129.082
+
+4ª (4+0)       1 entre 14.342
+
+5ª (3+1)       1 entre 2.689
+
+6ª (3+0)       1 entre 299
+
+7ª (2+1)       1 entre 172
+
+8ª (2+0)       1 entre 19
+
+Reintegro      1 entre 10</pre>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+</form>
+<script>
+  var numerosSeleccionados = [];
+  var clavesSeleccionados = [];
+  var grupo = [99,99,99,99,99];
+  var clave = [99];
+  var grupodos = [99,99,99,99,99,99,99,99,99,99,99];
+  var filasel = 1;
+
+  function reset() {
+    var capasopa = document.querySelectorAll('.capa-opacidad:not(.activo)');
+    capasopa.forEach(opa => {
+      opa.classList.add('activo')
+    });
+
+    numerosSeleccionados = [];
+    clavesSeleccionados = [];
+    grupo = [99,99,99,99,99];
+    clave = [99];
+    grupodos = [99,99,99,99,99,99,99,99,99,99,99];
+    filasel = 1;
+
+    var inputs = document.querySelectorAll('.contenedor-combinaciones input');
+    inputs.forEach(input => {
+      input.value = '-';
+    });
+    var botones = document.querySelectorAll('.modulo-botonera button.seleccionado');
+    botones.forEach(boton => {
+      boton.classList.remove('seleccionado');
+    });
+    total();
+  }
+
+  function generarNumero(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function auto(element){
+    var selectElement = document.getElementById('autodos');
+    selectElement.selectedIndex = 0;
+    reset();
+    botonModo(document.getElementById("sencilloBtn"));
+    var opcion = element.value;
+    var numeros = [];
+    for (let index = 0; index < opcion; index++) {
+      while (numeros.length < 6) {
+          var numeroAleatorio = generarNumero(1, 54);
+          if (numeros.indexOf(numeroAleatorio) === -1) {
+              numeros.push(numeroAleatorio);
+          }
+      }
+      var sueno = Math.floor(Math.random() * 9) ;
+      numerosSeleccionados.push(numeros);
+      clavesSeleccionados.push(sueno);
+      numeros = [];
+    }
+
+    var contenedor = document.querySelectorAll('.fila-combinacion.d-flex');
+    for (let index = 0; index < opcion; index++) {
+      var filasel = contenedor[index].querySelector('.capa-opacidad.activo');
+      filasel.classList.remove('activo');
+      var inputs = contenedor[index].querySelectorAll('input');
+      for (let indexdos = 0; indexdos < inputs.length-1; indexdos++) {
+        inputs[indexdos].value = numerosSeleccionados[index][indexdos];
+      }
+      inputs[5].value = clavesSeleccionados[index];
+    }
+    var selectElement = document.getElementById('autodos');
+    selectElement.selectedIndex = 0;
+    selectElement = document.getElementById('autouno');
+    selectElement.selectedIndex = 0;
+    total();
+  }
+
+  function autom(element){
+    var selectElement = document.getElementById('autouno');
+    selectElement.selectedIndex = 0;
+    reset();
+    botonModo(document.getElementById("multipleBtn"));
+    var opcion = element.value;
+    var numeros = [];
+    
+    while (numeros.length < opcion) {
+        var numeroAleatorio = generarNumero(1, 54);
+        if (numeros.indexOf(numeroAleatorio) === -1) {
+            numeros.push(numeroAleatorio);
+        }
+    }
+    var sueno = Math.floor(Math.random() * 9);
+    numerosSeleccionados.push(numeros);
+    clavesSeleccionados.push(sueno);
+    numeros = [];
+    
+
+    var contenedor = document.querySelectorAll('.fila-combinacion.d-flex');
+    
+    var filasel = contenedor[0].querySelector('.capa-opacidad.activo');
+    filasel.classList.remove('activo');
+    var inputs = contenedor[0].querySelectorAll('input');
+    for (let indexdos = 0; indexdos < opcion; indexdos++) {
+      inputs[indexdos].value = numerosSeleccionados[0][indexdos];
+    }
+    inputs[11].value = clavesSeleccionados[0];
+
+    var botonesuno = document.querySelectorAll('.modulo-botonera .botonera button');
+    for (let index = 0; index < numerosSeleccionados[0].length; index++) {
+      var valor = numerosSeleccionados[0][index].toString();;
+      for (let indexdos = 0; indexdos < botonesuno.length; indexdos++) {
+        var botonvalor = botonesuno[indexdos].value;
+        if(botonvalor === valor){
+          boton(botonesuno[indexdos]);
+        }
+      }
+    }
+
+    var botonesdos = document.querySelectorAll('.modulo-botonera .claves button');
+    
+    var valor = clavesSeleccionados[0].toString();;
+    for (let indexdos = 0; indexdos < botonesdos.length; indexdos++) {
+      var botonvalor = botonesdos[indexdos].value;
+      if(botonvalor === valor){
+        boton(botonesdos[indexdos]);
+      }
+    }
+    var selectElement = document.getElementById('autodos');
+    selectElement.selectedIndex = 0;
+    selectElement = document.getElementById('autouno');
+    selectElement.selectedIndex = 0;
+    total();
+  }
+
+  function total(){
+    var total = document.querySelector('.total-compra');
+    var botonmode = document.querySelector('.btn-m-seleccionado');
+    var botondia = document.querySelector('.btn-d-seleccionado');
+    if(botonmode.textContent === "Sencilla"){
+      total.textContent = `${(numerosSeleccionados.length * 1.5).toFixed(2)} €`;
+    }else if(botonmode.textContent === "Multiple"){
+      var botonSelec = document.querySelectorAll('.botonera .boton-boleto.seleccionado');
+      var botondia = document.querySelector('.btn-d-seleccionado');
+      var inputSueno = document.querySelector('.fila-combinacion.d-flex .item-num-clave');
+      if(inputSueno.value !== '-'){
+        if(botonSelec.length === 6){
+          var total = document.querySelector('.total-compra');
+          total.textContent = `9.00 €`;
+        }else if(botonSelec.length === 7){
+          var total = document.querySelector('.total-compra');
+          total.textContent = `31.50 €`;
+        }else if(botonSelec.length === 8){
+          var total = document.querySelector('.total-compra');
+          total.textContent = `84.00 €`;
+        }else if(botonSelec.length === 9){
+          var total = document.querySelector('.total-compra');
+          total.textContent = `189.00 €`;
+        }else if(botonSelec.length === 10){
+          var total = document.querySelector('.total-compra');
+          total.textContent = `378.00 €`;
+        }else if(botonSelec.length === 11){
+          var total = document.querySelector('.total-compra');
+          total.textContent = `693.00 €`;
+        }else{
+          var total = document.querySelector('.total-compra');
+          total.textContent = `${(0).toFixed(2)} €`;
+        }
+      }else{
+        total.textContent = `${(0).toFixed(2)} €`;
+      }
+    }
+
+    var total = document.querySelector('.total-compra');
+    if(total.textContent !== "0,00 €" && total.textContent !== "0.00 €"){
+      var confirmar = document.querySelector('.boton-confirmar');
+      confirmar.disabled = false;
+    }else{
+      var confirmar = document.querySelector('.boton-confirmar');
+      confirmar.disabled = true;
+    }
+  }
+
+  function botondos(elemento){
+      var contenedor = elemento.closest('.claves');
+      var clavesDiv = document.querySelector('.claves');
+      var botonera = document.querySelector('.botonera');
+      var botonesSeleccionados = botonera.querySelectorAll('.boton-boleto.seleccionado');
+      if (botonera.contains(elemento) && botonesSeleccionados.length >= 11 && !elemento.classList.contains('seleccionado')) {
+          return; 
+      }
+      var inputSueno = document.querySelector('.fila-combinacion.d-flex .item-num-clave');
+      if(inputSueno.value === '-' || contenedor){
+        var botonesSeleccionadosSuenos = document.querySelectorAll('.claves .seleccionado');
+        botonesSeleccionadosSuenos.forEach(function(boton) {
+            if (boton.classList.contains('seleccionado')) {
+                boton.classList.remove('seleccionado');
+            }
+        });
+      }
+
+      elemento.classList.toggle('seleccionado');
+      
+      if(elemento.classList.contains('seleccionado')){
+        if (contenedor) {
+            // El botón pertenece al contenedor "claves"
+            var valor = elemento.value;
+            clave.splice(0,1,valor);
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsuno = sel.querySelectorAll('.listado-num-clave input');
+            inputsuno[0].value = clave[0];
+        }else{
+            // El botón no pertenece al contenedor "claves"
+            var valor = elemento.value;
+            var index = grupodos.indexOf(valor);
+            if(index === -1){
+              var can = grupodos.indexOf(99);
+              if(index === -1){
+                grupodos.splice(can,1,valor);
+              }else{
+                grupodos.splice(can,1,valor);
+              }
+            }else{
+              grupodos.splice(index,0,99);
+            }
+
+            var filas = document.querySelector('.fila-combinacion.d-flex');
+            var inputsunos = filas.querySelectorAll('.list-combinacion-multiple input');
+            for (var i = 0; i < grupodos.length; i++) {
+              if(grupodos[i]!==99){
+                inputsunos[i].value = grupodos[i];
+              }else{
+                inputsunos[i].value = "-";
+              }
+            }
+            console.log(grupodos);
+        }
+      }else{
+        if (contenedor) {
+            // El botón pertenece al contenedor "claves"
+            var valor = elemento.value;
+            clave.splice(0,1,valor);
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsuno = sel.querySelectorAll('.listado-num-clave input');
+            inputsuno[0].value = clave[0];
+        }else{
+            var valor = elemento.value;
+            var index = grupodos.indexOf(valor);
+            var tamano = grupodos.length;
+            if(index !== -1){
+              grupodos.splice(index,1,99);
+            }
+
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsunos = sel.querySelectorAll('.list-combinacion-multiple input');
+            for (var i = 0; i < grupodos.length; i++) {
+              if(grupodos[i]!==99){
+                inputsunos[i].value = grupodos[i];
+              }else{
+                inputsunos[i].value = "-";
+              }
+            }
+        }
+      }
+      total();
+  }
+
+  function boton(elemento) {
+      var contenedor = elemento.closest('.claves');
+      var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+      var sel = filas[filasel-1];
+      var opa = sel.querySelectorAll('.capa-opacidad.activo');
+      if(opa.length === 1){
+        opa[0].classList.remove('activo')
+      }
+      if(filas.length===1){
+        botondos(elemento);
+        return;
+      }
+
+      var botonera = document.querySelector('.botonera');
+      var botonesSeleccionados = botonera.querySelectorAll('.boton-boleto.seleccionado');
+      if (botonera.contains(elemento) && botonesSeleccionados.length >= 5 && !elemento.classList.contains('seleccionado')) {
+          return; 
+      }
+      var inputSueno = document.querySelectorAll('.fila-combinacion.d-flex .item-num-clave');
+      if(inputSueno[filasel-1].value === '-' || contenedor){
+        var botonesSeleccionadosSuenos = document.querySelectorAll('.claves .seleccionado');
+        botonesSeleccionadosSuenos.forEach(function(boton) {
+            if (boton.classList.contains('seleccionado')) {
+                boton.classList.remove('seleccionado');
+            }
+        });
+      }
+
+      elemento.classList.toggle('seleccionado');
+      
+      if(elemento.classList.contains('seleccionado')){
+        if (contenedor) {
+            // El botón pertenece al contenedor "claves"
+            var valor = elemento.value;
+            var index = grupo.indexOf(valor);
+            var tamano = grupo.length;
+            clave.splice(0,1,valor);
+
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsuno = sel.querySelectorAll('.listado-num-clave input');
+            inputsuno[0].value = clave[0];
+        } else {
+            // El botón no pertenece al contenedor "claves"
+            var valor = elemento.value;
+            var index = grupo.indexOf(valor);
+            var tamano = grupo.length;
+            if(index === -1){
+              var can = grupo.indexOf(99);
+              if(index === -1){
+                grupo.splice(can,1,valor);
+              }else{
+                grupo.splice(can,1,valor);
+              }
+            }else{
+              grupo.splice(index,0,99);
+            }
+
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsunos = sel.querySelectorAll('.list-combinacion input');
+            for (var i = 0; i < grupo.length; i++) {
+              if(grupo[i]!==99){
+                inputsunos[i].value = grupo[i];
+              }else{
+                inputsunos[i].value = "-";
+              }
+            }
+        }
+      }else{
+        if (contenedor) {
+          var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+          var sel = filas[filasel-1];
+          var inputsunos = sel.querySelectorAll('.listado-num-clave input');
+          for (var i = 0; i < grupo.length; i++) {
+            if(grupo[i]!==99){
+              inputsunos[i].value = grupo[i];
+            }else{
+              inputsunos[i].value = "-";
+            }
+          }
+        }else{
+            var valor = elemento.value;
+            var index = grupo.indexOf(valor);
+            var tamano = grupo.length;
+            if(index !== -1){
+              grupo.splice(index,1,99);
+            }
+
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsunos = sel.querySelectorAll('.list-combinacion input');
+            for (var i = 0; i < grupo.length; i++) {
+              if(grupo[i]!==99){
+                inputsunos[i].value = grupo[i];
+              }else{
+                inputsunos[i].value = "-";
+              }
+            }
+        }
+      }
+
+      if(!grupo.includes(99) && !clave.includes(99)){
+        filasel = filasel + 1;
+        var buttons = document.querySelectorAll('.modulo-botonera button');
+        buttons.forEach(function(buttons) {
+          buttons.classList.remove('seleccionado');
+        });
+        numerosSeleccionados.push(grupo);
+        clavesSeleccionados.push(clave);
+        grupo = [99,99,99,99,99];
+        clave = [99];
+        grupodos = [99,99,99,99,99,99,99,99,99,99,99];
+      }
+      total();
+  }
+    
+
+  function botonDia(elemento) {
+      document.getElementById("diario").value = elemento.textContent;
+      var botones = document.querySelectorAll('.btn-d-seleccionado');
+      botones.forEach(function (boton) {
+        boton.classList.remove('btn-d-seleccionado');
+        boton.classList.add('btn-d');
+      });
+      elemento.classList.add('btn-d-seleccionado');
+      elemento.classList.remove('btn-d'); 
+
+      var selectElement = document.getElementById('autouno');
+
+      if(elemento.textContent == 'Lunes' || elemento.textContent == 'Jueves'){
+        selectElement.options[1].textContent = "1 bloque (2,5€)";
+        selectElement.options[2].textContent = "2 bloque (5€)";
+        selectElement.options[3].textContent = "3 bloque (7,5€)";
+        selectElement.options[4].textContent = "4 bloque (10€)";
+        selectElement.options[5].textContent = "5 bloque (12,5€)";
+        selectElement.options[6].textContent = "6 bloque (15,5€)";
+      }else if(elemento.textContent == 'Semanal' && document.getElementById('dia').textContent == 'Lunes'){
+        selectElement.options[1].textContent = "1 bloque (5€)";
+        selectElement.options[2].textContent = "2 bloque (10€)";
+        selectElement.options[3].textContent = "3 bloque (15€)";
+        selectElement.options[4].textContent = "4 bloque (20€)";
+        selectElement.options[5].textContent = "5 bloque (255€)";
+        selectElement.options[6].textContent = "6 bloque (30€)";
+      }
+
+      selectElement = document.getElementById('autodos');
+
+      if(elemento.textContent == 'Lunes' || elemento.textContent == 'Jueves'){
+        selectElement.options[1].textContent = "Multiple 7 (17,5€)";
+        selectElement.options[2].textContent = "Multiple 28 (70€)";
+        selectElement.options[3].textContent = "Multiple 35 (87,5€)";
+        selectElement.options[4].textContent = "Multiple 84 (210€)";
+        selectElement.options[5].textContent = "Multiple 210 (525€)";
+      }else if(elemento.textContent == 'Semanal' && document.getElementById('dia').textContent == 'Lunes'){
+        selectElement.options[1].textContent = "Multiple 7 (35€)";
+        selectElement.options[2].textContent = "Multiple 28 (140€)";
+        selectElement.options[3].textContent = "Multiple 35 (175€)";
+        selectElement.options[4].textContent = "Multiple 84 (420€)";
+        selectElement.options[5].textContent = "Multiple 210 (1050€)";
+      }
+
+      total();
+  }
+
+  function botonModo(elemento) {
+      document.getElementById("multi").value = elemento.textContent;
+      if (elemento.classList.contains('btn-m')) {
+        var filasSencillas = document.querySelectorAll('.fila-combinacion:not(.d-none)');
+        var filasMultiples = document.querySelectorAll('.fila-combinacion.d-none');
+        filasSencillas.forEach(function(fila) {
+              fila.classList.add('d-none');
+              fila.classList.remove('d-flex');
+          });
+
+        filasMultiples.forEach(function(fila) {
+            fila.classList.remove('d-none');
+            fila.classList.add('d-flex');
+        });
+      }
+
+      var botones = document.querySelectorAll('.btn-m-seleccionado');
+      botones.forEach(function (boton) {
+        boton.classList.remove('btn-m-seleccionado');
+        boton.classList.add('btn-m');
+      });
+      elemento.classList.add('btn-m-seleccionado');
+      elemento.classList.remove('btn-m'); 
+
+      var button = document.querySelectorAll('.modulo-botonera button.seleccionado');
+      button.forEach(function(button) {
+        button.classList.remove('seleccionado');
+      });
+
+      var inputs = document.querySelectorAll('.contenedor-combinaciones input');
+      inputs.forEach(function(input) {
+        input.value = '-';
+      });
+
+      var filas = document.querySelectorAll('.capa-opacidad:not(.activo)');
+      filas.forEach(function(fila) {
+        fila.classList.add('activo');
+      });
+
+      numerosSeleccionados = [];
+      clavesSeleccionados = [];
+      grupo = [99,99,99,99,99];
+      grupodos = [99,99,99,99,99,99,99,99,99,99,99];
+      clave = [99];
+      filasel = 1;
+      var total = document.querySelector('.total-compra');
+      total.textContent = "0.00 €"
+      if(total.textContent !== "0,00 €" && total.textContent !== "0.00 €"){
+        var confirmar = document.querySelector('.boton-confirmar');
+        confirmar.disabled = false;
+      }else{
+        var confirmar = document.querySelector('.boton-confirmar');
+        confirmar.disabled = true;
+      }
+      
+  }
+
+  const filasCombinacion = document.querySelectorAll('.fila-combinacion');
+  
+  filasCombinacion.forEach((fila) => {
+      const primerInput = fila.querySelector('.item-combinacion:first-child');
+  
+      primerInput.addEventListener('change', () => {
+          const capaOpacidad = fila.querySelector('.capa-opacidad');
+      
+          if (primerInput.value !== '-') { 
+              capaOpacidad.classList.remove('activo');
+          } else {
+              capaOpacidad.classList.add('activo');
+          }
+      });
+  });
+  function cambio() {
+    var total = document.querySelector('.total-compra');
+    const numerosJson = JSON.stringify({
+      numerosSeleccionados: numerosSeleccionados,
+      clavesSeleccionados: clavesSeleccionados,
+    });
+    const miArrayJsonInput = document.getElementById('variable');
+    miArrayJsonInput.value = numerosJson;
+    const prec = document.getElementById('precioinput')
+    prec.value = total.textContent
+    console.log("Contenido cambiado");
+        
+  }
+  function observarCambios(targetElement, callback) {
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList') {
+                    callback();
+                }
+            });
+        });
+
+        observer.observe(targetElement, {
+            childList: true
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const span = document.querySelector('.total-compra');
+        observarCambios(span, cambio);
+    });
+</script>
+{% endblock %}

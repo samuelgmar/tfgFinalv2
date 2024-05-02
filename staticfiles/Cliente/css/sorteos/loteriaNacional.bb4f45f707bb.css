@@ -1,0 +1,183 @@
+.img-sorteo{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 12em;
+    height: 8em;
+}
+
+.table tbody tr th{
+    text-align: right!important;
+}
+
+.table tbody tr td{
+    text-align: left!important;
+}
+
+#loteria_t_buscador_nums_caja {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 20px 0;
+    width: 300px;
+    height: 98px;
+    padding: 5px;
+    background: #f6f6f6;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.loteria_t_nums_caja {
+    display: inline-block;
+    position: relative;
+    float: left;
+    width: 54px;
+    height: auto;
+    margin: 0 2px;
+    font-size: 24px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: rgba(255,255,255,.75);
+    box-shadow: inset 1px 1px 5px #ccc;
+    border: 1px solid #ccc;
+}
+
+.loteria_t_nums_mas, .loteria_t_nums_menos {
+    position: relative;
+    z-index: 10;
+    display: block;
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    background: 0 0;
+    box-sizing: border-box;
+    color: #333;
+    text-decoration: none;
+    line-height: 20px;
+    text-indent: -10000px;
+    overflow: hidden;
+}
+
+
+.loteria_t_nums_mas:before, .loteria_t_nums_menos:before {
+    display: block;
+    width: 100%;
+    height: 20px;
+    content: "\276E";
+    font-size: 20px;
+    line-height: 20px;
+    text-indent: 0px;
+    color: #9b2669;
+    transform: rotate(90deg);
+}
+
+.loteria_t_nums_menos:before {
+    transform: rotate(270deg);
+}
+
+.b_num_box {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 40px;
+    height: 45px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.b_num_box:before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -20px;
+    color: #ccc;
+    width: 46px;
+    height: 43px;
+    background: center center no-repeat;
+    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.loteria_t_nums_input {
+    position: relative;
+    display: block;
+    top: -4px;
+    margin: 0 2px;
+    min-width: inherit !important;
+    width: 100% !important;
+    height: 100% !important;
+    text-align: center;
+    padding: 0 !important;
+    z-index: 100 !important;
+    background: rgba(255,255,255,.5)!important;
+    border: none !important;
+    font-weight: 700;
+    color: #9b2669;
+    font-size: 1.8em !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #9b2669;
+}
+
+.loteria_t_nums_input, .contador {
+    outline: none!important;
+    -moz-appearance: textfield;
+}
+
+.decimo{
+    position: relative;
+}
+
+.decimo-box{
+    top: 0;
+    left: 0;
+    width: 170px;
+    height: 110px;
+    box-sizing: border-box;
+}
+
+.decimo-box-img{
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 6px rgba(0,0,0,.3);
+}
+
+.decimo-box-num{
+    position: absolute;
+    top: 37px;
+    left: 72px;
+    width: 80px;
+    height: 25px;
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: 800;
+    color: #000;
+    text-align: center;
+    background: rgba(255,255,255,.8);
+}
+
+#decrement, #increment, #productinput{
+    width: 1em;
+    height: 2em;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    text-align: center;
+    font-size: 2em;
+    color: #000;
+}
+
+#productinput{
+    left: 2em;
+}
+
+.con-decimos{
+    max-width: 12em;
+}

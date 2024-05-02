@@ -1,0 +1,159 @@
+.ss{
+
+}
+
+.carousel-item{
+  position: relative;
+}
+
+.carousel-item img{
+    image-rendering: pixelated;
+}
+
+.slider-img{
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%; 
+    height: 20em;
+    top: 0;
+}
+
+.bg-cr-1{
+    filter: blur(10px);
+    background-color: cadetblue;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%; 
+    height: 20em;
+}
+
+.bac-opa{
+  background-color: rgba(0, 0, 0, 0.288);
+}
+
+.sec1{
+  height: 20em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.title-sec1{
+    position: relative;
+    width: 100%;
+    font-size: 40px;
+    line-height: 48px;
+    font-weight: 800;
+    color: #f7e18c;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px black;
+}
+
+.banner-sec1{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 21px;
+    line-height: 25px;
+    color: #f7e18c;
+    text-shadow: .5px .5px 1px black;
+}
+
+.banner-sec1 .bi{
+  font-size: 3em;
+}
+
+.btn-center{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-center .btn, .btn-modal{
+  background-color: #faedb8;
+  color: black;
+  border-color: #faedb8;
+}
+
+.btn-center .btn:hover, .btn-modal:hover{
+  background-color: #f7e18c;
+  color: black;
+  border-color: #f7e18c;
+}
+
+.sec2{
+  position: relative;
+  height: auto;
+  background-color: rgb(250, 237, 222);
+  color: white;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sec2-opac{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  filter: blur(10px);
+  height: 100%;
+}
+
+.title-sec2{
+  position: relative;
+  width: 100%;
+  font-size: 3em!important;
+  line-height: 48px;
+  font-weight: 800;
+  color: #f7e18c;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px black;
+}
+
+.swiper {
+  width: 100%;
+  height: auto;
+}
+
+.swiper-slide .card{
+  min-height: 25em;
+}
+
+.card-img{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 13em;
+  height: 10em;
+}
+
+.swiper-slide .card img{
+  margin: auto;
+  max-width: 12em;
+  height: 10em;
+}
+
+.sec3{
+  height: auto;
+}
+
+.img-comprobar{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-height: 30vh;
+  min-width: 25%;
+}
+
+.sec4{
+  height: auto;
+  width: 100%;
+}

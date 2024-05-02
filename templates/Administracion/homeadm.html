@@ -1,0 +1,510 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<style>
+    #chart {
+      max-width: 760px;
+      margin: 35px auto;
+      opacity: 0.9;
+    }
+</style>
+<div id="q-app" class="q-page q-pa-sm pb-5" style="min-height: 100vh;">
+    <div class="row q-col-gutter-sm ">
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="q-item q-item-type row no-wrap q-pa-none" style="background-color: rgb(84, 107, 250);"> 
+                <div class="q-item__section column  q-pa-md q-ml-none  text-white q-item__section--main justify-center">
+                    <div class="q-item__label text-white text-h6 text-weight-bolder">{{totalIngresoMensual}} €</div>
+                    <div class="q-item__label">Ingreso mensual</div>
+                </div>
+                <div class="q-item__section column q-mr-md text-white q-item__section--side justify-center">
+                    <span class="material-symbols-outlined notranslate text-white" style="font-size: 44px;">euro</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="q-item q-item-type row no-wrap q-pa-none" style="background-color: rgb(58, 150, 136);"> 
+                <div class="q-item__section column  q-pa-md q-ml-none  text-white q-item__section--main justify-center">
+                    <div class="q-item__label text-white text-h6 text-weight-bolder">{{numeroOrdersSemanal}}</div>
+                    <div class="q-item__label">Ventas Semanales</div>
+                </div>
+                <div class="q-item__section column q-mr-md text-white q-item__section--side justify-center">
+                    <span class="material-symbols-outlined notranslate text-white" style="font-size: 44px;">data_thresholding</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="q-item q-item-type row no-wrap q-pa-none" style="background-color: rgb(124, 179, 66);"> 
+                <div class="q-item__section column  q-pa-md q-ml-none  text-white q-item__section--main justify-center">
+                    <div class="q-item__label text-white text-h6 text-weight-bolder">{{usuarios_registrados_hoy}}</div>
+                    <div class="q-item__label">Nuevos clientes hoy</div>
+                </div>
+                <div class="q-item__section column q-mr-md text-white q-item__section--side justify-center">
+                    <span class="material-symbols-outlined notranslate text-white" style="font-size: 44px;">person_add</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="q-item q-item-type row no-wrap q-pa-none" style="background-color: rgb(248, 140, 43);"> 
+                <div class="q-item__section column  q-pa-md q-ml-none  text-white q-item__section--main justify-center">
+                    <div class="q-item__label text-white text-h6 text-weight-bolder">{{usuarios_activos_hoy}}</div>
+                    <div class="q-item__label">Usuarios activos hoy</div>
+                </div>
+                <div class="q-item__section column q-mr-md text-white q-item__section--side justify-center">
+                    <span class="material-symbols-outlined notranslate text-white" style="font-size: 44px;">eye_tracking</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="q-mt-sm q-card">
+        <div class="row q-card__section q-card__section--vert justify-content-center">
+            <div class="col-lg-7 col-sm-12 col-xs-12 col-md-7">
+                <div class="text-h6 q-pb-none q-card__section q-card__section--vert">
+                    <div class="q-item q-item-type row no-wrap">
+                        <div class="q-item__section column q-item__section--avatar q-item__section--side justify-center"><span class="material-symbols-rounded q-icon notranslate text-blue" style="font-size: 44px;">monitoring</span></div>
+                        <div class="q-item__section column q-item__section--main justify-center">
+                            <div class="text-h6">Estadísticas de ventas de productos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+                        <div class="q-item q-item-type row no-wrap">
+                            <div class="q-item__section column q-item__section--top q-item__section--avatar q-item__section--side justify-start">
+                                <div class="q-avatar bg-blue text-white q-chip--colored">
+                                    <div class="q-avatar__content row flex-center overflow-hidden"><span class="material-icons q-icon notranslate">work</span></div>
+                                </div>
+                            </div>
+                            <div class="q-item__section column q-item__section--main justify-center">
+                                <div class="q-item__label text-h6 text-blue text-bold">{{productos_ordenados_final_suma.1}}</div>
+                                <div class="q-item__label q-item__label--caption text-caption">Lotería Nacional (J)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+                        <div class="q-item q-item-type row no-wrap">
+                            <div class="q-item__section column q-item__section--top q-item__section--avatar q-item__section--side justify-start">
+                                <div class="q-avatar bg-red text-white q-chip--colored">
+                                    <div class="q-avatar__content row flex-center overflow-hidden"><span class="material-icons q-icon notranslate">savings</span></div>
+                                </div>
+                            </div>
+                            <div class="q-item__section column q-item__section--main justify-center">
+                                <div class="q-item__label text-h6 text-red text-bold">{{productos_ordenados_final_suma.0}}</div>
+                                <div class="q-item__label q-item__label--caption text-caption">Lotería Nacional (S)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+                        <div class="q-item q-item-type row no-wrap">
+                            <div class="q-item__section column q-item__section--top q-item__section--avatar q-item__section--side justify-start">
+                                <div class="q-avatar bg-purple text-white q-chip--colored">
+                                    <div class="q-avatar__content row flex-center overflow-hidden"><span class="material-icons q-icon notranslate">corporate_fare</span></div>
+                                </div>
+                            </div>
+                            <div class="q-item__section column q-item__section--main justify-center">
+                                <div class="q-item__label text-h6 text-purple text-bold">{{productos_ordenados_final_suma.5}}</div>
+                                <div class="q-item__label q-item__label--caption text-caption">Euromillones</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+                        <div class="q-item q-item-type row no-wrap">
+                            <div class="q-item__section column q-item__section--top q-item__section--avatar q-item__section--side justify-start">
+                                <div class="q-avatar bg-indigo text-white q-chip--colored">
+                                    <div class="q-avatar__content row flex-center overflow-hidden"><span class="material-icons q-icon notranslate">bubble_chart</span></div>
+                                </div>
+                            </div>
+                            <div class="q-item__section column q-item__section--main justify-center">
+                                <div class="q-item__label text-h6 text-indigo text-bold">{{productos_ordenados_final_suma.4}}</div>
+                                <div class="q-item__label q-item__label--caption text-caption">Eurodreams</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+                        <div class="q-item q-item-type row no-wrap">
+                            <div class="q-item__section column q-item__section--top q-item__section--avatar q-item__section--side justify-start">
+                                <div class="q-avatar bg-teal text-white q-chip--colored">
+                                    <div class="q-avatar__content row flex-center overflow-hidden"><span class="material-icons q-icon notranslate">nest_eco_leaf</span></div>
+                                </div>
+                            </div>
+                            <div class="q-item__section column q-item__section--main justify-center">
+                                <div class="q-item__label text-h6 text-teal text-bold">{{productos_ordenados_final_suma.2}}</div>
+                                <div class="q-item__label q-item__label--caption text-caption">Bonoloto</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+                        <div class="q-item q-item-type row no-wrap">
+                            <div class="q-item__section column q-item__section--top q-item__section--avatar q-item__section--side justify-start">
+                                <div class="q-avatar bg-lime text-white q-chip--colored">
+                                    <div class="q-avatar__content row flex-center overflow-hidden"><span class="material-icons q-icon notranslate">pallet</span></div>
+                                </div>
+                            </div>
+                            <div class="q-item__section column q-item__section--main justify-center">
+                                <div class="q-item__label text-h6 text-lime text-bold">{{productos_ordenados_final_suma.8}}</div>
+                                <div class="q-item__label q-item__label--caption text-caption">La Primitiva</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+                        <div class="q-item q-item-type row no-wrap">
+                            <div class="q-item__section column q-item__section--top q-item__section--avatar q-item__section--side justify-start">
+                                <div class="q-avatar bg-amber text-white q-chip--colored">
+                                    <div class="q-avatar__content row flex-center overflow-hidden"><span class="material-icons q-icon notranslate">import_contacts</span></div>
+                                </div>
+                            </div>
+                            <div class="q-item__section column q-item__section--main justify-center">
+                                <div class="q-item__label text-h6 text-amber text-bold">{{productos_ordenados_final_suma.6}}</div>
+                                <div class="q-item__label q-item__label--caption text-caption">El Gordo</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+                        <div class="q-item q-item-type row no-wrap">
+                            <div class="q-item__section column q-item__section--top q-item__section--avatar q-item__section--side justify-start">
+                                <div class="q-avatar bg-deep-orange text-white q-chip--colored">
+                                    <div class="q-avatar__content row flex-center overflow-hidden"><span class="material-icons q-icon notranslate">sports_soccer</span></div>
+                                </div>
+                            </div>
+                            <div class="q-item__section column q-item__section--main justify-center">
+                                <div class="q-item__label text-h6 text-deep-orange text-bold">{{productos_ordenados_final_suma.3}}</div>
+                                <div class="q-item__label q-item__label--caption text-caption">Quinigol</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+                        <div class="q-item q-item-type row no-wrap">
+                            <div class="q-item__section column q-item__section--top q-item__section--avatar q-item__section--side justify-start">
+                                <div class="q-avatar bg-brown text-white q-chip--colored">
+                                    <div class="q-avatar__content row flex-center overflow-hidden"><span class="material-icons q-icon notranslate">pause_presentation</span></div>
+                                </div>
+                            </div>
+                            <div class="q-item__section column q-item__section--main justify-center">
+                                <div class="q-item__label text-h6 text-brown text-bold">{{productos_ordenados_final_suma.7}}</div>
+                                <div class="q-item__label q-item__label--caption text-caption">La Quiniela</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id="chart">
+                        <div id="responsive-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-sm-12 col-xs-12 col-md-7">
+                <div class="text-h6 q-pb-none q-card__section q-card__section--vert">
+                    <div class="q-item q-item-type row no-wrap">
+                        <div class="q-item__section column q-item__section--avatar q-item__section--side justify-center"><span class="material-symbols-rounded q-icon notranslate text-blue" style="font-size: 44px;">featured_seasonal_and_gifts</span></div>
+                        <div class="q-item__section column q-item__section--main justify-center">
+                            <div class="text-h6">Ventas de Hoy</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id="chart">
+                        <div id="responsive-chart-two"></div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="q-mt-sm q-card pb-4">
+        <div class="text-h6 q-pb-none q-card__section q-card__section--vert">
+            <div class="q-item q-item-type row no-wrap">
+                <div class="q-item__section column q-item__section--avatar q-item__section--side justify-center">
+                    <span class="material-symbols-rounded q-icon notranslate text-blue" style="font-size: 44px;"> shopping_bag </span>
+                </div>
+                <div class="q-item__section column q-item__section--main justify-center">
+                    <div class="q-item__label">
+                        <div class="text-h6">Últimas ventas</div>
+                    </div>
+                    <div class="q-item__label text-black q-item__label--caption text-caption">
+                        Seguimiento de sus productos. Seguimiento de ventas aquí.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="q-pa-none q-ma-none q-card__section q-card__section--vert">
+            <q-table flat bordered :rows="rows" :columns="columns" row-key="name" v-model:pagination="pagination" hide-pagination>
+            </q-table>
+            <div class="row justify-center q-mt-md">
+                <q-pagination
+                  v-model="pagination.page"
+                  color="grey-8"
+                  :max="pagesNumber"
+                  size="sm"
+                ></q-pagination>
+            </div>
+        </div>
+        
+    </div>
+    <div class="q-mt-sm q-card pb-4">
+        <div class="text-h6 q-pb-none q-card__section q-card__section--vert">
+            <div class="q-item q-item-type row no-wrap">
+                <div class="q-item__section column q-item__section--avatar q-item__section--side justify-center">
+                    <span class="material-symbols-rounded q-icon notranslate text-red" style="font-size: 44px;"> warning </span>
+                </div>
+                <div class="q-item__section column q-item__section--main justify-center">
+                    <div class="q-item__label">
+                        <div class="text-h6">Stocks Bajos</div>
+                    </div>
+                    <div class="q-item__label text-black q-item__label--caption text-caption">
+                        Aqui podra ver que productos están en riesgo de agotarse
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="q-pa-none q-ma-none q-card__section q-card__section--vert">
+            <div class="d-flex justify-content-center p-2 flex-wrap">
+                {%for decimo in decimosBajos%}
+                <div class="card text-center p-2" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{decimo}}</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary"> Id: {{decimo.id}}</h6>
+                      <h6 class="card-subtitle mb-2 text-body-secondary"> Cantidad: {{decimo.cantidad}}</h6>
+                      <a href="{% url 'Administracion:EditarDecimo' pk=decimo.id nombre_administracion=nombre_administracion %}" class="card-link fs-2 text-danger">Editar Stock</a>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+
+    <script>
+        const columns = [
+          { name: 'id', label: 'ID', align: 'center', field: row => row.id, sortable: true },
+          { name: 'user', label: 'User', align: 'center', field: 'username', sortable: true },
+          { name: 'paypalId', label: 'Paypal ID', align: 'center', field: 'paypalId', sortable: true },
+          { name: 'productos', label: 'Productos', align: 'center', field: 'productos', sortable: true },
+          { name: 'creado', label: 'Creado', align: 'center', field: 'creado', sortable: true },
+          { name: 'total', label: 'Total', align: 'center', field: 'total', sortable: true },
+          { name: 'completado', label: 'Completado', align: 'center', field: 'completado', sortable: true },
+        ];
+
+
+        const rows = [
+        {% for order in orders_hoy %}
+            {
+              id: {{ order.id }},
+              username: '{{ order.user.username }}', // Aquí debes proporcionar un objeto que contenga al menos la propiedad 'username'
+              paypalId: '{{ order.paypalId }}',
+              productos: '{{ order.productos.count }}', // Aquí debes proporcionar una lista de nombres de productos
+              creado: '{{ order.creado }}', // Aquí debes proporcionar la fecha y hora de creación en el formato ISO 8601
+              total: '{{ order.total }}€', // Aquí debes proporcionar el total
+              completado: true, // Aquí debes proporcionar el estado de completado (true/false)
+            },
+        {% endfor %}
+        ]
+        const { ref, computed } = Vue
+
+        const app = Vue.createApp({
+          setup () {
+            const pagination = ref({
+              descending: false,
+              page:1,
+              rowsPerPage: 10
+            })
+            return {
+                pagination, 
+                columns,
+                rows,
+                pagesNumber: computed(() => Math.ceil(rows.length / pagination.value.rowsPerPage))
+            }
+          }
+        })
+    
+      app.use(Quasar, { config: {} })
+      Quasar.lang.set(Quasar.lang.es)
+      app.mount('#q-app')
+    </script>
+    <script>
+        var options = {
+          chart: {
+            width: "100%",
+            height: 400,
+            type: "bar",
+            stacked: true,
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true
+            }
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            width: 1,
+            colors: ["#fff"]
+          },
+          series: [
+            {
+                name:"Lotería Nacional (J)",
+                group: 'actual',
+                data: {% for key, value in productos_ordenados_final.items %} {% if key == "Loteria Nacional Jueves" %} {{ value }} {% endif %} {% endfor %}
+            },
+            {
+                name:"Lotería Nacional (S)",
+                group: 'actual',
+                data: {% for key, value in productos_ordenados_final.items %} {% if key == "Loteria Nacional Sábado" %} {{ value }} {% endif %} {% endfor %}
+            },
+            {
+                name:"Euromillones",
+                group: 'actual',
+                data: {{productos_ordenados_final.Euromillón}}
+            },
+            {
+                name:"Eurodreams",
+                group: 'actual',
+                data: {{productos_ordenados_final.Eurodreams}}
+            },
+            {
+                name:"Bonoloto", 
+                group: 'actual', 
+                data: {{productos_ordenados_final.Bonoloto}}
+            },
+            {
+                name:"La Primitiva",
+                group: 'actual',
+                data: {{productos_ordenados_final.Primitiva}}
+            },
+            {
+                name:"El Gordo",
+                group: 'actual',
+                data: {% for key, value in productos_ordenados_final.items %} {% if key == "El Gordo" %} {{ value }} {% endif %} {% endfor %}
+            },
+            {
+                name:"Quinigol",
+                group: 'actual',
+                data: {{productos_ordenados_final.Quinigol}}
+            },
+            {
+                name:"La Quiniela",
+                group: 'actual',
+                data: {{productos_ordenados_final.Quiniela}}
+            }
+          ],
+          xaxis: {
+            categories: [
+              "Enero",
+              "Fecbrero",
+              "Marzo",
+              "Abril",
+              "Mayo",
+              "Junio",
+              "Julio",
+              "Agosto",
+              "Septiembre",
+              "Octubre",
+              "Noviembre",
+              "Diciembre"
+            ]
+          },
+          legend: {
+            position: "right",
+            verticalAlign: "top",
+            containerMargin: {
+              left: 35,
+              right: 60
+            }
+          },
+          responsive: [
+            {
+              breakpoint: 1000,
+              options: {
+                plotOptions: {
+                  bar: {
+                    horizontal: false
+                  }
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ],
+            colors: ['#2196F3', '#F44336', '#9826AB', '#3F51B5', '#009688', '#CDDC39', '#FFC107', '#FF5722', '#795548']
+        };
+
+        var chart = new ApexCharts(
+          document.querySelector("#responsive-chart"),
+          options
+        );
+
+        chart.render();
+    </script>
+    <script>
+        var options = {
+          chart: {
+            width: "100%",
+            height: 380,
+            type: "donut"
+          },
+          dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+              return val.toFixed(1) + "%"
+            },
+            dropShadow: {}
+          },
+          plotOptions: {
+            pie: {
+                expandOnClick: false 
+            },
+            donut: {
+              labels: {
+                show: true,
+                name: {
+                    fontSize: '14px',
+                    color: '#888'
+                },
+                value: {
+                    fontSize: '16px',
+                    color: '#333'
+                }
+              },
+              expandOnHover: true
+            }
+          },
+          responsive: [
+            {
+              breakpoint: 1000,
+              options: {
+                plotOptions: {
+                  bar: {
+                    horizontal: false
+                  }
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ],
+            colors: ['#2196F3', '#F44336', '#9826AB', '#3F51B5', '#009688', '#CDDC39', '#FFC107', '#FF5722', '#795548'],
+            series: [{{productos_vendidos_hoy.1}},{{productos_vendidos_hoy.0}},{{productos_vendidos_hoy.8}},{{productos_vendidos_hoy.9}},{{productos_vendidos_hoy.7}},{{productos_vendidos_hoy.10}},{{productos_vendidos_hoy.11}},{{productos_vendidos_hoy.5}},{{productos_vendidos_hoy.6}}],
+            labels: ['Lotería Nacional (J)', 'Lotería Nacional (S)', 'Euromillones', 'Eurodreams', 'Bonoloto', 'La Primitiva', 'El Gordo', 'Quinigol', 'La Quiniela']
+        };
+
+        var chart = new ApexCharts(
+          document.querySelector("#responsive-chart-two"),
+          options
+        );
+
+        chart.render();
+    </script>
+{% endblock %}

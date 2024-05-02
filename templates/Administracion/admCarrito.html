@@ -1,0 +1,102 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/admProductList.css' %}">
+{% endblock %}
+{% block extrascripts %}
+
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Administración - Carrito</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2 "></div>
+        <div class="bg-light pt-1 rounded shadow">
+          {% if mensaje %}
+            <p class="p-2 fw-light">{{ mensaje }}</p>
+          {% else %}
+            <table class="table rounded">
+              <thead>
+                <tr>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Borrar</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in cart_details %}
+                  <tr>
+                    <th scope="row">{{ item.tipo }}</th>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.precio  }}</td>
+                    <td>
+                      <form action="{% url 'Administracion:admsCarritoRemove' nombre_administracion=nombre_administracion product_id=item.id %}" method="post">
+                        <input type="submit" class="btn btn-danger" value="Remove">
+                        {% csrf_token %}
+                      </form>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>   
+          
+        </div>
+        <div class="w-100 d-flex justify-content-center align-items-center">
+          <div id="paypal-button-container" class="w-50 d-flex justify-content-center align-items-center"></div>
+          <script src="https://www.paypal.com/sdk/js?currency=EUR&client-id=AQjCzMIsGLZhzj88QdoH4w0R4cPIkXPBgUVZXLO6yZna6vJxl6ldgNsXWfQwwGldvheFMNarFT0y4oXv"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+          </script>
+          <script>
+                  paypal.Buttons({
+        createOrder: function(data, actions) {
+          let value="{{ cart.get_total_price_with_tax }}";
+          let code="EUR"
+          // Datos de la compra
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                currency_code: code,
+                value: value
+              }
+            }]
+          });
+        },
+        onApprove: function(data) {
+          var csrftoken = token('csrftoken');
+          return fetch('/pago/', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({
+                  orderID: data.orderID,
+                  nombreAdm: '{{nombre_administracion}}'
+            })
+            }).then(function(res) {
+                  return res.json();
+            }).then(function(details) {
+              if(details.status){
+                window.location.href = '{% url 'Administracion:admsPaymentSuccess' nombre_administracion=nombre_administracion  %}';
+              }
+              else{
+                window.location.href = '{% url 'Administracion:admsPaymentFailed' nombre_administracion=nombre_administracion %}';
+              }
+            })
+            }
+        }).render('#paypal-button-container');
+
+        </script>
+        <script>
+              
+        </script>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

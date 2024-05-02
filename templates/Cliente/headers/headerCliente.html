@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{% block title %}{{ nombre_administracion }}{% endblock %}</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YHBYWXC58"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-3YHBYWXC58');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-K9PZT2X6');
+    </script>
+    <!-- End Google Tag Manager -->
+    <link rel="icon" href="{% static 'imgs/LotoFinderHead.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+    {% block styles %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'Global/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'Cliente/css/headers/headerCliente.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+      #menu-icons:hover {
+          color: {{ administracion.color_secundario }};
+      }
+
+      .nav-link{
+        color: black;
+      }
+      .nav-link:hover{
+        color: rgb(49, 197, 255);
+      }
+      .row{
+        display: flex;
+      }
+  </style>
+  <script>
+        function token(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+  </script>
+
+</head>
+<body style="background-color: {{ administracion.color_primario }};">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9PZT2X6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->  
+  <header class="px-3 py-2 position-relative" style="background-image: url({% if administracion.imagen_cabecera %}{{ administracion.imagen_cabecera.url }}{% endif %}); background-color: {{ administracion.color_primario }};color: {{ administracion.color_secundario }};">
+        <div class="container d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-center align-items-center"><a class="" href="/{{nombre_administracion}}/">
+            <div class="logo d-flex flex-wrap align-items-center justify-content-center">
+              <img style="height: 18vw;" src="{% if administracion.logo %}{{ administracion.logo.url }}{% endif %}" alt="">
+            </div></a>
+          </div>
+          <div class=" d-flex align-items-center justify-content-end ">
+            <div id="menu-icons" class="d-flex  align-items-center flex-shrink-0" style="color: {{ administracion.color_secundario }};">
+              <button type="button"  class="bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#perfil">
+                <i class="icon-nav-menu-b bi bi-person fs-1" style="color: {{ administracion.color_secundario }};"></i>
+              </button>
+              {% if user.is_authenticated %}
+              <a href="{% url 'Cliente:ClienteCarritoDetail' nombre_administracion=nombre_administracion %}">
+                <button  type="button"  class="bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#cart">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="0.9em" fill="currentColor" class="bi bi-cart fs-1" style="color: {{ administracion.color_secundario }};" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"></path>
+                  </svg>
+                </button>
+              </a>
+              {%endif%}
+              <button type="button" id="menu-icon" class="bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#cart">
+                <i class="bi bi-list fs-1" data-bs-toggle="collapse" data-bs-target="#collapseExample" style="color: {{ administracion.color_secundario }};" aria-expanded="true" aria-controls="collapseExample"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center flex-column">
+                <ul class="d-none nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                    <li class="sorteo-link">
+                      <a href="{% url 'Cliente:loteriaNacional' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                        <div style="background-image:url('{% static 'imgs/sorteos/m1_loteria.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                        LOTERÍA NACIONAL
+                      </a>
+                    </li>
+                    <li class="sorteo-link">
+                      <a href="{% url 'Cliente:eurodreams' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                        <div style="filter: invert(82%) sepia(95%) saturate(7042%) hue-rotate(331deg) brightness(92%) contrast(95%); background-image:url('{% static 'imgs/sorteos/eurodreams.svg' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                        EURODREAMS
+                      </a>
+                    </li>
+                    <li class="sorteo-link">
+                      <a href="{% url 'Cliente:primitiva' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                        <div style="background-image:url('{% static 'imgs/sorteos/m1_primitiva.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                        LA PRIMITIVA
+                      </a>
+                    </li>
+                    <li class="sorteo-link">
+                      <a href="{% url 'Cliente:bonoloto' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                        <div style="background-image:url('{% static 'imgs/sorteos/m1_bonoloto.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                        BONOLOTO
+                      </a>
+                    </li>
+                    <li class="sorteo-link">
+                      <a href="{% url 'Cliente:elgordo' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                        <div style="background-image:url('{% static 'imgs/sorteos/m1_primitiva.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                        EL GORDO
+                      </a>
+                    </li>
+                    <li class="sorteo-link">
+                      <a href="{% url 'Cliente:euromillones' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                        <div style="background-image:url('{% static 'imgs/sorteos/m1_euromillones.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                        EUROMILLONES
+                      </a>
+                    </li>
+                    <li class="sorteo-link">
+                      <a href="{% url 'Cliente:quiniela' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                        <div style="background-image:url('{% static 'imgs/sorteos/m1_quiniela.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                        LA QUINIELA
+                      </a>
+                    </li>
+                    <li class="sorteo-link">
+                      <a href="{% url 'Cliente:quinigol' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                        <div style="background-image:url('{% static 'imgs/sorteos/m1_quinigol.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                        EL QUINIGOL
+                      </a>
+                    </li>
+                    <!--li class="sorteo-link">
+                    <a href="{% url 'Cliente:ClienteCarritoDetail' nombre_administracion=nombre_administracion %}" class="sorteo-link nav-link " style="color: {{ administracion.color_secundario }};">
+                      <div style="background-image:url('{% static 'imgs/sorteos/m1_mas_serv.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      MÁS SERVICIOS
+                    </a>
+                  </li-->
+                </ul>
+                <ul id="collapseExample" class="collapse nav col-12 col-lg-auto my-2 justify-content-center align-items-center my-md-0 text-small">
+                  <li class="sorteo-link">
+                    <a href="{% url 'Cliente:loteriaNacional' nombre_administracion=nombre_administracion %}" class="nav-link" style="color: {{ administracion.color_secundario }};">
+                      <div style="background-image:url('{% static 'imgs/sorteos/m1_loteria.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      LOTERÍA NACIONAL
+                    </a>
+                  </li>
+                  <li class="sorteo-link">
+                    <a href="{% url 'Cliente:eurodreams' nombre_administracion=nombre_administracion %}" class="nav-link" style="color: {{ administracion.color_secundario }};">
+                      <div style="filter: invert(82%) sepia(95%) saturate(7042%) hue-rotate(331deg) brightness(92%) contrast(95%); background-image:url('{% static 'imgs/sorteos/eurodreams.svg' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      EURODREAMS
+                    </a>
+                  </li>
+                  <li class="sorteo-link">
+                    <a href="{% url 'Cliente:primitiva' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                      <div style="background-image:url('{% static 'imgs/sorteos/m1_primitiva.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      LA PRIMITIVA
+                    </a>
+                  </li>
+                  <li class="sorteo-link">
+                    <a href="{% url 'Cliente:bonoloto' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                      <div style="background-image:url('{% static 'imgs/sorteos/m1_bonoloto.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      BONOLOTO
+                    </a>
+                  </li>
+                  <li class="sorteo-link">
+                    <a href="{% url 'Cliente:elgordo' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                      <div style="background-image:url('{% static 'imgs/sorteos/m1_primitiva.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      EL GORDO
+                    </a>
+                  </li>
+                  <li class="sorteo-link">
+                    <a href="{% url 'Cliente:euromillones' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                      <div style="background-image:url('{% static 'imgs/sorteos/m1_euromillones.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      EUROMILLONES
+                    </a>
+                  </li>
+                  <li class="sorteo-link">
+                    <a href="{% url 'Cliente:quiniela' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                      <div style="background-image:url('{% static 'imgs/sorteos/m1_quiniela.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      LA QUINIELA
+                    </a>
+                  </li>
+                  <li class="sorteo-link">
+                    <a href="{% url 'Cliente:quinigol' nombre_administracion=nombre_administracion %}" class="nav-link " style="color: {{ administracion.color_secundario }};">
+                      <div style="background-image:url('{% static 'imgs/sorteos/m1_quinigol.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      EL QUINIGOL
+                    </a>
+                  </li>
+                  <!--li class="sorteo-link">
+                    <a href="{% url 'Cliente:ClienteCarritoDetail' nombre_administracion=nombre_administracion %}" class="sorteo-link nav-link " style="color: {{ administracion.color_secundario }};">
+                      <div style="background-image:url('{% static 'imgs/sorteos/m1_mas_serv.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
+                      MÁS SERVICIOS
+                    </a>
+                  </li-->
+                </ul>
+                <script>
+                  const header = document.querySelector('header');
+
+                  const primerUl = document.querySelector('ul:first-of-type');
+                                  
+                  function ajustarVisibilidadUl() {
+                      // Obtén la altura del header
+                      const anchuraHeader = header.clientWidth;
+                      const menu = document.getElementById('menu-icon')
+                      if (anchuraHeader < 1400) {
+                          primerUl.classList.add('d-none');
+                          menu.classList.remove('d-none');
+                      } else {
+                          primerUl.classList.remove('d-none');
+                          menu.classList.add('d-none');
+                      }
+                  }
+                  
+                  window.addEventListener('DOMContentLoaded', ajustarVisibilidadUl);
+                  window.addEventListener('resize', ajustarVisibilidadUl);
+                </script>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="perfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel">
+                  {% if user.is_authenticated %}
+                      {{ user.username }}
+                  {% else %}
+                      Inicia sesión
+                  {% endif %}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body text-dark ">
+                <div>
+                  <ul class="nav flex-column">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item btn">
+                      <a class="nav-link" aria-current="page" href="{% url 'Cliente:profile' nombre_administracion=nombre_administracion %}">Perfil</a>
+                    </li>
+                    <li class="nav-item btn">
+                      <a class="nav-link" aria-current="page" href="{% url 'Cliente:ClienteOrderList' nombre_administracion=nombre_administracion %}">Historial Compras</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item btn">
+                      <a class="nav-link" href="{% url 'Cliente:resultados' nombre_administracion=nombre_administracion %}">Resultados</a>
+                    </li>
+                    <!--li class="nav-item btn">
+                     !-- <a class="nav-link" href="{% url 'Cliente:estadisticas' nombre_administracion=nombre_administracion %}">Estadisticas</a>
+                    <!--/li-->
+                  </ul>
+                </div>
+                <div class="{% if user.is_authenticated %} text-end{% else %} text-center{% endif %}">
+                  {% if user.is_authenticated %} 
+                      <a class="btn btn-danger" href="{% url 'Cliente:logoutCliente' nombre_administracion=nombre_administracion %}">Cerrar sesión</a>
+                  {% else %}
+                      <a class="btn btn-primary " href="{% url 'Cliente:loginCliente' nombre_administracion=nombre_administracion %}">Iniciar sesión</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </header>
+    <div class="body" style="background-color: {{ administracion.color_body }};">
+        {% block content %}{% endblock %}
+        {% include 'global/cookie_modal.html' %}
+    </div>
+    <style>
+      .gradiente {
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 20%);
+    /* Fallback para navegadores que no admiten gradients */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+
+    }
+    </style>
+    <footer class=" py-3 pt-4  pt-md-5" style="background-color: {{ administracion.color_footer }};">
+        <div class="row m-md-5 d-flex justify-content-center" style="flex-wrap: wrap;">
+          
+          <div class="col-6 col-md text-center">
+            <h5>Sorteos</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:loteriaNacional' nombre_administracion=nombre_administracion %}">LOTERÍA NACIONAL</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:eurodreams' nombre_administracion=nombre_administracion %}">EURODREAMS</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:primitiva' nombre_administracion=nombre_administracion %}">LA PRIMITIVA</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:bonoloto' nombre_administracion=nombre_administracion %}">BONOLOTO</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:elgordo' nombre_administracion=nombre_administracion %}">EL GORDO</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:euromillones' nombre_administracion=nombre_administracion %}">EUROMILLONES</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:quiniela' nombre_administracion=nombre_administracion %}">LA QUINIELA</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:quinigol' nombre_administracion=nombre_administracion %}">EL QUINIGOL</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md text-center">
+            <h5>Usuario</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:profile' nombre_administracion=nombre_administracion %}">Perfil</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:ClienteOrderList' nombre_administracion=nombre_administracion %}">Historial Compras</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:resultados' nombre_administracion=nombre_administracion %}">Resultados</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:estadisticas' nombre_administracion=nombre_administracion %}">Estadísticas</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:ClienteCarritoDetail' nombre_administracion=nombre_administracion %}">Carrito</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'Cliente:privacyPolicy' nombre_administracion=nombre_administracion %}">Privacidad y Políticas de la web</a></li>
+            </ul>
+          </div>
+          
+          <!--div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+            </ul>
+          </div-->
+        </div>
+        <div class=" col-md text-center">
+          <img class="mb-2 " src="{% static 'Administracion/img/logo.png' %}" alt="" width="150" height="50">
+          <small class="d-block mb-3 text-light">© 2024</small>
+        </div>
+      </footer>
+      {% block scripts %}{% endblock %}
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
+

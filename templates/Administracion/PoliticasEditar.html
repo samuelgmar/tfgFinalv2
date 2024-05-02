@@ -1,0 +1,107 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+<style>
+  .addbut{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+  }
+  .form-search {
+    display: flex !important;
+  }
+  .decimo{
+    position: relative;
+    height: 100px;
+    width: 200px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .numero-decimo{
+    left: 60px;
+    letter-spacing: 6.6px;
+    color: red;
+    top: 7px;
+    background-color: aliceblue;
+    width: 72px;
+    opacity: 80%;
+  }
+
+#q-app .row > * {
+  flex-shrink: initial !important;
+
+  padding-right: initial !important;
+  padding-left: initial !important;
+  margin-top: initial !important;
+}
+
+.flex>.col, .flex>.col-0, .flex>.col-1, .flex>.col-10, .flex>.col-11, .flex>.col-12, .flex>.col-2, .flex>.col-3, .flex>.col-4, .flex>.col-5, .flex>.col-6, .flex>.col-7, .flex>.col-8, .flex>.col-9, .flex>.col-auto, .flex>.col-grow, .flex>.col-shrink, .flex>.col-xs, .flex>.col-xs-0, .flex>.col-xs-1, .flex>.col-xs-10, .flex>.col-xs-11, .flex>.col-xs-12, .flex>.col-xs-2, .flex>.col-xs-3, .flex>.col-xs-4, .flex>.col-xs-5, .flex>.col-xs-6, .flex>.col-xs-7, .flex>.col-xs-8, .flex>.col-xs-9, .flex>.col-xs-auto, .flex>.col-xs-grow, .flex>.col-xs-shrink, .row>.col, .row>.col-0, .row>.col-1, .row>.col-10, .row>.col-11, .row>.col-12, .row>.col-2, .row>.col-3, .row>.col-4, .row>.col-5, .row>.col-6, .row>.col-7, .row>.col-8, .row>.col-9, .row>.col-auto, .row>.col-grow, .row>.col-shrink, .row>.col-xs, .row>.col-xs-0, .row>.col-xs-1, .row>.col-xs-10, .row>.col-xs-11, .row>.col-xs-12, .row>.col-xs-2, .row>.col-xs-3, .row>.col-xs-4, .row>.col-xs-5, .row>.col-xs-6, .row>.col-xs-7, .row>.col-xs-8, .row>.col-xs-9, .row>.col-xs-auto, .row>.col-xs-grow, .row>.col-xs-shrink{
+  min-width: 100px;
+}
+
+#q-app .row {
+  display: flex;
+  max-width: initial !important;
+  flex-wrap: initial !important;
+  margin-top: initial !important;
+  margin-right: initial !important;
+  margin-left: initial !important;
+}
+.q-date__calendar-weekdays{
+  justify-content: space-around;
+}
+.q-field__control-container{
+  width: 100%!important;
+}
+
+.rowm{
+  display: flex;
+}
+
+.row{
+  display: flex!important;
+}
+</style>
+
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Editar Políticas y Privacidad</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2 "></div>
+        <div class="bg-light pt-1 rounded shadow">
+            <div id="loteryadd" >
+              <div class="rounded-2 p-2 mx-3 ">
+                <div>
+                  <form action="{% url 'Administracion:PoliticasEditar' nombre_administracion=nombre_administracion %}" method="post">
+                    {% csrf_token %}
+                    {{form.media}}
+                    <h1 style="font-size: 2em;">Políticas Privacidad Resumen</h1>
+                    {{form.politicas_privacidad_resumen}}
+                    <h1 style="font-size: 2em;">Políticas cookies</h1>
+                    {{form.politicas_cookies}}
+                    <h1 style="font-size: 2em;">Políticas Privacidad</h1>
+                    {{form.politicas_privacidad}}
+                    <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+
+{% endblock %}
+

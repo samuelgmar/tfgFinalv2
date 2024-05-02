@@ -1,0 +1,447 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - Loteria Nacional{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'Cliente/css/sorteos/loteriaNacional.css' %}">
+<style>.input-box{
+    position: relative;
+  }
+  
+ 
+  
+  .form-control{
+  
+    height: 50px;
+    background-color:#eeeeee69;
+  }
+  
+  .form-control:focus{
+    background-color: #eeeeee69;
+    box-shadow: none;
+    border-color: #eee;
+  }
+  </style>
+{% endblock %}
+{% block extrascripts %}
+
+{% endblock %}
+
+{% block content %}
+<div id="q-app">
+    <div class="w-100">
+        <div class="container-fluid">
+            <div class="text-center py-4 d-flex flex-row justify-content-center align-items-center">
+                <div class="img-sorteo" style="background-image: url('{% static 'imgs/sorteos/cabecera_LoteriaNacional.png' %}');"></div>
+            </div>
+            <div class="w-75 m-auto"></div>
+            <div class="mb-3 mx-5 d-flex flex-column justify-content-center align-items-center border border-dark">
+                <div class=" w-75 py-4 d-flex flex-column justify-content-center align-items-center">
+                    <div class="text-center text-uppercase fw-bold"><h3>Sorteos Disponibles</h3></div>
+                    <div class="text-center fw-light"><p class="text-">Seleccione el sorteo en el que desea Jugar:</p></div>
+                    <div class="w-75 pb-4">
+                        <select id="selectSorteo" class="form-select" aria-label="Default select example">
+                            <option selected value="1">Todos</option>
+                            <option value="2">sorteo Loteria Nacional Jueves</option>
+                            <option value="3">sorteo Loteria Nacional Sábado</option>
+                        </select>
+                    </div>
+                    <!--div class="text-center py-4 text-uppercase fw-bold"><h3>Sorteo Seleccionado</h3></div>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <th scope="row" class="fw-normal">SORTEO</th>
+                                    <td class="fw-bolder">SORTEO DE LOTERIA NACIONAL 10/02/2024</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="fw-normal">FECHA SORTEO</th>
+                                    <td class="fw-bolder">SÁBADO, 10 DE FEBRERO DE 2024</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="fw-normal">PRECIO DÉCIMO</th>
+                                    <td class="fw-bolder">6,00€</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div-->
+                </div>
+            <!--div class="py-4 w-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="text-center py-4 text-uppercase fw-bold"><h3>La Administración Escoge</h3></div>
+                <div class="w-100 d-flex flex-row justify-content-center align-items-center">
+                    <div class="card m-2 text-center" style="width: 18rem;">
+                        <img src="{% static 'imgs/sorteos/decimoLN.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-uppercase">Décimos al azar Iguales</h5>
+                            <select class="form-control my-4" id="sel1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <a href="#" class="btn btn-primary">¡Comprar Ahora!</a>
+                        </div>
+                    </div>
+                    <div class="card m-2 text-center" style="width: 18rem;">
+                        <img src="{% static 'imgs/sorteos/decimoLN.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-uppercase">Décimos al azar diferentes</h5>
+                            <select class="form-control my-4" id="sel1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <a href="#" class="btn btn-primary">¡Comprar Ahora!</a>
+                        </div>
+                    </div>
+                </div>
+            </div-->
+        </div>
+        <div class="py-4 w-100 d-flex flex-column justify-content-center align-items-center bg-success-subtle">
+            <div class="text-center py-4 text-uppercase fw-bold"><h3>BUSCA TU NÚMERO PREFERIDO</h3></div>
+            <div class="text-center fw-light"><p class="text-">Busca tu número, Indica la cantidad de décimos que desees y añádelos a tu carrito.</p></div>
+            <div class="py-2 mx-3">
+                <form method="GET" class="form-search" action="{% url 'Cliente:loteriaNacional' nombre_administracion=nombre_administracion %}">
+                    <div class="input-box d-flex justify-content-center align-items-center ">
+                        <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                        <button  type="submit" class="mx-1 btn-form-search text-decoration-none text-dark fs-2 border-0 bg-transparent"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            <!--div id="loteria_t_buscador_nums_caja">
+                <form  method="get">
+                <div id="loteria_t_nums_caja_1" class="loteria_t_nums_caja">
+                    <a href="#1" id="loteria_t_nums_mas_1" class="loteria_t_nums_mas" onclick="b_num_mas(1)">+</a>
+                    
+                    <div id="b_num_1_box" class="b_num_box" style="background-image: url('{% static 'imgs/sorteos/m1_loteria.png' %}');">
+                        <input tabindex="1" id="b_num_1" name="loteria_t_num_1" type="text" maxlength="1" class="loteria_t_nums_input" onkeydown="return onlyNums(event)" onkeyup="moveNextBNum(2,event)" autocomplete="off" value="">
+                    </div>
+                    
+                    <a href="#1" id="loteria_t_nums_menos_1" class="loteria_t_nums_menos" onclick="b_num_menos(1)">-</a>
+                </div>
+                <div id="loteria_t_nums_caja_2" class="loteria_t_nums_caja">
+                    <a href="#1" id="loteria_t_nums_mas_2" class="loteria_t_nums_mas" onclick="b_num_mas(2)">+</a>
+                    
+                    <div id="b_num_2_box" class="b_num_box" style="background-image: url('{% static 'imgs/sorteos/m1_loteria.png' %}');">
+                        <input tabindex="2" id="b_num_2" name="loteria_t_num_2" type="text" maxlength="1" class="loteria_t_nums_input" onkeydown="return onlyNums(event)" onkeyup="moveNextBNum(3,event)" autocomplete="off" value="">
+                    </div>
+                    
+                    <a href="#1" id="loteria_t_nums_menos_2" class="loteria_t_nums_menos" onclick="b_num_menos(2)">-</a>
+                </div>
+                <div id="loteria_t_nums_caja_3" class="loteria_t_nums_caja">
+                    <a href="#1" id="loteria_t_nums_mas_3" class="loteria_t_nums_mas" onclick="b_num_mas(3)">+</a>
+                    
+                    <div id="b_num_3_box" class="b_num_box" style="background-image: url('{% static 'imgs/sorteos/m1_loteria.png' %}');">
+                        <input tabindex="3" id="b_num_3" name="loteria_t_num_3" type="text" maxlength="1" class="loteria_t_nums_input" onkeydown="return onlyNums(event)" onkeyup="moveNextBNum(4,event)" autocomplete="off" value="">
+                    </div>
+                    
+                    <a href="#1" id="loteria_t_nums_menos_3" class="loteria_t_nums_menos" onclick="b_num_menos(3)">-</a>
+                </div>
+                <div id="loteria_t_nums_caja_4" class="loteria_t_nums_caja">
+                    <a href="#1" id="loteria_t_nums_mas_4" class="loteria_t_nums_mas" onclick="b_num_mas(4)">+</a>
+                    
+                    <div id="b_num_4_box" class="b_num_box" style="background-image: url('{% static 'imgs/sorteos/m1_loteria.png' %}');">
+                        <input tabindex="4" id="b_num_4" name="loteria_t_num_4" type="text" maxlength="1" class="loteria_t_nums_input" onkeydown="return onlyNums(event)" onkeyup="moveNextBNum(5,event)" autocomplete="off">
+                    </div>
+                    
+                    <a href="#1" id="loteria_t_nums_menos_4" class="loteria_t_nums_menos" onclick="b_num_menos(4)">-</a>
+                </div>
+                <div id="loteria_t_nums_caja_5" class="loteria_t_nums_caja">
+                    <a href="#1" id="loteria_t_nums_mas_5" class="loteria_t_nums_mas" onclick="b_num_mas(5)">+</a>
+                    
+                    <div id="b_num_5_box" class="b_num_box" style="background-image: url('{% static 'imgs/sorteos/m1_loteria.png' %}');">
+                        <input tabindex="5" id="b_num_5" name="loteria_t_num_5" type="text" maxlength="1" class="loteria_t_nums_input" onkeydown="return onlyNums(event)" onkeyup="moveNextBNum(6,event)" autocomplete="off" value="">
+                    </div>
+                    
+                    <a href="#1" id="loteria_t_nums_menos_5" class="loteria_t_nums_menos" onclick="b_num_menos(5)">-</a>
+                </div>		
+            </div-->
+            <!--div>
+                <button id="busc" type="button" class="btn btn-light px-5 fw-bold">Buscar</button>
+                <button id="restablecerBuscador" type="button" class="btn btn-light px-5 fw-bold">Restablecer</button>
+            </div-->
+            </form>
+            <script>
+                document.getElementById("restablecerBuscador").addEventListener("click", function() {
+                    document.getElementById("b_num_1").value = "";
+                    document.getElementById("b_num_2").value = "";
+                    document.getElementById("b_num_3").value = "";
+                    document.getElementById("b_num_4").value = "";
+                    document.getElementById("b_num_5").value = "";
+                });
+
+                function onlyNums(event) {
+                    var key = event.keyCode || event.charCode;
+
+                    if (key >= 48 && key <= 57 || key >= 96 && key <= 105 || key == 8 || key == 9 || key == 37 || key == 39 || key == 46) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+                function moveNextBNum(num, event) {
+                    var key = event.keyCode || event.charCode;
+                
+                    if (key >= 48 && key <= 57) {
+                        if (num > 1) {
+                            document.getElementById("b_num_" + (num)).focus();
+                        } else
+                        if (num < 5) {
+                            document.getElementById("b_num_" + (num)).focus();
+                        }
+                    } else if (key >= 96 && key <= 105) {
+                        if (num > 1) {
+                            document.getElementById("b_num_" + (num)).focus();
+                        } else
+                        if (num < 5) {
+                            document.getElementById("b_num_" + (num)).focus();
+                        }
+                    }
+                }
+
+                function b_num_mas(num) {
+                    var input = document.getElementById("b_num_" + num);
+                    var value = parseInt(input.value);
+
+                    if (isNaN(value)) {
+                        input.value = 0;
+                    } else {
+                        if (value < 9) {
+                            input.value = value + 1;
+                        } else {
+                            input.value = ""; // Limitar el valor máximo a 9
+                        }
+                    }
+                }
+
+                function b_num_menos(num) {
+                    var input = document.getElementById("b_num_" + num);
+                    var value = parseInt(input.value);
+                
+                    if (isNaN(value)) {
+                        input.value = 0;
+                    } else {
+                        if (value > 0) {
+                            input.value = value - 1;
+                        } else {
+                            input.value = ""; // Limitar el valor mínimo a 0
+                        }
+                    }
+                }
+            </script>
+        </div>
+        <div class="py-4 w-100 d-flex flex-column justify-content-center align-items-center">
+            <div class="text-center py-4 text-uppercase fw-bold"><h3>NÚMEROS DISPONIBLES</h3></div>
+            <div class="text-center fw-light">
+                <p class="text">Números de consignación propia. <br> Disponibilidad garantizada en la mayoría de los casos.</p>
+            </div>
+            <div class="p-5 w-100 d-flex flex-row flex-wrap justify-content-center align-items-center ">
+                <div style="display: block;" class="productos-jueves" id="dj">
+                    {% for product in dj %}
+                    {%if product.juego == "Loteria Nacional Jueves"%}
+                    
+                    <div id="decimo" style="display: block;">
+                        <div class=" card px-3 bg-transparent  mb-3  border-0 d-flex justify-content-center align-items-center flex-row" style="max-width: 25em;">
+                            <div class="decimo-box">
+                                <div class="decimo-box-img">
+                                    <img src="{% static 'imgs/sorteos/decimoLNJ.jpg' %}" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="decimo-box-num">
+                                    <span class="numero_dato" rvalue="{{ product.nombre }}">{{ product.nombre }}</span>
+                                </div>
+                            </div>
+                            <div class="">
+                              <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                <form method="post" class="w-100">
+                                    {% csrf_token %}
+                                    <div class="w-100 con-decimos d-flex justify-content-between align-items-center flex-row fs-6 position-relative">
+                                        <div class=" py-2 w-100">
+                                            <input type="number" name="cantidad" class="form-control w-100" value="1" min="1" max="{{product.cantidad}}">    
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="w-100">
+                                        
+                                        <input type="hidden" name="sorteo" value="LNJ">
+                                        <input type="hidden" name="precio" value="{{product.precio}}">
+                                        <input type="hidden" name="fecha" value="{{product.fecha_sorteo}}">
+                                        <input type="hidden" name="id" value="{{product.id}}">
+                                        <input type="hidden" name="variable" value="{{product}}">
+                                        <button type="submit" class="w-100 btn btn-dark  fw-bold">Añadir al Carrito</button>
+                                      
+                                    </div>
+                                    
+                                    <p class="fw-light text-center">Quedan <span class="fw-bolder">{{ product.cantidad }}</span> décimos</p>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+                    {% endfor %}
+                </div>
+                <div style="display: block;" class="productos-sabado" id="ds">
+                    {% for product in ds %}
+                    {%if product.juego == "Loteria Nacional Sábado"%}
+                    <div id="decimo" style="display: block;">
+                        <div  class=" productos-sabado card px-3 bg-transparent  mb-3  border-0 d-flex justify-content-center align-items-center flex-row" style="max-width: 25em;">
+                            <div class="decimo-box">
+                                <div class="decimo-box-img">
+                                    <img src="{% static 'imgs/sorteos/decimoLN.jpg' %}" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="decimo-box-num">
+                                    <span class="numero_dato" rvalue="{{ product.nombre }}">{{ product.nombre }}</span>
+                                </div>
+                            </div>
+                            <div class="">
+                              <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                <form method="post" class="w-100">
+                                    {% csrf_token %}
+                                    <div class="w-100 con-decimos d-flex justify-content-between align-items-center flex-row fs-6 position-relative">
+                                        
+                                            <div class=" py-2 w-100">
+                                                <input type="number" name="cantidad" class="form-control w-100" value="1" min="1" max="{{product.cantidad}}">    
+
+                                              </div>
+                                        
+                                    </div>
+                                    
+                                    
+                                    <div class="w-100">
+                                        
+                                            <input type="hidden" name="sorteo" value="LNS">
+                                            <input type="hidden" name="precio" value="{{product.precio}}">
+                                            <input type="hidden" name="fecha" value="{{product.fecha_sorteo}}">
+                                            <input type="hidden" name="id" value="{{product.id}}">
+                                            <input type="hidden" name="variable" value="{{product}}">
+                                            <button type="submit" class="btn btn-dark  fw-bold w-100">Añadir al Carrito</button>
+                                        
+                                    
+                                    </div>
+                                    <p class="fw-light text-center">Quedan <span class="fw-bolder">{{ product.cantidad }}</span> décimos</p>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var selectSorteo = document.getElementById("selectSorteo");
+    
+            selectSorteo.addEventListener("change", function () {
+                var value = selectSorteo.value;
+                var productosJueves = document.querySelectorAll('.productos-jueves');
+                var productosSabado = document.querySelectorAll('.productos-sabado');
+    
+                // Mostrar u ocultar productos según la selección
+                if (value === "2") {
+                    mostrarProductos(productosJueves);
+                    ocultarProductos(productosSabado);
+                } else if (value === "3") {
+                    mostrarProductos(productosSabado);
+                    ocultarProductos(productosJueves);
+                } else {
+                    // Si se selecciona "Todos", mostrar todos los productos
+                    mostrarProductos(productosJueves);
+                    mostrarProductos(productosSabado);
+                }
+            });
+    
+            // Función para mostrar elementos del DOM
+            function mostrarProductos(elementos) {
+                elementos.forEach(function (elemento) {
+                    elemento.style.display = "block";
+                });
+            }
+    
+            // Función para ocultar elementos del DOM
+            function ocultarProductos(elementos) {
+                elementos.forEach(function (elemento) {
+                    elemento.style.display = "none";
+                });
+            }
+        });
+        document.querySelector(".btn-light").addEventListener("click", function () {
+            var numeros = [];
+
+            for (var i = 1; i <= 5; i++) {
+                var input = document.getElementById("b_num_" + i);
+                var value = input.value.trim(); // Eliminar espacios en blanco al principio y al final
+            
+                numeros.push(value);
+            }
+        
+            // Realizar la búsqueda o cualquier otra acción con los números obtenidos
+            console.log("Números ingresados:", numeros);
+            var decimos = document.querySelectorAll("#decimo");
+            decimos.forEach(function(decimo) {
+                var numeroDato = decimo.querySelector(".numero_dato").getAttribute("rvalue");
+                var numerosDecimo = numeroDato.split(""); // Convertir el string en un array de caracteres
+
+                var coincide = true;
+                for (var i = 0; i < numeros.length; i++) {
+                    if (numeros[i] !== "" && numeros[i] !== numerosDecimo[i]) {
+                        coincide = false;
+                        break;
+                    }
+                }
+            
+                if (coincide) {
+                    decimo.style.display = "block"; // Mostrar el décimo si coincide con los números ingresados
+                } else {
+                    decimo.style.display = "none"; // Ocultar el décimo si no coincide con los números ingresados
+                }
+            });
+        });
+        document.getElementById("restablecerBuscador").addEventListener("click", function() {
+    document.querySelectorAll("#decimo").forEach(function(decimo) {
+        decimo.style.display = "block";
+    });
+
+    // Restablecer también los valores de los inputs de búsqueda
+    for (var i = 1; i <= 5; i++) {
+        document.getElementById("b_num_" + i).value = "";
+    }
+});
+    </script>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+<script>
+    
+    
+
+
+    const { ref } = Vue
+    
+    
+    
+    
+    // we generate lots of rows here
+    
+
+    
+        const app = Vue.createApp({
+          setup () {
+            return {
+                
+            }
+          }
+        })
+    
+        app.use(Quasar, { config: {} })
+        Quasar.lang.set(Quasar.lang.es)
+        app.mount('#q-app')
+</script>
+</div>
+{% endblock %}

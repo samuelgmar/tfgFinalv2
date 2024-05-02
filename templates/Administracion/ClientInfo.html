@@ -1,0 +1,44 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid pb-3" style="min-height: 100vh; height: auto;">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Perfil {{nombre}}</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2 "></div>
+        <div class="bg-light pt-1 rounded shadow">
+            <form method="post" class="m-4" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <ul>
+                            {% for error in field.errors %}
+                                <li style="color: red;">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                {% endfor %}  
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Imagen de Perfil Actual: <a href="{{ usuario.imagen.url }}">{{ usuario.imagen }}</a></label>
+                    <input class="form-control" accept="image/*" type="file" name="imagen"  id="id_imagen">
+                </div>
+                <div class="w-100 text-end">
+                    <button type="submit" class="btn btn-success mb-4">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

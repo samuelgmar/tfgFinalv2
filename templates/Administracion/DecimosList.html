@@ -1,0 +1,400 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+<style>
+  .addbut{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+  }
+  .form-search {
+    display: flex !important;
+  }
+  .decimo{
+    position: relative;
+    height: 100px;
+    width: 200px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .numero-decimo{
+    left: 60px;
+    letter-spacing: 6.6px;
+    color: red;
+    top: 7px;
+    background-color: aliceblue;
+    width: 72px;
+    opacity: 80%;
+  }
+
+#q-app .row > * {
+  flex-shrink: initial !important;
+
+  padding-right: initial !important;
+  padding-left: initial !important;
+  margin-top: initial !important;
+}
+
+.flex>.col, .flex>.col-0, .flex>.col-1, .flex>.col-10, .flex>.col-11, .flex>.col-12, .flex>.col-2, .flex>.col-3, .flex>.col-4, .flex>.col-5, .flex>.col-6, .flex>.col-7, .flex>.col-8, .flex>.col-9, .flex>.col-auto, .flex>.col-grow, .flex>.col-shrink, .flex>.col-xs, .flex>.col-xs-0, .flex>.col-xs-1, .flex>.col-xs-10, .flex>.col-xs-11, .flex>.col-xs-12, .flex>.col-xs-2, .flex>.col-xs-3, .flex>.col-xs-4, .flex>.col-xs-5, .flex>.col-xs-6, .flex>.col-xs-7, .flex>.col-xs-8, .flex>.col-xs-9, .flex>.col-xs-auto, .flex>.col-xs-grow, .flex>.col-xs-shrink, .row>.col, .row>.col-0, .row>.col-1, .row>.col-10, .row>.col-11, .row>.col-12, .row>.col-2, .row>.col-3, .row>.col-4, .row>.col-5, .row>.col-6, .row>.col-7, .row>.col-8, .row>.col-9, .row>.col-auto, .row>.col-grow, .row>.col-shrink, .row>.col-xs, .row>.col-xs-0, .row>.col-xs-1, .row>.col-xs-10, .row>.col-xs-11, .row>.col-xs-12, .row>.col-xs-2, .row>.col-xs-3, .row>.col-xs-4, .row>.col-xs-5, .row>.col-xs-6, .row>.col-xs-7, .row>.col-xs-8, .row>.col-xs-9, .row>.col-xs-auto, .row>.col-xs-grow, .row>.col-xs-shrink{
+  min-width: 100px;
+}
+
+#q-app .row {
+  display: flex;
+  max-width: initial !important;
+  flex-wrap: initial !important;
+  margin-top: initial !important;
+  margin-right: initial !important;
+  margin-left: initial !important;
+}
+.q-date__calendar-weekdays{
+  justify-content: space-around;
+}
+.q-field__control-container{
+  width: 100%!important;
+}
+
+.rowm{
+  display: flex;
+}
+
+.row{
+  display: flex!important;
+}
+</style>
+
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Lista Décimos</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2 "></div>
+        <div class="bg-light pt-1 rounded shadow">
+            <div class="py-2 mx-3 d-flex justify-content-end">
+                <form style="flex: 1;" method="GET" class="form-search" action="{% url 'Administracion:admsDecimosList' nombre_administracion=nombre_administracion %}">
+                    <input type="text" class="form-control-i-pers" placeholder="Buscar décimo..." name="q" value="{{ request.GET.q }}">
+                    <button type="submit" class="btn-form-search">
+                      <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="py-2 mx-3 d-flex justify-content-center">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+                <label class="form-check-label" for="inlineCheckbox1">Disponibles</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
+                <label class="form-check-label" for="inlineCheckbox2">No Disponibles</label>
+              </div>
+            </div>
+            <div id="loteryadd" >
+              <div class="rounded-2 p-2 mx-3 " style="background-color: rgba(127, 255, 212, 0.212);">
+                <div id="q-app" class="no-grid-styles" style="min-height: auto;">
+                  <q-expansion-item v-model="expanded" icon="add_circle" label="Añadir nuevo Décimo">
+                    <q-form action="{% url 'Administracion:añadirDecimo' nombre_administracion=nombre_administracion %}" method="post">
+                      {% csrf_token %}
+                      <div class="q-pa-md">
+                    <q-input
+                      name="decimo"
+                      v-model="ph"
+                      label="Número de décimo"
+                      :rules="phRules"
+                      dense
+                      outlined
+                      ref="phRef"
+                    />
+                  </div>
+                  <div class="q-pa-md">
+                    <q-select
+                      name="juego"
+                      v-model="model"
+                      label="Juego"
+                      :options="options"
+                      :rules="modelRules"
+                      dense
+                      outlined
+                      ref="modelRef"
+                      @update:model-value="handleGameChange"
+                    />
+                  </div>
+                  <div class="q-pa-md">
+                    <q-input
+                      name="cantidad"
+                      v-model="cantidad"
+                      label="Cantidad"
+                      :rules="cantidadRules"
+                      type="number"
+                      dense
+                      outlined
+                      ref="cantidadRef"
+                    />
+                  </div>
+                  <div class="q-pa-md">
+                    <q-input
+                      name="precio"
+                      v-model="precio"
+                      label="Precio"
+                      :rules="precioRules"
+                      type="number"
+                      dense
+                      outlined
+                      ref="precioRef"
+                      >
+                      <template v-slot:after>
+                        <q-icon name="euro"></q-icon>
+                      </template>
+                      </q-input>
+                  </div>
+                  <div class="q-pa-md d-flex justify-content-center">
+                    <div class="q-gutter-md">
+                      <q-date ref="dateRef" name="fecha" :rules="[val => !!val || 'Seleccione una fecha']" v-model="date" :options="dates" ></q-date>
+                    </div>
+                  </div>
+                  <div class="q-pa-md">
+                    <q-input ref="descripcionRef" name="descripcion"  v-model="descripcion" label="Descripción" filled autogrow ></q-input>
+                  </div>
+                  <div class="q-pa-md d-flex justify-content-end">
+                    <q-btn class="justify-content-end" label="Añadir" type="submit" color="primary"/>
+                  </div>
+                    </q-form>
+                  </q-expansion-item>
+                </div>
+              </div>
+            </div>
+            <div>
+              <ul class="list-group list-group-flush">
+              {% for decimos in object_list %}
+                <li style="display: flex;" class="list-group-item align-items-center" {% if decimos.cantidad == 0 %}id="noDisponible"{% else %}id="Disponible"{% endif %}>
+                  <div class="decimo" {% if decimos.juego == 'Loteria Nacional Jueves' %} style="background-image: url('{% static 'imgs/sorteos/decimoLNJ.jpg'%}');"{% else %}style="background-image: url('{% static 'imgs/sorteos/decimoLN.jpg'%}');"{% endif %}>
+                    <div class="numero-decimo position-absolute">
+                      <span>{{decimos}}</span>
+                    </div>
+                  </div>
+                  <div style="font-size: 0.9em">
+                    <div>{{decimos}}</div>
+                    <div>Cantidad: {{decimos.cantidad}}</div>
+                    <div>{{decimos.juego}} - {{decimo.precio}}€ - {{decimos.fecha_sorteo}}</div>
+                  </div>
+                  <div style="flex:1; color: red;">
+                    <div class="addbut">
+                      <a href="{% url 'Administracion:BorrarDecimo' pk=decimos.id nombre_administracion=nombre_administracion %}" class="px-2">
+                        <i class="bi bi-x-circle" style="color: red !important;"></i>
+                      </a>
+                      <a href="{% url 'Administracion:EditarDecimo' pk=decimos.id nombre_administracion=nombre_administracion %}">
+                        <i class="bi bi-pencil" style="color: goldenrod !important;"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </li>
+              {% endfor %}
+              </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  
+
+  
+<script>
+
+
+
+  // Función para manejar los cambios en los checkboxes
+  function handleCheckboxChange() {
+      var checkbox1 = document.getElementById('inlineCheckbox1');
+      var divs = document.querySelectorAll('#Disponible');
+      if (!checkbox1.checked) {
+        divs.forEach(function(div) {
+          div.style.display = 'none';  
+        });
+      } else {
+          divs.forEach(function(div) {
+            div.style.display = 'flex';
+          });
+      }
+  }
+  function handleCheckboxChange2() {
+      var checkbox1 = document.getElementById('inlineCheckbox2');
+      var divs = document.querySelectorAll('#noDisponible');
+      if (!checkbox1.checked) {
+        divs.forEach(function(div) {
+          div.style.display = 'none';  
+        });
+      } else {
+          divs.forEach(function(div) {
+            div.style.display = 'flex';
+          });
+      }
+  }
+
+ 
+  document.getElementById('inlineCheckbox1').addEventListener('change', handleCheckboxChange);
+  document.getElementById('inlineCheckbox2').addEventListener('change', handleCheckboxChange2);
+
+ 
+  handleCheckboxChange();
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+
+    <script>
+      const { ref } = Vue
+    
+      const app = Vue.createApp({
+        setup () {
+          
+          const { useQuasar } = Quasar
+          const $q = useQuasar()
+    
+          const ph = ref('')
+          const phRef = ref(null)
+    
+          const model = ref(null)
+          const modelRef = ref(null)
+    
+          const cantidad = ref(null)
+          const cantidadRef = ref(null)
+    
+          const precio = ref(null)
+          const precioRef = ref(null)
+    
+          const date = ref(null)
+          const dateRef = ref(null)
+
+          const descripcion = ref(null)
+          const descripcionRef = ref(null)
+          return {
+            descripcion,
+            descripcionRef,
+            expanded: ref(false),
+            options: [
+              'Lotería Nacional Jueves', 'Lotería Nacional Sábado'
+            ],
+            ph,
+            phRef,
+            phRules: [
+              val => (val && val.length === 5) || 'El número de décimo debe tener 5 caracteres'
+            ],
+    
+            model,
+            modelRef,
+            modelRules: [
+              val => !!val || 'Seleccione un juego'
+            ],
+    
+            cantidad,
+            cantidadRef,
+            cantidadRules: [
+              val => (val > 0) || 'La cantidad debe ser mayor que cero'
+            ],
+    
+            precio,
+            precioRef,
+            precioRules: [
+              val => (val > 0) || 'El precio debe ser mayor que cero'
+            ],
+    
+            date,
+            dateRef,
+            dateRules: [
+              val => !!val || 'Seleccione una fecha'
+            ],
+    
+            onSubmit () {
+              phRef.value.validate()
+              modelRef.value.validate()
+              cantidadRef.value.validate()
+              precioRef.value.validate()
+              dateRef.value.validate()
+    
+              if (phRef.value.hasError || modelRef.value.hasError || cantidadRef.value.hasError || precioRef.value.hasError || dateRef.value.hasError) {
+                // El formulario tiene errores
+              }
+              else {
+                $q.notify({
+                  icon: 'done',
+                  color: 'positive',
+                  message: 'Enviado'
+                })
+              }
+            },
+    
+            onReset () {
+              ph.value = ''
+              model.value = null
+              cantidad.value = null
+              precio.value = null
+              date.value = null
+              descripcion.valuel = null
+    
+              phRef.value.resetValidation()
+              modelRef.value.resetValidation()
+              cantidadRef.value.resetValidation()
+              precioRef.value.resetValidation()
+              dateRef.value.resetValidation()
+            }
+          }
+        },
+        methods: {
+          handleGameChange() {
+            if (this.model === 'Lotería Nacional Jueves') {
+              this.dates = this.getAllThursdaysOfYear();
+            } else if (this.model === 'Lotería Nacional Sábado') {
+              this.dates = this.getAllSaturdaysOfYear();
+            } else {
+              this.dates = [];
+            }
+          },
+          getAllThursdaysOfYear() {
+            const year = new Date().getFullYear();
+            const thursdays = [];
+            for (let month = 0; month < 12; month++) {
+              const currentMonth = new Date(year, month, 1);
+              while (currentMonth.getDay() !== 4) { // 4 es el índice del jueves en JavaScript (domingo es 0)
+                currentMonth.setDate(currentMonth.getDate() + 1);
+              }
+              while (currentMonth.getMonth() === month) {
+                const formattedDate = `${currentMonth.getFullYear()}/${(currentMonth.getMonth() + 1).toString().padStart(2, '0')}/${currentMonth.getDate().toString().padStart(2, '0')}`;
+                thursdays.push(formattedDate);
+                currentMonth.setDate(currentMonth.getDate() + 7); // Saltar 7 días para el siguiente jueves
+              }
+            }
+            return thursdays;
+          }, 
+          getAllSaturdaysOfYear() {
+            const year = new Date().getFullYear();
+            const mondays = [];
+            for (let month = 0; month < 12; month++) {
+              const currentMonth = new Date(year, month, 1);
+              while (currentMonth.getDay() !== 6) { // 1 es el índice del lunes en JavaScript (domingo es 0)
+                currentMonth.setDate(currentMonth.getDate() + 1);
+              }
+              while (currentMonth.getMonth() === month) {
+                const formattedDate = `${currentMonth.getFullYear()}/${(currentMonth.getMonth() + 1).toString().padStart(2, '0')}/${currentMonth.getDate().toString().padStart(2, '0')}`;
+                mondays.push(formattedDate);
+                currentMonth.setDate(currentMonth.getDate() + 7); // Saltar 7 días para el siguiente lunes
+              }
+            }
+            return mondays;
+          }
+        }
+      })
+    
+      app.use(Quasar, { config: {} })
+      Quasar.lang.set(Quasar.lang.es)
+      app.mount('#q-app')
+    </script>
+{% endblock %}
+

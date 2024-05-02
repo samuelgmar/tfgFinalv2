@@ -1,0 +1,174 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - Carrito{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/admProductList.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.15.3/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block extrascripts %}
+
+{% endblock %}
+    
+{% block content %}
+<style>
+  .col{
+    text-align: center;
+  }
+  .grid-style-transition {
+      transition: transform 0.28s, background-color 0.28s;
+  }
+</style>
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Carrito</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2 "></div>
+        <div class="bg-light pt-1 rounded shadow ">
+          {% if mensaje %}
+            <p class="p-2 fw-light">{{ mensaje }}</p>
+          {% else %}
+          <div id="q-app" style="min-height: auto;">
+            <div class="q-pa-md">
+              <q-table :rows="rows" :columns="columns" row-key="name" selection="multiple" v-model:selected="selected" :filter="filter" grid hide-header >
+              <template v-slot:top-right>
+                <q-input class="bg-white rounded px-2" borderless dense debounce="300" v-model="filter" placeholder="Search">
+                  <template v-slot:append>
+                    <q-icon name="search"></q-icon>
+                  </template>
+                </q-input>
+              </template>
+        
+              <template v-slot:item="props">
+                <div
+                  class="q-pa-xs col-xs-12 col-sm-6 col-md-4 col-lg-3 grid-style-transition"
+                  :style="props.selected ? 'transform: scale(0.95);' : ''"
+                >
+                  <q-card bordered flat :class="props.selected ? ($q.dark.isActive ? 'bg-grey-9' : 'bg-grey-2') : ''">
+                    
+                    
+                    <q-list dense>
+                      <q-item v-for="col in props.cols.filter(col => col.name !== 'desc')" :key="col.name">
+                        <q-item-section>
+                          <q-item-label :label="col.label"><q-breadcrumbs-el :label="col.label"></q-breadcrumbs-el></q-item-label>
+                        </q-item-section>
+                        <q-item-section side>
+                          <q-item-label caption :label="col.value"><q-breadcrumbs-el :label="col.value"></q-breadcrumbs-el></q-item-label>
+                        </q-item-section>
+                      </q-item>
+                    </q-list>
+                    <q-separator></q-separator>
+                    <q-card-section>
+                      <div class="text-center d-flex justify-content-around">
+                        <form action="" method="post">
+                          {% csrf_token %}
+                          <q-input class="d-none" name="id"  outlined v-model="props.row.id"></q-input>
+                          <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                        </form>
+                        <a :href="props.row.id">
+                          <button class="btn btn-info"><i class="bi bi-info-square"></i></button>
+                        </a>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </template>
+        
+            </q-table>
+              </div>
+            </div>
+            
+            <div class="pb-1 px-3 d-flex justify-content-end">
+              <h4>Total (IVA + Tasas): {{total_price_iva_str}}€</h4>
+            </div>
+        </div>
+        
+        <div class="w-100 d-flex justify-content-center align-items-center pt-3">
+          <div id="paypal-button-container" class="w-50 d-flex justify-content-center align-items-center"></div>
+          <script src="https://www.paypal.com/sdk/js?currency=EUR&client-id=AQjCzMIsGLZhzj88QdoH4w0R4cPIkXPBgUVZXLO6yZna6vJxl6ldgNsXWfQwwGldvheFMNarFT0y4oXv"> 
+          </script>
+          <script>
+            paypal.Buttons({
+              createOrder: function(data, actions) {
+                let value="{{ total_price_iva_str }}";
+                let code="EUR"
+                // Datos de la compra
+                return actions.order.create({
+                  purchase_units: [{
+                    amount: {
+                      currency_code: code,
+                      value: value
+                    }
+                  }]
+                });
+              },
+              onApprove: function(data) {
+                var csrftoken = token('csrftoken');
+                return fetch('{% url 'Global:pagoCliente' %}', {
+                  method: 'POST',
+                  headers: {
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                  },
+                  body: JSON.stringify({
+                        orderID: data.orderID, 
+                        nombreAdm: '{{nombre_administracion}}'
+                  })
+                  }).then(function(res) {
+                        return res.json();
+                  }).then(function(details) {
+                    if(details.status){
+                      window.location.href = '{% url 'Cliente:ClientePaymentSuccess' nombre_administracion=nombre_administracion  %}';
+                    }
+                    else{
+                      window.location.href = '{% url 'Cliente:ClientePaymentFailed' nombre_administracion=nombre_administracion %}';
+                    }
+                  })
+                  }
+              }).render('#paypal-button-container');
+            </script>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+  <script>
+    const { ref } = Vue
+
+    const columns = [
+      { name: 'name', align: 'center', label: 'Sorteo', field: 'name', sortable: true },
+      { name: 'id', label: 'ID', field: 'id', sortable: true },
+      { name: 'cantidad', label: 'Cantidad', field: 'cantidad', sortable: true },
+      { name: 'precio', label: 'Precio', field: 'precio' }
+    ]
+    const rows = [
+      {% for item in cart %}
+      {
+        name: '{{ item.producto.nombre }}',
+        id: {{ item.producto.id }},
+        cantidad: {{ item.producto.cantidad }},
+        precio: '{{ item.producto.precio }}€'
+      },
+      {% endfor %}
+    ]
+
+    const app = Vue.createApp({
+      setup () {
+        return {
+          filter: ref(''),
+          selected: ref([]),
+          columns,
+          rows
+        }
+      }
+    })
+
+    app.use(Quasar, { config: {} })
+    Quasar.lang.set(Quasar.lang.es)
+    app.mount('#q-app')
+</script>
+{% endblock %}

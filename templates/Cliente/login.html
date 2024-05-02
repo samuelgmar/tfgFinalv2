@@ -1,0 +1,67 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - Login{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'Administracion/css/headers/headerLogin.css' %}">
+{% endblock %}
+{% block extrascripts %}
+    
+{% endblock %}
+
+{% block content %}
+<style>
+  
+</style>
+<section class="overflow-hidden bac-opa-w d-flex align-items-center" style="min-height: 100vh;">
+    <div class="w-100 m-auto">
+      <div class="card border-light border-0 rounded-0 m-auto" style="box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.397);max-width: 36em;">
+            <div class="card-header rounded-0 bg-white text-center p-4">
+              <h5 class="fs-4 mb-1">Iniciar sesión</h5>
+            </div>
+            <div class="card-body bg-white p-5">
+              <form method="post" action="{% url 'Cliente:loginCliente' nombre_administracion=nombre_administracion %}">
+                {% csrf_token %}
+                {% for field in form %} 
+                  <div class="form-floating mb-2">
+                      {{ field }}
+                      <label for="floatingInput">{{ field.label }}</label>
+                      {{ field.errors }}
+                  </div>
+                {% endfor %}
+                <div class="d-grid mb-2">
+                  <button type="submit" class="rounded-0 btn btn-lg btn-primary">Iniciar Sesión</button>
+                </div>
+                <div class="row">
+                  <div class="col text-end">
+                    <a href="{% url 'Cliente:forgotPasswordCliente' nombre_administracion=nombre_administracion %}" class="underline small">¿Has olvidado tu contraseña?</a>
+                  </div>
+                </div>
+              </form>
+              {% if form.errors %}
+                  <div class="alert alert-danger" role="alert">
+                    <strong>Error:</strong> Por favor, corrige los siguientes errores.
+                    <ul>
+                      {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                          <li>
+                            {% if field != '__all__' %}
+                                <strong>{{ field.label }}:</strong>
+                            {% endif %}
+                            {{ error }}
+                          </li>
+                        {% endfor %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endif %}
+            </div>
+            <div class="rounded-0 card-footer text-center p-4">
+              <p class="text-secondary">¿No tienes una cuenta? <a href="{% url 'Cliente:registerCliente' nombre_administracion=nombre_administracion %}" class="border-transition">Registrate</a>
+              </p>
+            </div>
+      </div>
+    </div>
+</section>
+    
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/admProductList.css' %}">
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid">
+    <div class="container">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Administración - Productos</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="bg-light pt-2 rounded">
+            <div class="d-flex justify-content-center align-items-center pt-5 mx-3 flex-column">
+                {% for producto in object_list %}
+                <div class="card mb-3 " style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4 cd-img" style="background-image: url({% if producto.imagen %}{{ producto.imagen.url }}{% endif %});">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ producto.nombre }}</h5>
+                            <p class="card-text">{{ producto.descripcion }}</p>
+                            <p class="card-text"><small class="text-body-secondary">{{ producto.actualizado }}</small></p>
+                            <p>Precio: {{ producto.precio }} €</p><br>
+                            <a href="{% url 'Administracion:admsProductsDetail' nombre_administracion=nombre_administracion pk=producto.id %}" class="btn btn-primary">Comprar Ahora</a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,616 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - Euromillones{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'Cliente/css/sorteos/Euromillones.css' %}">
+
+{% endblock %}
+{% block extrascripts %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="w-100">
+  <div class="container-fluid">
+      <div class="text-center py-4 d-flex flex-row justify-content-center align-items-center">
+          <div class="img-sorteo" style="background-image: url('{% static 'imgs/sorteos/cabecera_Euromillones.png' %}');"></div>
+      </div>
+      <div class="w-75 m-auto mb-5 border-bottom border-black"></div>
+      
+      <div class="d-flex flex-column justify-content-center align-items-center pb-5">
+        <div class="container-fluid" style="max-width: 50em;">
+          <div class="d-flex justify-content-center align-items-center pb-3">
+            <button id="sencilloBtn" onclick="botonModo(this)" class="btn-m-seleccionado mx-2" type="button">Sencilla</button>
+            <button id="multipleBtn" onclick="botonModo(this)" class="btn-m mx-2" type="button">Multiple</button>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center pb-3">
+
+
+            <button id="dia" onclick="botonDia(this)" class="btn-d-seleccionado mx-2" type="button">Lunes</button>
+            <button id="semanal" onclick="botonDia(this)" class="btn-d mx-2" type="button">Semanal</button>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center mx-1 pb-3">
+            <select id="autouno" class="form-select mx-4" aria-label="Default select example" onchange="auto(this)">
+              <option selected>AUTOMATICAS</option>
+              <option value="1">1 apuesta </option>
+              <option value="2">2 apuesta </option>
+              <option value="3">3 apuesta </option>
+              <option value="4">4 apuesta </option>
+              <option value="5">5 apuesta </option>
+            </select>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center mx-1 pb-3">
+            <select id="autodos" class="form-select mx-4" aria-label="Default select example" onchange="autom(this)">
+              <option selected>AUTOMAT. MULTIPLES</option>
+              <option value="2-6">2 estrellas y 6 números </option>
+              <option value="2-7">2 estrellas y 7 números </option>
+              <option value="2-8">2 estrellas y 8 números </option>
+              <option value="2-9">2 estrellas y 9 números </option>
+              <option value="2-10">2 estrellas y 10 números </option>
+              <option value="3-5">3 estrellas y 5 números </option>
+              <option value="3-6">3 estrellas y 6 números </option>
+              <option value="3-7">3 estrellas y 7 números </option>
+              <option value="3-8">3 estrellas y 8 números </option>
+              <option value="3-9">3 estrellas y 9 números </option>
+              <option value="3-10">3 estrellas y 10 números </option>
+              <option value="4-5">4 estrellas y 5 números </option>
+              <option value="4-6">4 estrellas y 6 números </option>
+              <option value="4-7">4 estrellas y 7 números </option>
+              <option value="4-8">4 estrellas y 8 números </option>
+              <option value="4-9">4 estrellas y 9 números </option>
+              <option value="4-10">4 estrellas y 10 números </option>
+              <option value="5-5">5 estrellas y 5 números </option>
+              <option value="5-6">5 estrellas y 6 números </option>
+              <option value="5-7">5 estrellas y 7 números </option>
+              <option value="5-8">5 estrellas y 8 números </option>
+              <option value="5-9">5 estrellas y 9 números </option>
+              <option value="5-10">5 estrellas y 10 números </option>
+            </select>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center mx-1">
+             <h5 class="apuesta-title">Apuesta 1</h5>
+          </div>
+          <div class="d-flex flex-wrap-reverse justify-content-center align-items-center">
+            <div class="d-inline-block modulo-botonera">
+              <div class="fw-light"><p>NÚMEROS</p></div>
+              <div class="botonera numeros pb-3">
+                <button onclick="boton(this)" value="1" name="" class="boton-boleto numero">1</button>
+                <button onclick="boton(this)" value="2" name="" class="boton-boleto numero">2</button>
+                <button onclick="boton(this)" value="3" name="" class="boton-boleto numero">3</button>
+                <button onclick="boton(this)" value="4" name="" class="boton-boleto numero">4</button>
+                <button onclick="boton(this)" value="5" name="" class="boton-boleto numero">5</button>
+                <button onclick="boton(this)" value="6" name="" class="boton-boleto numero">6</button>
+                <button onclick="boton(this)" value="7" name="" class="boton-boleto numero">7</button>
+                <button onclick="boton(this)" value="8" name="" class="boton-boleto numero">8</button>
+                <button onclick="boton(this)" value="9" name="" class="boton-boleto numero">9</button>
+                <button onclick="boton(this)" value="10" name="" class="boton-boleto numero">10</button>
+                <button onclick="boton(this)" value="11" name="" class="boton-boleto numero">11</button>
+                <button onclick="boton(this)" value="12" name="" class="boton-boleto numero">12</button>
+                <button onclick="boton(this)" value="13" name="" class="boton-boleto numero">13</button>
+                <button onclick="boton(this)" value="14" name="" class="boton-boleto numero">14</button>
+                <button onclick="boton(this)" value="15" name="" class="boton-boleto numero">15</button>
+                <button onclick="boton(this)" value="16" name="" class="boton-boleto numero">16</button>
+                <button onclick="boton(this)" value="17" name="" class="boton-boleto numero">17</button>
+                <button onclick="boton(this)" value="18" name="" class="boton-boleto numero">18</button>
+                <button onclick="boton(this)" value="19" name="" class="boton-boleto numero">19</button>
+                <button onclick="boton(this)" value="20" name="" class="boton-boleto numero">20</button>
+                <button onclick="boton(this)" value="21" name="" class="boton-boleto numero">21</button>
+                <button onclick="boton(this)" value="22" name="" class="boton-boleto numero">22</button>
+                <button onclick="boton(this)" value="23" name="" class="boton-boleto numero">23</button>
+                <button onclick="boton(this)" value="24" name="" class="boton-boleto numero">24</button>
+                <button onclick="boton(this)" value="25" name="" class="boton-boleto numero">25</button>
+                <button onclick="boton(this)" value="26" name="" class="boton-boleto numero">26</button>
+                <button onclick="boton(this)" value="27" name="" class="boton-boleto numero">27</button>
+                <button onclick="boton(this)" value="28" name="" class="boton-boleto numero">28</button>
+                <button onclick="boton(this)" value="29" name="" class="boton-boleto numero">29</button>
+                <button onclick="boton(this)" value="30" name="" class="boton-boleto numero">30</button>
+                <button onclick="boton(this)" value="31" name="" class="boton-boleto numero">31</button>
+                <button onclick="boton(this)" value="32" name="" class="boton-boleto numero">32</button>
+                <button onclick="boton(this)" value="33" name="" class="boton-boleto numero">33</button>
+                <button onclick="boton(this)" value="34" name="" class="boton-boleto numero">34</button>
+                <button onclick="boton(this)" value="35" name="" class="boton-boleto numero">35</button>
+                <button onclick="boton(this)" value="36" name="" class="boton-boleto numero">36</button>
+                <button onclick="boton(this)" value="37" name="" class="boton-boleto numero">37</button>
+                <button onclick="boton(this)" value="38" name="" class="boton-boleto numero">38</button>
+                <button onclick="boton(this)" value="39" name="" class="boton-boleto numero">39</button>
+                <button onclick="boton(this)" value="40" name="" class="boton-boleto numero">40</button>
+                <button onclick="boton(this)" value="41" name="" class="boton-boleto numero">41</button>
+                <button onclick="boton(this)" value="42" name="" class="boton-boleto numero">42</button>
+                <button onclick="boton(this)" value="43" name="" class="boton-boleto numero">43</button>
+                <button onclick="boton(this)" value="44" name="" class="boton-boleto numero">44</button>
+                <button onclick="boton(this)" value="45" name="" class="boton-boleto numero">45</button>
+                <button onclick="boton(this)" value="46" name="" class="boton-boleto numero">46</button>
+                <button onclick="boton(this)" value="47" name="" class="boton-boleto numero">47</button>
+                <button onclick="boton(this)" value="48" name="" class="boton-boleto numero">48</button>
+                <button onclick="boton(this)" value="49" name="" class="boton-boleto numero">49</button>
+                <button onclick="boton(this)" value="50" name="" class="boton-boleto numero">50</button>
+              </div>
+              <div class="fw-light"><p>ESTRELLAS</p></div>
+              <div class="estrellas">
+                <button onclick="boton(this)" value="1" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>1</button>
+                <button onclick="boton(this)" value="2" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>2</button>
+                <button onclick="boton(this)" value="3" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>3</button>
+                <button onclick="boton(this)" value="4" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>4</button>
+                <button onclick="boton(this)" value="5" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>5</button>
+                <button onclick="boton(this)" value="6" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>6</button>
+                <button onclick="boton(this)" value="7" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>7</button>
+                <button onclick="boton(this)" value="8" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>8</button>
+                <button onclick="boton(this)" value="9" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>9</button>
+                <button onclick="boton(this)" value="10" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>10</button>
+                <button onclick="boton(this)" value="11" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>11</button>
+                <button onclick="boton(this)" value="12" name="" class="boton-boleto estrella"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/estrella.png' %}');"></span>12</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center ">
+        <button id="validar" class="btn-m-seleccionado mx-2 mb-3" onclick="validar()"  style="max-width: 80em; background-color: #153f69; color: white;" disabled="disabled">
+          Validar Apuesta
+        </button>
+      </div>
+      <div class="d-flex justify-content-center align-items-center pb-3">
+        <button class="btn-m-seleccionado mx-2 mb-3" onclick="reset()" style="max-width: 80em; background-color: #153f69; color: white;">
+          Volver a empezar
+        </button>
+      </div>
+      <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+        <div class="w-100 ">
+          <table class="mx-5 table table-striped" style="width: -webkit-fill-available;">
+            <thead>
+              <tr>
+                <th scope="col">Apuesta</th>
+                <th scope="col">Números</th>
+                <th scope="col">Estrellas</th>
+                <th scope="col">Coste</th>
+                <th scope="col">Día</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpoTabla">
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="total-block d-flex flex-column justify-content-center align-items-center">
+        <div class="modulo-total-compra">
+          <strong>Total</strong>	
+          <span class="total-compra">0,00 €</span>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="dia" id="diario" value="Martes">
+          <input type="hidden" name="mode" id="multi" value="Sencilla">
+          <input type="hidden" name="sorteo" value="euromillones">
+          <input type="hidden" id="precioinput" name="precio" value="0.00">
+          <input type="hidden" id="variable" name="variable">
+          <button class="boton-confirmar" disabled="disabled">CONFIRMAR APUESTAS</button>
+        </form>
+      </div>
+      <div class="d-flex justify-content-center flex-wrap pb-5">
+        <p class="">
+          <button class="btn" style="max-width: 50em; background-color: #153f69; color: white;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            ¿Como Jugar?
+          </button>
+        </p>
+        <div class="collapse w-100" id="collapseExample">
+          <div class="card card-body fw-light lh-sm" style="font-size: small;">
+            Cada apuesta de Euromillones consiste en seleccionar 5 números de una tabla de 50 (números del 1 al 50) y dos estrellas de una tabla de 12 números (del 1 al 12). En Euromillones se destina el 50% de la recaudación a premios.<br><br>
+
+El precio de una apuesta son 2,50 €.<br><br>
+
+Para participar solamente tienes que:<br>
+1.- Elegir si quieres jugar al siguiente sorteo o  a los dos de la semana (hay sorteos los martes y viernes).<br><br>
+
+2.- Elegir la combinación de 5 números y dos estrellas que deseas jugar o dejar que el sistema te ofrezca una aleatoria.<br><br>
+
+3.- Puedes jugar hasta 5 combinaciones de 5 números y 2 estrellas (apuestas sencillas de varios bloques) de una sola vez o una combinación de más números o estrellas.<br><br>
+
+4.- Añadir la combinación o combinaciones deseadas a tu compra.<br><br>
+
+5.- Continuar y decidir si quieres realizar la misma compra en semanas sucesivas o no.<br><br>
+
+6.- Revisar todas las opciones y jugar.
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<script>
+  var contadorApuestasSencillas = 1;
+  var apuestasSencillas = [];
+  var apuestasMultiple = [];
+  var apuestasMultipleEstrellas = [];
+  var totalcantidad = 0;
+  var totalparte = 0;
+
+  const tbody  = document.querySelector('table tbody');
+
+  const observerOptions = {
+    childList: true, 
+  };
+
+  const mutationCallback = function(mutationsList, observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'childList') {
+        const button = document.querySelector('.boton-confirmar');
+        button.disabled = tbody.children.length === 0;
+      }
+    }
+  };
+
+  const observer = new MutationObserver(mutationCallback);
+
+  function validar() {
+      var apuesta = [];
+      var estrellasm = [];
+
+      var botonesNumeros = document.querySelectorAll('button.numero.seleccionado');
+      var botonesEstrellas = document.querySelectorAll('button.estrella.seleccionado');
+
+      botonesNumeros.forEach(boton => {
+          apuesta.push(boton.value);
+          boton.classList.remove('seleccionado');
+      });
+
+      botonesEstrellas.forEach(boton => {
+          estrellasm.push(boton.value);
+          boton.classList.remove('seleccionado');
+      });
+
+      var isSencilloBtnSelected = document.getElementById('sencilloBtn').classList.contains('btn-m-seleccionado');
+      var apuestasArray = isSencilloBtnSelected ? apuestasSencillas : apuestasMultiple;
+      var apuestasEstrellasArray = isSencilloBtnSelected ? [] : apuestasMultipleEstrellas;
+
+      apuestasArray.push(apuesta);
+      apuestasEstrellasArray.push(estrellasm);
+
+      contadorApuestasSencillas++;
+
+      document.querySelector('.apuesta-title').textContent = contadorApuestasSencillas < (isSencilloBtnSelected ? 5 : 2) ? "Apuesta " + contadorApuestasSencillas : "No hay más apuestas.";
+
+      var cuerpoTabla = document.getElementById('cuerpoTabla');
+      var nuevaFila = document.createElement('tr');
+
+      var apuestacelda = document.createElement('th');
+      apuestacelda.textContent = contadorApuestasSencillas - 1;
+
+      var numeros = document.createElement('td');
+      numeros.textContent = apuesta.join(', ');
+
+      var estrellas = document.createElement('td');
+      estrellas.textContent = estrellasm.join(', ');
+
+      var coste = document.createElement('td');
+      coste.textContent = document.querySelector('.total-compra').textContent;
+
+      var modo = document.createElement('td');
+      modo.textContent = document.querySelector('.btn-d-seleccionado').textContent;
+
+      nuevaFila.appendChild(apuestacelda);
+      nuevaFila.appendChild(numeros);
+      nuevaFila.appendChild(estrellas);
+      nuevaFila.appendChild(coste);
+      nuevaFila.appendChild(modo);
+
+      cuerpoTabla.appendChild(nuevaFila);
+
+      document.getElementById('validar').disabled = true;
+  }
+
+  function total() {
+    var buttonsEstrellas = document.querySelectorAll('button.estrella.seleccionado');
+    var buttonsNumeros = document.querySelectorAll('button.numero.seleccionado');
+    var multiplicador = document.getElementById('dia').textContent === 'Martes' && document.getElementById('semanal').classList.contains('btn-d-seleccionado') ? 2 : 1;
+    var totalparte = 0;
+
+    if (document.getElementById('sencilloBtn').classList.contains('btn-m-seleccionado')) {
+        totalparte = buttonsEstrellas.length === 2 && buttonsNumeros.length === 5 ? 2.5 : 0;
+    } else if (document.getElementById('multipleBtn').classList.contains('btn-m-seleccionado')) {
+      var basePrice = buttonsEstrellas.length * buttonsNumeros.length;
+      var priceMap = {
+          15: 7.5,
+          20: 15,
+          25: 25,
+          12: 15,
+          18: 45,
+          24: 90,
+          30: 150,
+          14: 52.50,
+          21: 157.50,
+          28: 315,
+          35: 525,
+          16: 140,
+          32: 840,
+          40: 1400,
+          27: 945,
+          36: 1890,
+          45: 3150,
+          50: 6300
+      };
+      totalparte = priceMap[basePrice] || 0;   
+    }
+
+    var totalcantidad = 0; 
+
+    var totalCompra = totalparte + totalcantidad;
+    totalCompra = totalCompra * multiplicador;
+    document.getElementById('validar').disabled = totalparte === 0;
+    document.querySelector('.total-compra').textContent = totalCompra.toFixed(2) + ' €';
+}
+
+  function boton(elemento) {
+    var buttonsEstrellas = document.querySelectorAll('button.estrella.seleccionado');
+    var buttonsNumeros = document.querySelectorAll('button.numero.seleccionado');
+    var sencilloBtnSeleccionado = document.getElementById('sencilloBtn').classList.contains('btn-m-seleccionado');
+    var maxNumeros = sencilloBtnSeleccionado ? 5 : 10;
+    var maxEstrellas = sencilloBtnSeleccionado ? 2 : 5;
+    
+    if (contadorApuestasSencillas < (sencilloBtnSeleccionado ? 6 : 2)) {
+        if ((elemento.classList.contains('numero') && buttonsNumeros.length < maxNumeros) ||
+            (elemento.classList.contains('estrella') && buttonsEstrellas.length < maxEstrellas) ||
+            elemento.classList.contains('seleccionado')) {
+            elemento.classList.toggle('seleccionado');
+            total();
+        }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+      brdia();
+      observer.observe(tbody, observerOptions);
+  });
+
+  function brdia() {
+    var hoy = new Date();
+    var horas = hoy.getHours();
+    var minutos = hoy.getMinutes();
+    var numeroDia = hoy.getDay();
+    var nombresDias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    var nombreDia = nombresDias[numeroDia];
+    var diaponer = '';
+
+    if ((nombreDia === 'Lunes' || nombreDia === 'Domingo' || nombreDia === 'Sábado') ||
+        (nombreDia === 'Martes' && (horas >= 20 && horas <= 24 && minutos < 30))) {
+        diaponer = 'Martes';
+    } else if ((nombreDia === 'Miércoles' || nombreDia === 'Jueves') ||
+               (nombreDia === 'Viernes' && !(horas >= 20 && horas <= 24 && minutos < 30))) {
+        diaponer = 'Viernes';
+    } else {
+        diaponer = 'Martes';
+    }
+
+    document.getElementById('dia').textContent = diaponer;
+  }
+
+  function reset() {
+    contadorApuestasSencillas = 1;
+    apuestasSencillas = [];
+    apuestasMultiple = [];
+    apuestasMultipleEstrellas = [];
+    totalcantidad = 0;
+    totalparte = 0;
+
+    // Resetear botones seleccionados
+    document.querySelectorAll('button.seleccionado').forEach(button => {
+        button.classList.remove('seleccionado');
+    });
+
+    // Deshabilitar botón validar
+    document.getElementById('validar').disabled = true;
+
+    // Restablecer el texto del botón total-compra
+    document.querySelector('.total-compra').textContent = '0,00 €';
+
+    // Deshabilitar botón boton-confirmar
+    document.querySelector('.boton-confirmar').disabled = true;
+
+    // Restablecer el título del contador de apuestas
+    document.querySelector('.apuesta-title').textContent = 'Apuesta 1';
+
+    // Limpiar tabla
+    document.getElementById('cuerpoTabla').innerHTML = '';
+
+    // Restablecer selecciones automáticas sencillas y múltiples
+    document.getElementById('autouno').selectedIndex = 0;
+    document.getElementById('autodos').selectedIndex = 0;
+  }
+
+  function generarNumero(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function auto(element) {
+    var opcion = parseInt(element.value);
+    reset();
+
+    for (let index = 0; index < opcion; index++) {
+        var numeros = [];
+        for (let i = 0; i < 5; i++) {
+            numeros.push(generarNumero(1, 50));
+        }
+        numeros.push(generarNumero(1, 12));
+
+        apuestasSencillas.push(numeros);
+        contadorApuestasSencillas++;
+
+        agregarFilaTablaSencilla(contadorApuestasSencillas - 1, numeros);
+    }
+
+    actualizarTotalCompra(opcion);
+    actualizarTituloApuesta();
+
+    function agregarFilaTablaSencilla(apuestaIndex, numeros) {
+        var cuerpoTabla = document.getElementById('cuerpoTabla');
+        var nuevaFila = document.createElement('tr');
+
+        var apuestaCelda = document.createElement('th');
+        apuestaCelda.textContent = apuestaIndex;
+
+        var numerosCelda = document.createElement('td');
+        numerosCelda.textContent = numeros.slice(0, 5).join(', ');
+
+        var estrellasCelda = document.createElement('td');
+        estrellasCelda.textContent = numeros.slice(5).join(', ');
+
+        var costeCelda = document.createElement('td');
+        var coste = (document.querySelector('.btn-d-seleccionado').textContent === 'Semanal') ? (2.5 * 2).toFixed(2) : 2.5.toFixed(2);
+        costeCelda.textContent = coste + ' €';
+
+        var modoCelda = document.createElement('td');
+        modoCelda.textContent = document.querySelector('.btn-d-seleccionado').textContent;
+
+        nuevaFila.appendChild(apuestaCelda);
+        nuevaFila.appendChild(numerosCelda);
+        nuevaFila.appendChild(estrellasCelda);
+        nuevaFila.appendChild(costeCelda);
+        nuevaFila.appendChild(modoCelda);
+
+        cuerpoTabla.appendChild(nuevaFila);
+    }
+
+    function actualizarTotalCompra(opcion) {
+        var totalCompra = (document.querySelector('.btn-d-seleccionado').textContent === 'Semanal') ? (2.5 * 2 * opcion).toFixed(2) : (2.5 * opcion).toFixed(2);
+        document.querySelector('.total-compra').textContent = totalCompra + ' €';
+    }
+
+    function actualizarTituloApuesta() {
+        if (contadorApuestasSencillas < 5) {
+            document.querySelector('.apuesta-title').textContent = "Apuesta " + contadorApuestasSencillas;
+        } else {
+            document.querySelector('.apuesta-title').textContent = "No hay más apuestas.";
+        }
+    }
+}
+
+  function generarNumerosUnicos(cantidad, min, max) {
+    let numeros = [];
+    while (numeros.length < cantidad) {
+        let numero = generarNumero(min, max);
+        if (!numeros.includes(numero)) {
+            numeros.push(numero);
+        }
+    }
+    return numeros;
+  }
+
+  function autom(element) {
+    var opcion = element.value;
+    reset();
+    document.getElementById('multipleBtn').click();
+
+    const [numerosStr, estrellasStr] = opcion.split("-");
+    const numero2 = parseInt(numerosStr, 10);
+    const numero1 = parseInt(estrellasStr, 10);
+
+    const numeros = generarNumerosUnicos(numero1, 1, 50);
+    const estrellas = generarNumerosUnicos(numero2, 1, 12);
+
+    document.querySelectorAll('.numeros button').forEach(button => {
+        if (numeros.includes(parseInt(button.value))) {
+            button.click();
+        }
+    });
+
+    document.querySelectorAll('.estrellas button').forEach(button => {
+        if (estrellas.includes(parseInt(button.value))) {
+            button.click();
+        }
+    });
+
+    validar();
+  }
+   
+  function botonDia(elemento) {
+    document.getElementById("diario").value = elemento.textContent;
+
+    document.querySelectorAll('.btn-d-seleccionado').forEach(boton => {
+        boton.classList.remove('btn-d-seleccionado');
+        boton.classList.add('btn-d');
+    });
+
+    elemento.classList.add('btn-d-seleccionado');
+    elemento.classList.remove('btn-d');
+
+    reset();
+  }
+
+  function botonModo(elemento) {
+    document.getElementById("multi").value = elemento.textContent;
+
+      var filasSencillas = document.querySelectorAll('.fila-combinacion:not(.d-none)');
+    var filasMultiples = document.querySelectorAll('.fila-combinacion.d-none');
+
+    filasSencillas.forEach(fila => {
+        fila.classList.add('d-none');
+        fila.classList.remove('d-flex');
+    });
+
+    filasMultiples.forEach(fila => {
+        fila.classList.remove('d-none');
+        fila.classList.add('d-flex');
+    });
+
+    var botones = document.querySelectorAll('.btn-m-seleccionado');
+    botones.forEach(boton => {
+        boton.classList.remove('btn-m-seleccionado');
+        boton.classList.add('btn-m');
+    });
+
+    elemento.classList.add('btn-m-seleccionado');
+    elemento.classList.remove('btn-m');
+
+    document.querySelectorAll('.modulo-botonera button.seleccionado').forEach(button => {
+        button.classList.remove('seleccionado');
+    });
+
+    document.querySelectorAll('.contenedor-combinaciones input').forEach(input => {
+        input.value = '-';
+    });
+
+    document.querySelectorAll('.capa-opacidad:not(.activo)').forEach(fila => {
+        fila.classList.add('activo');
+    });
+
+    reset();
+  }
+
+  function cambio() {
+    var total = document.querySelector('.total-compra');
+    const numerosJson = JSON.stringify({
+      apuestasSencillas: apuestasSencillas,
+      apuestasMultiple: apuestasMultiple,
+      apuestasMultipleEstrellas: apuestasMultipleEstrellas,
+    });
+    const miArrayJsonInput = document.getElementById('variable');
+    miArrayJsonInput.value = numerosJson;
+    const prec = document.getElementById('precioinput')
+    prec.value = total.textContent
+    console.log(prec.value);
+        
+  }
+  function observarCambios(targetElement, callback) {
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList') {
+                    callback();
+                }
+            });
+        });
+
+        observer.observe(targetElement, {
+            childList: true
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const span = document.querySelector('.total-compra');
+        observarCambios(span, cambio);
+    });
+</script>
+{% endblock %}

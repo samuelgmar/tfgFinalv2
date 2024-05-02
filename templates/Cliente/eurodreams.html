@@ -1,0 +1,911 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - EuroDreams{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'Cliente/css/sorteos/eurodreams.css' %}">
+
+{% endblock %}
+{% block extrascripts %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="w-100">
+  <div class="container-fluid">
+      <div class="text-center py-4 d-flex flex-row justify-content-center align-items-center">
+          <div class="img-sorteo" style="background-image: url('{% static 'imgs/sorteos/cabecera_Eurodreams.png' %}');"></div>
+      </div>
+      <div class="w-75 m-auto mb-5 border-bottom border-black"></div>
+      
+      <div class="d-flex flex-column justify-content-center align-items-center pb-5">
+        <div class="container-fluid" style="max-width: 50em;">
+          <div class="d-flex justify-content-center align-items-center pb-3">
+            <button id="sencilloBtn" onclick="botonModo(this)" class="btn-m-seleccionado mx-2" type="button">Sencilla</button>
+            <button id="multipleBtn" onclick="botonModo(this)" class="btn-m mx-2" type="button">Multiple</button>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center pb-3">
+            <button id="dia" onclick="botonDia(this)" class="btn-d-seleccionado mx-2" type="button">Lunes</button>
+            <button id="semanal" onclick="botonDia(this)" class="btn-d mx-2" type="button">Semanal</button>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center mx-1 pb-3">
+            <select id="autouno" class="form-select mx-4" aria-label="Default select example" onchange="auto(this)">
+              <option selected>AUTOMATICAS</option>
+              <option value="1">1 bloque (2,5€)</option>
+              <option value="2">2 bloque (5€)</option>
+              <option value="3">3 bloque (7,5€)</option>
+              <option value="4">4 bloque (10€)</option>
+              <option value="5">5 bloque (12,5€)</option>
+              <option value="6">6 bloque (15,5€)</option>
+            </select>
+          </div>
+          <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+          <div class="d-flex justify-content-center align-items-center mx-1">
+            <select id="autodos" class="form-select mx-4" aria-label="Default select example" onchange="autom(this)">
+              <option selected>AUTOMAT. MULTIPLES</option>
+              <option value="7">Multiple 7 (17,5€)</option>
+              <option value="8">Multiple 28 (70€)</option>
+              <option value="5">Multiple 35 (87,5€)</option>
+              <option value="9">Multiple 84 (210€)</option>
+              <option value="10">Multiple 210 (525€)</option>
+            </select>
+          </div>
+          
+          <div class="d-flex flex-wrap-reverse justify-content-center align-items-center">
+            <div class="d-inline-block modulo-botonera">
+              <div class="botonera pb-3">
+                <button onclick="boton(this)" value="1" name="" class="boton-boleto">1</button>
+                <button onclick="boton(this)" value="2" name="" class="boton-boleto">2</button>
+                <button onclick="boton(this)" value="3" name="" class="boton-boleto">3</button>
+                <button onclick="boton(this)" value="4" name="" class="boton-boleto">4</button>
+                <button onclick="boton(this)" value="5" name="" class="boton-boleto">5</button>
+                <button onclick="boton(this)" value="6" name="" class="boton-boleto">6</button>
+                <button onclick="boton(this)" value="7" name="" class="boton-boleto">7</button>
+                <button onclick="boton(this)" value="8" name="" class="boton-boleto">8</button>
+                <button onclick="boton(this)" value="9" name="" class="boton-boleto">9</button>
+                <button onclick="boton(this)" value="10" name="" class="boton-boleto">10</button>
+                <button onclick="boton(this)" value="11" name="" class="boton-boleto">11</button>
+                <button onclick="boton(this)" value="12" name="" class="boton-boleto">12</button>
+                <button onclick="boton(this)" value="13" name="" class="boton-boleto">13</button>
+                <button onclick="boton(this)" value="14" name="" class="boton-boleto">14</button>
+                <button onclick="boton(this)" value="15" name="" class="boton-boleto">15</button>
+                <button onclick="boton(this)" value="16" name="" class="boton-boleto">16</button>
+                <button onclick="boton(this)" value="17" name="" class="boton-boleto">17</button>
+                <button onclick="boton(this)" value="18" name="" class="boton-boleto">18</button>
+                <button onclick="boton(this)" value="19" name="" class="boton-boleto">19</button>
+                <button onclick="boton(this)" value="20" name="" class="boton-boleto">20</button>
+                <button onclick="boton(this)" value="21" name="" class="boton-boleto">21</button>
+                <button onclick="boton(this)" value="22" name="" class="boton-boleto">22</button>
+                <button onclick="boton(this)" value="23" name="" class="boton-boleto">23</button>
+                <button onclick="boton(this)" value="24" name="" class="boton-boleto">24</button>
+                <button onclick="boton(this)" value="25" name="" class="boton-boleto">25</button>
+                <button onclick="boton(this)" value="26" name="" class="boton-boleto">26</button>
+                <button onclick="boton(this)" value="27" name="" class="boton-boleto">27</button>
+                <button onclick="boton(this)" value="28" name="" class="boton-boleto">28</button>
+                <button onclick="boton(this)" value="29" name="" class="boton-boleto">29</button>
+                <button onclick="boton(this)" value="30" name="" class="boton-boleto">30</button>
+                <button onclick="boton(this)" value="31" name="" class="boton-boleto">31</button>
+                <button onclick="boton(this)" value="32" name="" class="boton-boleto">32</button>
+                <button onclick="boton(this)" value="33" name="" class="boton-boleto">33</button>
+                <button onclick="boton(this)" value="34" name="" class="boton-boleto">34</button>
+                <button onclick="boton(this)" value="35" name="" class="boton-boleto">35</button>
+                <button onclick="boton(this)" value="36" name="" class="boton-boleto">36</button>
+                <button onclick="boton(this)" value="37" name="" class="boton-boleto">37</button>
+                <button onclick="boton(this)" value="38" name="" class="boton-boleto">38</button>
+                <button onclick="boton(this)" value="39" name="" class="boton-boleto">39</button>
+                <button onclick="boton(this)" value="40" name="" class="boton-boleto">40</button>
+              </div>
+              <div class="fw-light"><p>SUEÑO</p></div>
+              <div class="sueños">
+                <button onclick="boton(this)" value="1" name="" class="boton-boleto"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');"></span>1</button>
+                <button onclick="boton(this)" value="2" name="" class="boton-boleto"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');"></span>2</button>
+                <button onclick="boton(this)" value="3" name="" class="boton-boleto"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');"></span>3</button>
+                <button onclick="boton(this)" value="4" name="" class="boton-boleto"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');"></span>4</button>
+                <button onclick="boton(this)" value="5" name="" class="boton-boleto"><span class="sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');"></span>5</button>
+              </div>
+            </div>
+            <div class="d-inline-block contenedor-combinaciones pt-5"> 
+              <div class="combinaciones">
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">1.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="list-suenos">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');" readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">2.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="list-suenos">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');" readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">3.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="list-suenos">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');" readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">4.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="list-suenos">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');" readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">5.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="list-suenos">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');" readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-flex justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">6.</strong>
+                  <div class="list-combinacion">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                  </div>
+                  <div class="list-suenos">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');" readonly>
+                  </div>
+                </div>
+                <div class="fila-combinacion d-none justify-content-center">
+                  <div class="capa-opacidad activo"></div>
+                  <strong class="numero">1.</strong>
+                  <div class="list-combinacion-multiple">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">
+                    <input type="text" value="-" class="item-combinacion" readonly="">                  </div>
+                  <div class="list-suenos">
+                    <span class="separador"> - </span>
+                    <input type="text" value="-" class="item-num-sueno" style="background-image: url('{% static 'imgs/sorteos/sueno.svg' %}');" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center pb-3">
+        <button class="btn-m-seleccionado mx-2 mb-3" onclick="reset()" style="max-width: 80em; background-color: #6b3e98; color: white;">
+          Volver a empezar
+        </button>
+      </div>
+      
+      <div class="total-block d-flex flex-column justify-content-center align-items-center">
+        <div class="modulo-total-compra">
+          <strong>Total</strong>	
+          <span class="total-compra">0,00 €</span>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="dia" id="diario" value="Lunes">
+          <input type="hidden" name="mode" id="multi" value="Sencilla">
+          <input type="hidden" name="sorteo" value="eurodreams">
+          <input type="hidden" id="precioinput" name="precio" value="0.00">
+          <input type="hidden" id="variable" name="variable">
+          <button type="submit" class="boton-confirmar" disabled="disabled">CONFIRMA TU APUESTA</button>
+        </form>
+        
+      </div>
+    
+      <div class="d-flex justify-content-center flex-wrap pb-5">
+        <p class="">
+          <button class="btn" style="max-width: 50em; background-color: #6b3e98; color: white;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            ¿Como Jugar?
+          </button>
+        </p>
+        <div class="collapse w-100" id="collapseExample">
+          <div class="card card-body fw-light lh-sm" style="font-size: small;">
+            Cada apuesta de EuroDreams consiste en seleccionar 6 números de una tabla de 40 (números del 1 al 40) y uno más (sueño) de una tabla de 5 (del 1 al 5). En Eurodreams se destina el 52% de la recaudación a premios
+            <br><br>
+            Para participar solamente tienes que:<br><br>
+            1.- Elegir la combinación de 6 números y 1 sueño que deseas jugar o dejar que el sistema te ofrezca una aleatoria.<br><br>
+                              
+            2.- Puedes jugar hasta 6 combinaciones de 6 números más un sueño (apuestas sencillas de varios bloques) de una sola vez o una combinación de más números (por ejemplo 7 números, que corresponde a 7 apuestas, u 8 números, que corresponde a 28 apuestas).<br><br>
+                              
+            3.- Añadir la combinación o combinaciones deseadas a tu compra.<br><br>
+                              
+            4.- Continuar y decidir si quieres realizar la misma compra en semanas sucesivas o no.<br>
+                              
+            5.- Revisar todas las opciones y jugar.<br><br>
+                              
+            Las probabilidades aproximadas de acertar en Eurodreams son las siguientes:<br><br>
+                              
+            1ª (6+1) 1 entre 19.191.900<br><br>
+                              
+            2ª (6+0) 1 entre 4.797.975<br><br>
+                              
+            3ª (5+0) o (5+1) 1 entre 18.816<br><br>
+                              
+            4ª (4+0) o (4+1) 1 entre 456<br><br>
+                              
+            5ª (3+0) o (3+1) 1 entre 32<br><br>
+                              
+            6ª (2+0) o (2+1) 1 entre 6<br><br>
+                              
+            * NOTA: Premio individual para un máximo de tres ganadores. En el caso de haber más de 3 ganadores en la primera categoría, el importe del premio total para tres se dividirá entre todos ellos. En este caso, cada ganador recibirá el importe del premio en un único pago.
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<script>
+  var numerosSeleccionados = [];
+  var sueñosSeleccionados = [];
+  var grupo = [99,99,99,99,99,99];
+  var sueño = [99];
+  var grupodos = [99,99,99,99,99,99,99,99,99,99];
+  var filasel = 1;
+  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    brdia();
+  });
+
+  function brdia() {
+    var hoy = new Date();
+    var horas = hoy.getHours();
+    var minutos = hoy.getMinutes();
+    var numeroDia = hoy.getDay();
+    var nombresDias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    var nombreDia = nombresDias[numeroDia];
+    var diaponer = '';
+    if(nombreDia === 'Lunes'){
+      if((horas >= 20 && horas <= 23 || (horas === 20 && minutos < 30))){
+        diaponer = 'Jueves';
+      }else{
+        diaponer = 'Lunes';
+      }
+    }else if(nombreDia === 'Martes' || nombreDia === 'Miércoles'){
+      diaponer = 'Jueves';
+    }else if(nombreDia === 'Jueves'){
+      if((horas >= 20 && horas <= 23 || (horas === 20 && minutos < 30))){
+        diaponer = 'Lunes';
+      }else{
+        diaponer = 'Jueves';
+      }
+    }else if(nombreDia === 'Viernes' || nombreDia === 'Sábado' || nombreDia === 'Domingo'){
+      diaponer = 'Lunes';
+    }
+
+    document.getElementById('dia').textContent = diaponer;
+  }
+
+  
+
+  function reset() {
+    var capasopa = document.querySelectorAll('.capa-opacidad:not(.activo)');
+    capasopa.forEach(opa => {
+      opa.classList.add('activo')
+    });
+
+    numerosSeleccionados = [];
+    sueñosSeleccionados = [];
+    grupo = [99,99,99,99,99,99];
+    sueño = [99];
+    grupodos = [99,99,99,99,99,99,99,99,99,99];
+    filasel = 1;
+
+    var inputs = document.querySelectorAll('.contenedor-combinaciones input');
+    inputs.forEach(input => {
+      input.value = '-';
+    });
+    var botones = document.querySelectorAll('.modulo-botonera button.seleccionado');
+    botones.forEach(boton => {
+      boton.classList.remove('seleccionado');
+    });
+    total();
+  }
+
+  function generarNumero(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function auto(element){
+    var selectElement = document.getElementById('autodos');
+    selectElement.selectedIndex = 0;
+    reset();
+    botonModo(document.getElementById("sencilloBtn"));
+    var opcion = element.value;
+    var numeros = [];
+    for (let index = 0; index < opcion; index++) {
+      while (numeros.length < 6) {
+          var numeroAleatorio = generarNumero(1, 40);
+          if (numeros.indexOf(numeroAleatorio) === -1) {
+              numeros.push(numeroAleatorio);
+          }
+      }
+      var sueno = Math.floor(Math.random() * 5) + 1;
+      numerosSeleccionados.push(numeros);
+      sueñosSeleccionados.push(sueno);
+      numeros = [];
+    }
+
+    var contenedor = document.querySelectorAll('.fila-combinacion.d-flex');
+    for (let index = 0; index < opcion; index++) {
+      var filasel = contenedor[index].querySelector('.capa-opacidad.activo');
+      filasel.classList.remove('activo');
+      var inputs = contenedor[index].querySelectorAll('input');
+      for (let indexdos = 0; indexdos < inputs.length; indexdos++) {
+        inputs[indexdos].value = numerosSeleccionados[index][indexdos];
+      }
+      inputs[6].value = sueñosSeleccionados[index];
+    }
+    var selectElement = document.getElementById('autodos');
+    selectElement.selectedIndex = 0;
+    selectElement = document.getElementById('autouno');
+    selectElement.selectedIndex = 0;
+    total();
+  }
+
+  function autom(element){
+    var selectElement = document.getElementById('autouno');
+    selectElement.selectedIndex = 0;
+    reset();
+    botonModo(document.getElementById("multipleBtn"));
+    var opcion = element.value;
+    var numeros = [];
+    
+    while (numeros.length < opcion) {
+        var numeroAleatorio = generarNumero(1, 40);
+        if (numeros.indexOf(numeroAleatorio) === -1) {
+            numeros.push(numeroAleatorio);
+        }
+    }
+    var sueno = Math.floor(Math.random() * 5) + 1;
+    numerosSeleccionados.push(numeros);
+    sueñosSeleccionados.push(sueno);
+    numeros = [];
+    
+
+    var contenedor = document.querySelectorAll('.fila-combinacion.d-flex');
+    
+    var filasel = contenedor[0].querySelector('.capa-opacidad.activo');
+    filasel.classList.remove('activo');
+    var inputs = contenedor[0].querySelectorAll('input');
+    for (let indexdos = 0; indexdos < opcion; indexdos++) {
+      inputs[indexdos].value = numerosSeleccionados[0][indexdos];
+    }
+    inputs[10].value = sueñosSeleccionados[0];
+
+    var botonesuno = document.querySelectorAll('.modulo-botonera .botonera button');
+    for (let index = 0; index < numerosSeleccionados[0].length; index++) {
+      var valor = numerosSeleccionados[0][index].toString();;
+      for (let indexdos = 0; indexdos < botonesuno.length; indexdos++) {
+        var botonvalor = botonesuno[indexdos].value;
+        if(botonvalor === valor){
+          boton(botonesuno[indexdos]);
+        }
+      }
+    }
+
+    var botonesdos = document.querySelectorAll('.modulo-botonera .sueños button');
+    
+    var valor = sueñosSeleccionados[0].toString();;
+    for (let indexdos = 0; indexdos < botonesdos.length; indexdos++) {
+      var botonvalor = botonesdos[indexdos].value;
+      if(botonvalor === valor){
+        boton(botonesdos[indexdos]);
+      }
+    }
+    var selectElement = document.getElementById('autodos');
+    selectElement.selectedIndex = 0;
+    selectElement = document.getElementById('autouno');
+    selectElement.selectedIndex = 0;
+    total();
+  }
+
+  function total(){
+    var total = document.querySelector('.total-compra');
+    var botonmode = document.querySelector('.btn-m-seleccionado');
+    var botondia = document.querySelector('.btn-d-seleccionado');
+    if(botonmode.textContent === "Sencilla"){
+      if(botondia.textContent === "Lunes"){
+        if(sueñosSeleccionados.length!==0){
+          total.textContent = `${((numerosSeleccionados.length * 5)/2).toFixed(2)} €`;
+        }else{
+          var total = document.querySelector('.total-compra');
+            total.textContent = `${(0).toFixed(2)} €`;
+        }
+      }else if(botondia.textContent === "Semanal" && document.querySelector('.btn-d').textContent === "Lunes"){
+        if(sueñosSeleccionados.length!==0){
+          total.textContent = `${(numerosSeleccionados.length * 5).toFixed(2)} €`;
+        }else{
+          var total = document.querySelector('.total-compra');
+            total.textContent = `${(0).toFixed(2)} €`;
+        }
+      }else{
+        if(sueñosSeleccionados.length!==0){
+          total.textContent = `${((numerosSeleccionados.length * 5)/2).toFixed(2)} €`;
+        }else{
+          var total = document.querySelector('.total-compra');
+            total.textContent = `${(0).toFixed(2)} €`;
+        }
+      }
+    }else if(botonmode.textContent === "Multiple"){
+      var botonSelec = document.querySelectorAll('.botonera .boton-boleto.seleccionado');
+      var botondia = document.querySelector('.btn-d-seleccionado');
+      var inputSueno = document.querySelector('.fila-combinacion.d-flex .item-num-sueno');
+      if(botondia.textContent === "Semanal" && document.querySelector('.btn-d').textContent === "Lunes"){
+        
+        if(inputSueno.value !== '-'){
+            if(botonSelec.length === 5){
+              var total = document.querySelector('.total-compra');
+              total.textContent = `175.00 €`;
+            }else if(botonSelec.length === 6){
+              var total = document.querySelector('.total-compra');
+              total.textContent = `0.00 €`;
+            }else if(botonSelec.length === 7){
+              var total = document.querySelector('.total-compra');
+              total.textContent = `35.00 €`;
+            }else if(botonSelec.length === 8){
+              var total = document.querySelector('.total-compra');
+              total.textContent = `140.00 €`;
+            }else if(botonSelec.length === 9){
+              var total = document.querySelector('.total-compra');
+              total.textContent = `420.00 €`;
+            }else if(botonSelec.length === 10){
+              var total = document.querySelector('.total-compra');
+              total.textContent = `1050.00 €`;
+            }else{
+              var total = document.querySelector('.total-compra');
+              total.textContent = `${(0).toFixed(2)} €`;
+            }
+        }else{
+          var total = document.querySelector('.total-compra');
+            total.textContent = `${(0).toFixed(2)} €`;
+        }
+      }else{
+        if(inputSueno.value !== '-'){
+          if(botonSelec.length === 5){
+            var total = document.querySelector('.total-compra');
+            total.textContent = `87.50 €`;
+          }else if(botonSelec.length === 6){
+            var total = document.querySelector('.total-compra');
+            total.textContent = `0.00 €`;
+          }else if(botonSelec.length === 7){
+            var total = document.querySelector('.total-compra');
+            total.textContent = `17.50 €`;
+          }else if(botonSelec.length === 8){
+            var total = document.querySelector('.total-compra');
+            total.textContent = `70.00 €`;
+          }else if(botonSelec.length === 9){
+            var total = document.querySelector('.total-compra');
+            total.textContent = `210.00 €`;
+          }else if(botonSelec.length === 10){
+            var total = document.querySelector('.total-compra');
+            total.textContent = `525.00 €`;
+          }else{
+            var total = document.querySelector('.total-compra');
+            total.textContent = `${(0).toFixed(2)} €`;
+          }
+        }else{
+          var total = document.querySelector('.total-compra');
+            total.textContent = `${(0).toFixed(2)} €`;
+        }
+      }
+    }
+
+    var total = document.querySelector('.total-compra');
+    if(total.textContent !== "0,00 €" && total.textContent !== "0.00 €"){
+      var confirmar = document.querySelector('.boton-confirmar');
+      confirmar.disabled = false;
+
+    }else{
+      var confirmar = document.querySelector('.boton-confirmar');
+      confirmar.disabled = true;
+    }
+  }
+
+  function botondos(elemento){
+      var contenedor = elemento.closest('.sueños');
+      var sueñosDiv = document.querySelector('.sueños');
+      var botonera = document.querySelector('.botonera');
+      var botonesSeleccionados = botonera.querySelectorAll('.boton-boleto.seleccionado');
+      if (botonera.contains(elemento) && botonesSeleccionados.length >= 10 && !elemento.classList.contains('seleccionado')) {
+          return; 
+      }
+      var inputSueno = document.querySelector('.fila-combinacion.d-flex .item-num-sueno');
+      if(inputSueno.value === '-'  || contenedor){
+        var botonesSeleccionadosSuenos = document.querySelectorAll('.sueños .seleccionado');
+        botonesSeleccionadosSuenos.forEach(function(boton) {
+            if (boton.classList.contains('seleccionado')) {
+                boton.classList.remove('seleccionado');
+            }
+        });
+      }
+
+      elemento.classList.toggle('seleccionado');
+      
+      if(elemento.classList.contains('seleccionado')){
+        if (contenedor) {
+            // El botón pertenece al contenedor "sueños"
+            var valor = elemento.value;
+            sueño.splice(0,1,valor);
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsuno = sel.querySelectorAll('.list-suenos input');
+            inputsuno[0].value = sueño[0];
+        }else{
+            // El botón no pertenece al contenedor "sueños"
+            var valor = elemento.value;
+            var index = grupodos.indexOf(valor);
+            if(index === -1){
+              var can = grupodos.indexOf(99);
+              if(index === -1){
+                grupodos.splice(can,1,valor);
+              }else{
+                grupodos.splice(can,1,valor);
+              }
+            }else{
+              grupodos.splice(index,0,99);
+            }
+
+            var filas = document.querySelector('.fila-combinacion.d-flex');
+            var inputsunos = filas.querySelectorAll('.list-combinacion-multiple input');
+            for (var i = 0; i < grupodos.length; i++) {
+              if(grupodos[i]!==99){
+                inputsunos[i].value = grupodos[i];
+              }else{
+                inputsunos[i].value = "-";
+              }
+            }
+            console.log(grupodos);
+        }
+      }else{
+        if (contenedor) {
+            // El botón pertenece al contenedor "sueños"
+            var valor = elemento.value;
+            sueño.splice(0,1,valor);
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsuno = sel.querySelectorAll('.list-suenos input');
+            inputsuno[0].value = sueño[0];
+        }else{
+            var valor = elemento.value;
+            var index = grupodos.indexOf(valor);
+            var tamano = grupodos.length;
+            if(index !== -1){
+              grupodos.splice(index,1,99);
+            }
+
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsunos = sel.querySelectorAll('.list-combinacion-multiple input');
+            for (var i = 0; i < grupodos.length; i++) {
+              if(grupodos[i]!==99){
+                inputsunos[i].value = grupodos[i];
+              }else{
+                inputsunos[i].value = "-";
+              }
+            }
+        }
+      }
+      total();
+  }
+
+  function boton(elemento) {
+    var contenedor = elemento.closest('.sueños');
+      var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+      var sel = filas[filasel-1];
+      var opa = sel.querySelectorAll('.capa-opacidad.activo');
+      if(opa.length === 1){
+        opa[0].classList.remove('activo')
+      }
+      if(filas.length===1){
+        botondos(elemento);
+        return;
+      }
+
+      var botonera = document.querySelector('.botonera');
+      var botonesSeleccionados = botonera.querySelectorAll('.boton-boleto.seleccionado');
+      if (botonera.contains(elemento) && botonesSeleccionados.length >= 6 && !elemento.classList.contains('seleccionado')) {
+          return; 
+      }
+      var inputSueno = document.querySelectorAll('.fila-combinacion.d-flex .item-num-sueno');
+      if(inputSueno[filasel-1].value === '-'  || contenedor){
+        var botonesSeleccionadosSuenos = document.querySelectorAll('.sueños .seleccionado');
+        botonesSeleccionadosSuenos.forEach(function(boton) {
+            if (boton.classList.contains('seleccionado')) {
+                boton.classList.remove('seleccionado');
+            }
+        });
+      }
+
+      elemento.classList.toggle('seleccionado');
+      
+      if(elemento.classList.contains('seleccionado')){
+        if (contenedor) {
+            // El botón pertenece al contenedor "sueños"
+            var valor = elemento.value;
+            var index = grupo.indexOf(valor);
+            var tamano = grupo.length;
+            sueño.splice(0,1,valor);
+
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsuno = sel.querySelectorAll('.list-suenos input');
+            inputsuno[0].value = sueño[0];
+        } else {
+            // El botón no pertenece al contenedor "sueños"
+            var valor = elemento.value;
+            var index = grupo.indexOf(valor);
+            var tamano = grupo.length;
+            if(index === -1){
+              var can = grupo.indexOf(99);
+              if(index === -1){
+                grupo.splice(can,1,valor);
+              }else{
+                grupo.splice(can,1,valor);
+              }
+            }else{
+              grupo.splice(index,0,99);
+            }
+
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsunos = sel.querySelectorAll('.list-combinacion input');
+            for (var i = 0; i < grupo.length; i++) {
+              if(grupo[i]!==99){
+                inputsunos[i].value = grupo[i];
+              }else{
+                inputsunos[i].value = "-";
+              }
+            }
+        }
+      }else{
+        if (contenedor) {
+          var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+          var sel = filas[filasel-1];
+          var inputsunos = sel.querySelectorAll('.list-suenos input');
+          for (var i = 0; i < grupo.length; i++) {
+            if(grupo[i]!==99){
+              inputsunos[i].value = grupo[i];
+            }else{
+              inputsunos[i].value = "-";
+            }
+          }
+        }else{
+            var valor = elemento.value;
+            var index = grupo.indexOf(valor);
+            var tamano = grupo.length;
+            if(index !== -1){
+              grupo.splice(index,1,99);
+            }
+
+            var filas = document.querySelectorAll('.fila-combinacion.d-flex');
+            var sel = filas[filasel-1];
+            var inputsunos = sel.querySelectorAll('.list-combinacion input');
+            for (var i = 0; i < grupo.length; i++) {
+              if(grupo[i]!==99){
+                inputsunos[i].value = grupo[i];
+              }else{
+                inputsunos[i].value = "-";
+              }
+            }
+        }
+      }
+
+      if(!grupo.includes(99) && !sueño.includes(99)){
+        filasel = filasel + 1;
+        var buttons = document.querySelectorAll('.modulo-botonera button');
+        buttons.forEach(function(buttons) {
+          buttons.classList.remove('seleccionado');
+        });
+        numerosSeleccionados.push(grupo);
+        sueñosSeleccionados.push(sueño);
+        grupo = [99,99,99,99,99,99];
+        sueño = [99];
+        grupodos = [99,99,99,99,99,99,99,99,99,99];
+      }
+      total();
+  }
+    
+
+  function botonDia(elemento) {
+      document.getElementById("diario").value = elemento.textContent;
+      var botones = document.querySelectorAll('.btn-d-seleccionado');
+      botones.forEach(function (boton) {
+        boton.classList.remove('btn-d-seleccionado');
+        boton.classList.add('btn-d');
+      });
+      elemento.classList.add('btn-d-seleccionado');
+      elemento.classList.remove('btn-d'); 
+
+      var selectElement = document.getElementById('autouno');
+
+      if(elemento.textContent == 'Lunes' || elemento.textContent == 'Jueves'){
+        selectElement.options[1].textContent = "1 bloque (2,5€)";
+        selectElement.options[2].textContent = "2 bloque (5€)";
+        selectElement.options[3].textContent = "3 bloque (7,5€)";
+        selectElement.options[4].textContent = "4 bloque (10€)";
+        selectElement.options[5].textContent = "5 bloque (12,5€)";
+        selectElement.options[6].textContent = "6 bloque (15,5€)";
+      }else if(elemento.textContent == 'Semanal' && document.getElementById('dia').textContent == 'Lunes'){
+        selectElement.options[1].textContent = "1 bloque (5€)";
+        selectElement.options[2].textContent = "2 bloque (10€)";
+        selectElement.options[3].textContent = "3 bloque (15€)";
+        selectElement.options[4].textContent = "4 bloque (20€)";
+        selectElement.options[5].textContent = "5 bloque (255€)";
+        selectElement.options[6].textContent = "6 bloque (30€)";
+      }
+
+      selectElement = document.getElementById('autodos');
+
+      if(elemento.textContent == 'Lunes' || elemento.textContent == 'Jueves'){
+        selectElement.options[1].textContent = "Multiple 7 (17,5€)";
+        selectElement.options[2].textContent = "Multiple 28 (70€)";
+        selectElement.options[3].textContent = "Multiple 35 (87,5€)";
+        selectElement.options[4].textContent = "Multiple 84 (210€)";
+        selectElement.options[5].textContent = "Multiple 210 (525€)";
+      }else if(elemento.textContent == 'Semanal' && document.getElementById('dia').textContent == 'Lunes'){
+        selectElement.options[1].textContent = "Multiple 7 (35€)";
+        selectElement.options[2].textContent = "Multiple 28 (140€)";
+        selectElement.options[3].textContent = "Multiple 35 (175€)";
+        selectElement.options[4].textContent = "Multiple 84 (420€)";
+        selectElement.options[5].textContent = "Multiple 210 (1050€)";
+      }
+
+      total();
+  }
+
+  function botonModo(elemento) {
+      document.getElementById("multi").value = elemento.textContent;
+      if (elemento.classList.contains('btn-m')) {
+        var filasSencillas = document.querySelectorAll('.fila-combinacion:not(.d-none)');
+        var filasMultiples = document.querySelectorAll('.fila-combinacion.d-none');
+        filasSencillas.forEach(function(fila) {
+              fila.classList.add('d-none');
+              fila.classList.remove('d-flex');
+          });
+
+        filasMultiples.forEach(function(fila) {
+            fila.classList.remove('d-none');
+            fila.classList.add('d-flex');
+        });
+      }
+
+      var botones = document.querySelectorAll('.btn-m-seleccionado');
+      botones.forEach(function (boton) {
+        boton.classList.remove('btn-m-seleccionado');
+        boton.classList.add('btn-m');
+      });
+      elemento.classList.add('btn-m-seleccionado');
+      elemento.classList.remove('btn-m'); 
+
+      var button = document.querySelectorAll('.modulo-botonera button.seleccionado');
+      button.forEach(function(button) {
+        button.classList.remove('seleccionado');
+      });
+
+      var inputs = document.querySelectorAll('.contenedor-combinaciones input');
+      inputs.forEach(function(input) {
+        input.value = '-';
+      });
+
+      var filas = document.querySelectorAll('.capa-opacidad:not(.activo)');
+      filas.forEach(function(fila) {
+        fila.classList.add('activo');
+      });
+
+      numerosSeleccionados = [];
+      sueñosSeleccionados = [];
+      grupo = [99,99,99,99,99,99];
+      grupodos = [99,99,99,99,99,99,99,99,99,99];
+      sueño = [99];
+      filasel = 1;
+      var total = document.querySelector('.total-compra');
+      total.textContent = "0.00 €"
+      if(total.textContent !== "0,00 €" && total.textContent !== "0.00 €"){
+        var confirmar = document.querySelector('.boton-confirmar');
+        confirmar.disabled = false;
+
+        
+      }else{
+        var confirmar = document.querySelector('.boton-confirmar');
+        confirmar.disabled = true;
+
+        
+      }
+  }
+
+  function cambio() {
+    var total = document.querySelector('.total-compra');
+    const numerosJson = JSON.stringify({
+      numerosSeleccionados: numerosSeleccionados,
+      sueñosSeleccionados: sueñosSeleccionados,
+      grupoMultiple: grupodos,
+      multipleSueño: sueño
+    });
+    const miArrayJsonInput = document.getElementById('variable');
+    miArrayJsonInput.value = numerosJson;
+    const prec = document.getElementById('precioinput')
+    prec.value = total.textContent
+    console.log("Contenido cambiado");
+        
+  }
+  function observarCambios(targetElement, callback) {
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList') {
+                    callback();
+                }
+            });
+        });
+
+        observer.observe(targetElement, {
+            childList: true
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const span = document.querySelector('.total-compra');
+        observarCambios(span, cambio);
+    });
+
+</script>
+{% endblock %}

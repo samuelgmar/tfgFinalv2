@@ -1,0 +1,21 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/admProductList.css' %}">
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Pago Fallido</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="bg-light pt-2 rounded shadow">
+            <p>Su pago no se ha realizado correctamente.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

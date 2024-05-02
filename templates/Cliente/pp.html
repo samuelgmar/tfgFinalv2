@@ -1,0 +1,42 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/admProductList.css' %}">
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >RESUMEN DE PRIVACIDAD</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="bg-light pt-2 rounded shadow px-3 py-3">
+            {{ administracion.politicas_privacidad_resumen | safe }}
+        </div>
+    </div>
+</div>
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >POLÍTICA DE COOKIES Y ALMACENAMIENTO LOCAL</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="bg-light pt-2 rounded shadow px-3 py-3">
+            {{ administracion.politicas_cookies | safe }}
+        </div>
+    </div>
+</div>
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >POLÍTICA DE PRIVACIDAD</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="bg-light pt-2 rounded shadow px-3 py-3">
+            {{ administracion.politicas_privacidad | safe }}
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+{% endblock %}
+

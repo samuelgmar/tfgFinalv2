@@ -1,0 +1,82 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Lista Pedidos</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2 "></div>
+        <div class="bg-light pt-1 rounded shadow">
+            <div class="py-2 mx-3 d-flex justify-content-end">
+                <form style="flex: 1;" method="GET" class="form-search" action="{% url 'Administracion:admsClientePedidos' nombre_administracion=nombre_administracion %}">
+                    <input type="text" class="form-control-i-pers" placeholder="Buscar pedido..." name="q" value="{{ request.GET.q }}">
+                    <button type="submit" class="btn-form-search">
+                      <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div id="q-app">
+              <div class="q-pa-md row items-start q-gutter-md">
+                {% for order in object_list %}
+                  {% if order.validado == False %}
+                  <q-card class="my-card">
+                    <q-card-section class="bg-blue text-white" style="min-width: 13em;">
+                      <div class="text-h6">ID {{ order.id }} </div>
+                      <div class="text-subtitle4">{{ order.paypalId }}</div>
+                      <div class="text-subtitle2">{{ order.user }} - {{ order.productos.count }}</div>
+                    </q-card-section>
+                  
+                    <q-card-actions align="around">
+                      <q-btn href="{% url 'Administracion:clientesValidarOrder' pk=order.id nombre_administracion=nombre_administracion %}" outline style="color: rgb(69, 218, 32);" flat><q-icon name="done" size="1.2em"></q-icon> Validar</q-btn>
+                    </q-card-actions>
+                  </q-card>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <div class="q-pa-md row items-start q-gutter-md">
+                {% for order in object_list %}
+                  {% if order.validado == True %}
+                  <q-card class="my-card">
+                    <q-card-section class="bg-orange text-white" style="min-width: 13em;">
+                      <div class="text-h6">ID {{ order.id }} </div>
+                      <div class="text-subtitle4">{{ order.paypalId }}</div>
+                      <div class="text-subtitle2">{{ order.user }} - {{ order.productos.count }}</div>
+                    </q-card-section>
+                  
+                    <q-card-actions align="around">
+                      <q-btn href="{% url 'Administracion:clientesValidarOrder' pk=order.id nombre_administracion=nombre_administracion %}" outline style="color: rgb(69, 218, 32);" flat><q-icon name="edit" size="1.2em"></q-icon> EDITAR</q-btn>
+                    </q-card-actions>
+                  </q-card>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+<script>
+  const { ref } = Vue
+  const app = Vue.createApp({
+    setup () {
+      return {
+      }
+    }
+  })
+
+  app.use(Quasar, { config: {} })
+  Quasar.lang.set(Quasar.lang.es)
+  app.mount('#q-app')
+</script>
+{% endblock %}
+

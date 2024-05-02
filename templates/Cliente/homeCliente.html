@@ -1,0 +1,541 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - Home{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'Cliente/css/homeCliente.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<style>
+  body{
+    background-image: url('{% static 'imgs/door.jpg' %}');
+
+    }
+    
+    header,footer{
+      background-color: rgb(7, 7, 7);
+    }
+</style>
+{% endblock %}
+{% block extrascripts %}
+
+{% endblock %}
+
+{% block content %}
+<div class="ss">
+  <!--secc. slider-->
+  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for image in slider %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="bg-cr-1" style="background-image: url('{{ image.image.url }}');">
+          <div style="background-color: rgba(0, 0, 0, 0.438);">
+          </div>
+        </div>
+        <div style="background-image: url('{{ image.image.url }}');" class="slider-img d-block w-100"></div>
+      </div>          
+      {% endfor %}
+    </div>
+    
+    <!--button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button-->
+  </div>
+
+  <!--secc. botes de la semana-->
+  <div class="sec2">
+    <div class="sec2-opac" style="background-image: url('{% static 'imgs/whiteGold.jpg' %}');">
+    </div>
+    <div class="text-center  pt-5 pb-5">
+      <h5 class="title-sec2">BOTES DE LA SEMANA</h5>
+    </div>
+    <div class="swiper px-5 pb-5 mySwiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+      <div class="swiper-wrapper" id="swiper-wrapper-f2836851073ca8ec7" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(-1325px, 0px, 0px); transition-delay: 0ms;">
+        
+        <div class="swiper-slide d-flex justify-content-center " role="group" aria-label="1 / 9" style="width: auto; margin-right: 30px;">
+          <div class="card pt-4 d-flex justify-content-center align-items-center text-center" style="width: 18rem;">
+            <div class="card-img" style="background-image: url('{% static 'imgs/sorteos/cabecera_LoteriaNacional.png' %}');">
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center flex-column">
+              <h5 class="card-title">Loteria Nacional</h5>
+              <div class="card-text">
+                <p></p>
+                <p>2,3 <span>Millones €</span></p>
+              </div>
+              <a href="{% url 'Cliente:loteriaNacional' nombre_administracion=nombre_administracion %}" class="btn btn-primary">JUGAR</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide d-flex justify-content-center " role="group" aria-label="1 / 9" style="width: auto; margin-right: 30px;">
+          <div class="card pt-4 d-flex justify-content-center align-items-center text-center" style="width: 18rem;">
+            <div class="card-img" style="background-image: url('{% static 'imgs/sorteos/cabecera_Eurodreams.png' %}');">
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center flex-column">
+              <h5 class="card-title">Eurodreams</h5>
+              <div class="card-text">
+                <p></p>
+                <p>2,3 <span>Millones €</span></p>
+              </div>
+              <a href="{% url 'Cliente:eurodreams' nombre_administracion=nombre_administracion %}" class="btn btn-primary">JUGAR</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide d-flex justify-content-center " role="group" aria-label="1 / 9" style="width: auto; margin-right: 30px;">
+          <div class="card pt-4 d-flex justify-content-center align-items-center text-center" style="width: 18rem;">
+            <div class="card-img" style="background-image: url('{% static 'imgs/sorteos/cabecera_Primitiva.png' %}');">
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center flex-column">
+              <h5 class="card-title">Primitiva</h5>
+              <div class="card-text">
+                <p></p>
+                <p>2,3 <span>Millones €</span></p>
+              </div>
+              <a href="{% url 'Cliente:primitiva' nombre_administracion=nombre_administracion %}" class="btn btn-primary">JUGAR</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide swiper-slide-prev d-flex justify-content-center " role="group" aria-label="5 / 9" style="width: auto; margin-right: 30px;">
+          <div class="card pt-4 d-flex justify-content-center align-items-center text-center" style="width: 18rem;">
+            <div class="card-img" style="background-image: url('{% static 'imgs/sorteos/cabecera_Bonoloto.png' %}');">
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center flex-column">
+              <h5 class="card-title">Bonoloto</h5>
+              <div class="card-text">
+                <p></p>
+                <p>2,3 <span>Millones €</span></p>
+              </div>
+              <a href="{% url 'Cliente:bonoloto' nombre_administracion=nombre_administracion %}" class="btn btn-primary">JUGAR</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide swiper-slide-active d-flex justify-content-center " role="group" aria-label="6 / 9" style="width: auto; margin-right: 30px;">
+          <div class="card pt-4 d-flex justify-content-center align-items-center text-center" style="width: 18rem;">
+            <div class="card-img" style="background-image: url('{% static 'imgs/sorteos/cabecera_ElGordo.png' %}');">
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center flex-column">
+              <h5 class="card-title">ElGordo</h5>
+              <div class="card-text">
+                <p></p>
+                <p>2,3 <span>Millones €</span></p>
+              </div>
+              <a href="{% url 'Cliente:elgordo' nombre_administracion=nombre_administracion %}" class="btn btn-primary">JUGAR</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide swiper-slide-next d-flex justify-content-center " role="group" aria-label="7 / 9" style="width: auto; margin-right: 30px;">
+          <div class="card pt-4 d-flex justify-content-center align-items-center text-center" style="width: 18rem;">
+            <div class="card-img" style="background-image: url('{% static 'imgs/sorteos/cabecera_Euromillones.png' %}');">
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center flex-column">
+              <h5 class="card-title">Euromillones</h5>
+              <div class="card-text">
+                <p></p>
+                <p>2,3 <span>Millones €</span></p>
+              </div>
+              <a href="{% url 'Cliente:euromillones' nombre_administracion=nombre_administracion %}" class="btn btn-primary">JUGAR</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide d-flex justify-content-center " role="group" aria-label="8 / 9" style="width: auto; margin-right: 30px;">
+          <div class="card pt-4 d-flex justify-content-center align-items-center text-center" style="width: 18rem;">
+            <div class="card-img" style="background-image: url('{% static 'imgs/sorteos/cabecera_LaQuiniela.png' %}');">
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center flex-column">
+              <h5 class="card-title">La Quiniela</h5>
+              <div class="card-text">
+                <p></p>
+                <p>2,3 <span>Millones €</span></p>
+              </div>
+              <a href="{% url 'Cliente:quiniela' nombre_administracion=nombre_administracion %}" class="btn btn-primary">JUGAR</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="swiper-slide d-flex justify-content-center " role="group" aria-label="9 / 9" style="width: auto; margin-right: 3em;">
+          <div class="card pt-4 d-flex justify-content-center align-items-center text-center" style="width: 18rem;">
+            <div class="card-img" style="background-image: url('{% static 'imgs/sorteos/cabecera_Quinigol.png' %}');">
+
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center flex-column">
+              <h5 class="card-title">Quinigol</h5>
+              <div class="card-text">
+                <p></p>
+                <p>2,3 <span>Millones €</span></p>
+              </div>
+              <a href="{% url 'Cliente:quinigol' nombre_administracion=nombre_administracion %}" class="btn btn-primary">JUGAR</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class=" pb-5 swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 6" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span></div>
+      <span class="pb-5 swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+      <!--swiperJS JS-->
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <script>
+        var swiper = new Swiper(".mySwiper", {
+          slidesPerView: "auto",
+          spaceBetween: 10,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          breakpoints: {
+            431: {
+              slidesPerView: 1, 
+              spaceBetween: 10, 
+            },
+            768: {
+              slidesPerView: 2, 
+              spaceBetween: 20, 
+            },
+            992: {
+              slidesPerView: 3, 
+              spaceBetween: 30, 
+            },
+          },
+        });
+      </script>
+  </div>
+
+  <!--secc. juega todo>
+  <div style="background-image: url('{% static 'imgs/mar.jpg' %}');" class="sec1 cnt-tds bg-warning-subtle pt-3 d-flex justify-content-center align-content-center flex-column">
+  <div class="bac-opa">
+
+    <h5 class="text-center title-sec1">¿JUEGAS TODOS LOS BOTES?</h5>
+    <div class="banner-sec1">
+      Personaliza tu apuesta y juega en un click
+      <br><i class="bi bi-chevron-down"></i>
+    </div>
+    <div class="btn-center pb-3">
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Jugar en un click
+      </button>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">¡JUEGA A TODOS LOS BOTES!</h1>
+              <span> Selecciona la cantidad de boletos de cada sorteo.</span>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body bg-body-secondary">
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="container-fluid">
+                <div class="mb-3 row">
+                  <h1 class="col-md-10 col-form-label">EUROMILLONES:</h1>
+                  <div class="col-md-all ">
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="3">4</option>
+                      <option value="3">5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <h1 class="col-md-10 col-form-label">EURODREAMS:</h1>
+                  <div class="col-md-all ">
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="3">4</option>
+                      <option value="3">5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <h1 class="col-md-10 col-form-label">LA PRIMITIVA:</h1>
+                  <div class="col-md-all ">
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="3">4</option>
+                      <option value="3">5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <h1 class="col-md-10 col-form-label">EL GORDO:</h1>
+                  <div class="col-md-all ">
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="3">4</option>
+                      <option value="3">5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <h1 class="col-md-10 col-form-label">BONOLOTO:</h1>
+                  <div class="col-md-all ">
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="3">4</option>
+                      <option value="3">5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <h1 class="col-md-10 col-form-label">LA QUINIELA:</h1>
+                  <div class="col-md-all ">
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="3">4</option>
+                      <option value="3">5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <h1 class="col-md-10 col-form-label">EL QUINIGOL:</h1>
+                  <div class="col-md-all ">
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="3">4</option>
+                      <option value="3">5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <h1 class="col-md-10 col-form-label">LOTERÍA:</h1>
+                  <div class="col-md-all ">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+                      <label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Checked por defecto.</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary btn-modal">Comprar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div-->
+
+  <!--secc. Comprobar resultados-->
+  <div class="sec3 w-100">
+    <div class="container w-100">
+      <div class="d-flex justify-content-around align-items-center flex-row flex-wrap">
+        <div class="img-comprobar w-25" style="background-image: url('{% static 'imgs/pensando.svg' %}');"></div>
+        <div class="w-75">
+          <h5 class="text-center title-sec1">¿Te ha tocado?</h5>
+          <p class="pt-2 text-center">Compruebalo haciendo click en el siguiente boton.</p>
+          <br>
+          <div class="btn-center pb-3">
+            <a href="{% url 'Cliente:resultados' nombre_administracion=nombre_administracion %}"><button type="button" class="btn px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Ver Resultados
+            </button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--secc. blog>
+  <div class="sec4 ">
+    <div class="mx-5 p-4 p-md-5 mb-4 text-white rounded bg-dark">
+      <div class="col-md-6 px-0">
+        <h1 class="display-4 fst-italic">Enterate de toda la actualidad</h1>
+        <p class="lead my-3">Un blog donde publicaremos todo lo importante.</p>
+        <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continuar leyendo...</a></p>
+      </div>
+    </div>
+    <div class="row pb-5 mx-5">
+      <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">World</strong>
+            <h3 class="mb-0">Featured post</h3>
+            <div class="mb-1 text-muted">Nov 12</div>
+            <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="stretched-link">Continue reading</a>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+  
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-success">Design</strong>
+            <h3 class="mb-0">Post title</h3>
+            <div class="mb-1 text-muted">Nov 11</div>
+            <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="stretched-link">Continue reading</a>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div-->
+
+  <!--secc. sobre nosotros-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/quasar@2.15.3/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+  <section class="mb-4 mx-3">
+
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Contacta con nosotros</h2>
+    <p class="text-center w-responsive mx-auto mb-5">¿Tiene alguna pregunta? Por favor no dude en contactarnos directamente. Nuestro equipo le ayudara lo antes posible.</p>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-9 mb-md-0 mb-5">
+          <div id="q-app">
+          <form method="POST" class="w-100">
+              {% csrf_token %}
+              
+                <q-input ref="nombreRef"  v-model="nombre" name="nombre" label="Nombre Completo" :rules="[nombreRules,reglaRequerido]" :dense="dense"></q-input>
+                <q-input ref="emailRef"   v-model="email" name="email" label="Email" :rules="[reglaRequerido, mailRules]" :dense="dense"></q-input>
+                <q-input ref="asuntoRef"  v-model="asunto" name="asunto" label="Asunto" :rules="[reglaRequerido]" :dense="dense"></q-input>
+                <q-input ref="mensajeRef" v-model="mensaje" name="mensaje" label="Mensaje" :rules="[reglaRequerido]" :dense="dense"></q-input>
+              
+            <div class="my-4 text-center text-md-left">
+                <q-btn type="submit" color="primary" label="Enviar" :disabled="isFormInvalid"></q-btn>
+            </div>
+          </div>
+          </form>
+        </div>
+    </div>
+    <div class="w-100 d-flex justify-content-center flex-wrap">
+      {%for rs in redessociales%}
+      <a href="{{rs.url}}" class="text-decoration-none p-3" style="color:black">
+        <div class="card text-center" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><i class="{{rs.icono}}"></i></h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{rs.nombre}}</h6>
+          </div>
+        </div>
+      </a>
+      {% endfor%}
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-3 text-center">
+        <ul class="list-unstyled mb-0">
+            <li><i class="bi bi-map bi-2x"></i>
+                <p>{{user.ciudad}}, {{user.calle}} {{user.cPostal}}, {{user.provincia}}</p>
+            </li>
+  
+            <li><i class="bi bi-phone mt-4 bi-2x"></i>
+                <p>+34 {{user.telefono}}</p>
+            </li>
+  
+            <li><i class="bi bi-envelope mt-4 bi-2x"></i>
+                <p>{{user.email}}</p>
+            </li>
+        </ul>
+      </div>
+    </div>
+    
+  </section>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+<script>
+    
+    
+
+
+  const { ref, computed } = Vue
+  
+      const app = Vue.createApp({
+        setup () {
+          const nombreRef = ref(null);
+          const emailRef = ref(null);
+          const asuntoRef = ref(null);
+          const mensajeRef = ref(null);
+          const reglaRequerido = val => !!val || "Este campo es requerido";
+
+          return {
+            nombreRef,
+            emailRef,
+            asuntoRef,
+            mensajeRef,
+            nombre: ref(''),
+            email:ref(''),
+            asunto:ref(''),
+            mensaje:ref(''),
+            reglaRequerido,
+            
+            dense: false,
+            b1: ref(false),
+            nombreRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('El campo es requerido.');
+                    } else {
+                        resolve(true);
+                    }
+                  })
+                },
+                mailRules (val){
+                  return new Promise((resolve,reject)=>{
+                    if (!val) {
+                        resolve('El email es requerida.');
+                    } else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)){
+                        resolve('Formato de email no válido.');
+                    } else {
+                        resolve(true); 
+                    }
+                  })
+                },
+          }
+        },
+          computed: {
+            isFormInvalid() {
+              b1= false
+              if(!this.nombre || !this.email || !this.asunto || !this.mensaje){
+                b1 = true
+                return b1
+              }else if(!/.+@.+\..+/.test(this.email)){
+                b1 = true
+                return b1
+              }
+              return b1
+            }
+        }
+      })
+  
+      app.use(Quasar, { config: {} })
+      Quasar.lang.set(Quasar.lang.es)
+      app.mount('#q-app')
+  </script>
+{% endblock %}

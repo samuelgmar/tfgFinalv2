@@ -1,0 +1,538 @@
+{% extends 'Cliente/headers/headerCliente.html' %} {% load static %} 
+{% block title%}{{ nombre_administracion }} - Quinigol{% endblock %} {% block styles %}
+<link rel="stylesheet" href="{% static 'Cliente/css/sorteos/quinigol.css' %}" />
+{% endblock %} {% block extrascripts %} {% endblock %} 
+{% block content %}
+
+<div class="w-100">
+  <div class="container-fluid">
+    <div
+      class="text-center py-4 d-flex flex-row justify-content-center align-items-center"
+    >
+      <div
+        class="img-sorteo"
+        style="
+          background-image: url('{% static 'imgs/sorteos/cabecera_quinigol.png' %}');
+        "
+      ></div>
+    </div>
+    <div class="w-75 m-auto mb-5 border-bottom border-black"></div>
+    {% if error %}
+    <h5 class="text-center py-5">{{ error }} ;)</h5>
+  </div>
+</div>
+  {% else %}
+    <div
+      class="d-flex flex-column justify-content-center align-items-center pb-4"
+    >
+      <div class="container-fluid" style="max-width: 50em">
+        <div class="d-flex justify-content-center align-items-center pb-3">
+          <input type="hidden" name="dia" id="diario" value="Domingo">
+          
+          <button
+            id="dia"
+            onclick="botonDia(this)"
+            class="btn-d-seleccionado mx-2"
+            type="button"
+          >
+            Domingo
+          </button>
+        </div>
+        <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
+        <div class="d-flex justify-content-center align-items-center mx-1 pb-3">
+          <button onclick="auto(this)" class="btn-d mx-2 apu-mul-btn" type="button">GENERAR AUTOMATICO</button>
+        </div>
+        <div class=" pb-3">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <div class="w-100"><span>{{ partidos.0 }}</span><span style="text-align: right; float: right;">(<span class="marcados">0</span> de 16)</span></div>
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="partidos" style="">
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido0_00" value="0-0" name="partido0_00" class="botonBoleto" onclick="boton(this)">0-0</button></li>
+											<li><button id="partido0_10" value="1-0" name="partido0_10" class="botonBoleto" onclick="boton(this)">1-0</button></li>
+											<li><button id="partido0_20" value="2-0" name="partido0_20" class="botonBoleto" onclick="boton(this)">2-0</button></li>
+											<li><button id="partido0_m0" value="M-0" name="partido0_m0" class="botonBoleto" onclick="boton(this)">M-0</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido0_01" value="0-1" name="partido0_01" class="botonBoleto" onclick="boton(this)">0-1</button></li>
+											<li><button id="partido0_11" value="1-1" name="partido0_11" class="botonBoleto" onclick="boton(this)">1-1</button></li>
+											<li><button id="partido0_21" value="2-1" name="partido0_21" class="botonBoleto" onclick="boton(this)">2-1</button></li>
+											<li><button id="partido0_m1" value="M-1" name="partido0_m1" class="botonBoleto" onclick="boton(this)">M-1</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido0_02" value="0-2" name="partido0_02" class="botonBoleto" onclick="boton(this)">0-2</button></li>
+											<li><button id="partido0_12" value="1-2" name="partido0_12" class="botonBoleto" onclick="boton(this)">1-2</button></li>
+											<li><button id="partido0_22" value="2-2" name="partido0_22" class="botonBoleto" onclick="boton(this)">2-2</button></li>
+											<li><button id="partido0_m2" value="M-2" name="partido0_m2" class="botonBoleto" onclick="boton(this)">M-2</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center pb-2">
+											<li><button id="partido0_0m" value="0-M" name="partido0_0m" class="botonBoleto" onclick="boton(this)">0-M</button></li>
+											<li><button id="partido0_1m" value="1-M" name="partido0_1m" class="botonBoleto" onclick="boton(this)">1-M</button></li>
+											<li><button id="partido0_2m" value="2-M" name="partido0_2m" class="botonBoleto" onclick="boton(this)">2-M</button></li>
+											<li><button id="partido0_mm" value="M-M" name="partido0_mm" class="botonBoleto" onclick="boton(this)">M-M</button></li>
+										</ul>
+
+										<div class="d-flex justify-content-center">
+                      <button type="button" class="boton_siguiente" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+												SIGUIENTE PARTIDO
+											</button>
+                    </div>
+	
+									</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <div class="w-100"><span>{{ partidos.1 }}</span><span style="text-align: right; float: right;">(<span class="marcados">0</span> de 16)</span></div>
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="partidos" style="">
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido1_00" value="0-0" name="partido0_00" class="botonBoleto" onclick="boton(this)">0-0</button></li>
+											<li><button id="partido1_10" value="1-0" name="partido0_10" class="botonBoleto" onclick="boton(this)">1-0</button></li>
+											<li><button id="partido1_20" value="2-0" name="partido0_20" class="botonBoleto" onclick="boton(this)">2-0</button></li>
+											<li><button id="partido1_m0" value="M-0" name="partido0_m0" class="botonBoleto" onclick="boton(this)">M-0</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido1_01" value="0-1" name="partido0_01" class="botonBoleto" onclick="boton(this)">0-1</button></li>
+											<li><button id="partido1_11" value="1-1" name="partido0_11" class="botonBoleto" onclick="boton(this)">1-1</button></li>
+											<li><button id="partido1_21" value="2-1" name="partido0_21" class="botonBoleto" onclick="boton(this)">2-1</button></li>
+											<li><button id="partido1_m1" value="M-1" name="partido0_m1" class="botonBoleto" onclick="boton(this)">M-1</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido1_02" value="0-2" name="partido0_02" class="botonBoleto" onclick="boton(this)">0-2</button></li>
+											<li><button id="partido1_12" value="1-2" name="partido0_12" class="botonBoleto" onclick="boton(this)">1-2</button></li>
+											<li><button id="partido1_22" value="2-2" name="partido0_22" class="botonBoleto" onclick="boton(this)">2-2</button></li>
+											<li><button id="partido1_m2" value="M-2" name="partido0_m2" class="botonBoleto" onclick="boton(this)">M-2</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center pb-2">
+											<li><button id="partido1_0m" value="0-M" name="partido0_0m" class="botonBoleto" onclick="boton(this)">0-M</button></li>
+											<li><button id="partido1_1m" value="1-M" name="partido0_1m" class="botonBoleto" onclick="boton(this)">1-M</button></li>
+											<li><button id="partido1_2m" value="2-M" name="partido0_2m" class="botonBoleto" onclick="boton(this)">2-M</button></li>
+											<li><button id="partido1_mm" value="M-M" name="partido0_mm" class="botonBoleto" onclick="boton(this)">M-M</button></li>
+										</ul>
+
+										<div class="d-flex justify-content-center">
+                      <button type="button" class="boton_siguiente" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+												SIGUIENTE PARTIDO
+											</button>
+                    </div>
+	
+									</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <div class="w-100"><span>{{ partidos.2 }}</span><span style="text-align: right; float: right;">(<span class="marcados">0</span> de 16)</span></div>
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="partidos" style="">
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido2_00" value="0-0" name="partido0_00" class="botonBoleto" onclick="boton(this)">0-0</button></li>
+											<li><button id="partido2_10" value="1-0" name="partido0_10" class="botonBoleto" onclick="boton(this)">1-0</button></li>
+											<li><button id="partido2_20" value="2-0" name="partido0_20" class="botonBoleto" onclick="boton(this)">2-0</button></li>
+											<li><button id="partido2_m0" value="M-0" name="partido0_m0" class="botonBoleto" onclick="boton(this)">M-0</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido2_01" value="0-1" name="partido0_01" class="botonBoleto" onclick="boton(this)">0-1</button></li>
+											<li><button id="partido2_11" value="1-1" name="partido0_11" class="botonBoleto" onclick="boton(this)">1-1</button></li>
+											<li><button id="partido2_21" value="2-1" name="partido0_21" class="botonBoleto" onclick="boton(this)">2-1</button></li>
+											<li><button id="partido2_m1" value="M-1" name="partido0_m1" class="botonBoleto" onclick="boton(this)">M-1</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido2_02" value="0-2" name="partido0_02" class="botonBoleto" onclick="boton(this)">0-2</button></li>
+											<li><button id="partido2_12" value="1-2" name="partido0_12" class="botonBoleto" onclick="boton(this)">1-2</button></li>
+											<li><button id="partido2_22" value="2-2" name="partido0_22" class="botonBoleto" onclick="boton(this)">2-2</button></li>
+											<li><button id="partido2_m2" value="M-2" name="partido0_m2" class="botonBoleto" onclick="boton(this)">M-2</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center pb-2">
+											<li><button id="partido2_0m" value="0-M" name="partido0_0m" class="botonBoleto" onclick="boton(this)">0-M</button></li>
+											<li><button id="partido2_1m" value="1-M" name="partido0_1m" class="botonBoleto" onclick="boton(this)">1-M</button></li>
+											<li><button id="partido2_2m" value="2-M" name="partido0_2m" class="botonBoleto" onclick="boton(this)">2-M</button></li>
+											<li><button id="partido2_mm" value="M-M" name="partido0_mm" class="botonBoleto" onclick="boton(this)">M-M</button></li>
+										</ul>
+
+										<div class="d-flex justify-content-center">
+                      <button type="button" class="boton_siguiente" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+												SIGUIENTE PARTIDO
+											</button>
+                    </div>
+	
+									</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+                  <div class="w-100"><span>{{ partidos.3 }}</span><span style="text-align: right; float: right;">(<span class="marcados">0</span> de 16)</span></div>
+                </button>
+              </h2>
+              <div id="collapsefour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="partidos" style="">
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido3_00" value="0-0" name="partido0_00" class="botonBoleto" onclick="boton(this)">0-0</button></li>
+											<li><button id="partido3_10" value="1-0" name="partido0_10" class="botonBoleto" onclick="boton(this)">1-0</button></li>
+											<li><button id="partido3_20" value="2-0" name="partido0_20" class="botonBoleto" onclick="boton(this)">2-0</button></li>
+											<li><button id="partido3_m0" value="M-0" name="partido0_m0" class="botonBoleto" onclick="boton(this)">M-0</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido3_01" value="0-1" name="partido0_01" class="botonBoleto" onclick="boton(this)">0-1</button></li>
+											<li><button id="partido3_11" value="1-1" name="partido0_11" class="botonBoleto" onclick="boton(this)">1-1</button></li>
+											<li><button id="partido3_21" value="2-1" name="partido0_21" class="botonBoleto" onclick="boton(this)">2-1</button></li>
+											<li><button id="partido3_m1" value="M-1" name="partido0_m1" class="botonBoleto" onclick="boton(this)">M-1</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido3_02" value="0-2" name="partido0_02" class="botonBoleto" onclick="boton(this)">0-2</button></li>
+											<li><button id="partido3_12" value="1-2" name="partido0_12" class="botonBoleto" onclick="boton(this)">1-2</button></li>
+											<li><button id="partido3_22" value="2-2" name="partido0_22" class="botonBoleto" onclick="boton(this)">2-2</button></li>
+											<li><button id="partido3_m2" value="M-2" name="partido0_m2" class="botonBoleto" onclick="boton(this)">M-2</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center pb-2">
+											<li><button id="partido3_0m" value="0-M" name="partido0_0m" class="botonBoleto" onclick="boton(this)">0-M</button></li>
+											<li><button id="partido3_1m" value="1-M" name="partido0_1m" class="botonBoleto" onclick="boton(this)">1-M</button></li>
+											<li><button id="partido3_2m" value="2-M" name="partido0_2m" class="botonBoleto" onclick="boton(this)">2-M</button></li>
+											<li><button id="partido3_mm" value="M-M" name="partido0_mm" class="botonBoleto" onclick="boton(this)">M-M</button></li>
+										</ul>
+
+										<div class="d-flex justify-content-center">
+                      <button type="button" class="boton_siguiente" data-bs-toggle="collapse" data-bs-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+												SIGUIENTE PARTIDO
+											</button>
+                    </div>
+	
+									</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+                  <div class="w-100"><span>{{ partidos.4 }}</span><span style="text-align: right; float: right;">(<span class="marcados">0</span> de 16)</span></div>
+                </button>
+              </h2>
+              <div id="collapsefive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="partidos" style="">
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido4_00" value="0-0" name="partido0_00" class="botonBoleto" onclick="boton(this)">0-0</button></li>
+											<li><button id="partido4_10" value="1-0" name="partido0_10" class="botonBoleto" onclick="boton(this)">1-0</button></li>
+											<li><button id="partido4_20" value="2-0" name="partido0_20" class="botonBoleto" onclick="boton(this)">2-0</button></li>
+											<li><button id="partido4_m0" value="M-0" name="partido0_m0" class="botonBoleto" onclick="boton(this)">M-0</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido4_01" value="0-1" name="partido0_01" class="botonBoleto" onclick="boton(this)">0-1</button></li>
+											<li><button id="partido4_11" value="1-1" name="partido0_11" class="botonBoleto" onclick="boton(this)">1-1</button></li>
+											<li><button id="partido4_21" value="2-1" name="partido0_21" class="botonBoleto" onclick="boton(this)">2-1</button></li>
+											<li><button id="partido4_m1" value="M-1" name="partido0_m1" class="botonBoleto" onclick="boton(this)">M-1</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido4_02" value="0-2" name="partido0_02" class="botonBoleto" onclick="boton(this)">0-2</button></li>
+											<li><button id="partido4_12" value="1-2" name="partido0_12" class="botonBoleto" onclick="boton(this)">1-2</button></li>
+											<li><button id="partido4_22" value="2-2" name="partido0_22" class="botonBoleto" onclick="boton(this)">2-2</button></li>
+											<li><button id="partido4_m2" value="M-2" name="partido0_m2" class="botonBoleto" onclick="boton(this)">M-2</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center pb-2">
+											<li><button id="partido4_0m" value="0-M" name="partido0_0m" class="botonBoleto" onclick="boton(this)">0-M</button></li>
+											<li><button id="partido4_1m" value="1-M" name="partido0_1m" class="botonBoleto" onclick="boton(this)">1-M</button></li>
+											<li><button id="partido4_2m" value="2-M" name="partido0_2m" class="botonBoleto" onclick="boton(this)">2-M</button></li>
+											<li><button id="partido4_mm" value="M-M" name="partido0_mm" class="botonBoleto" onclick="boton(this)">M-M</button></li>
+										</ul>
+
+										<div class="d-flex justify-content-center">
+                      <button type="button" class="boton_siguiente" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+												SIGUIENTE PARTIDO
+											</button>
+                    </div>
+	
+									</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+                  <div class="w-100"><span>{{ partidos.5 }}</span><span style="text-align: right; float: right;">(<span class="marcados">0</span> de 16)</span></div>
+                </button>
+              </h2>
+              <div id="collapsesix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="partidos" style="">
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido5_00" value="0-0" name="partido0_00" class="botonBoleto" onclick="boton(this)">0-0</button></li>
+											<li><button id="partido5_10" value="1-0" name="partido0_10" class="botonBoleto" onclick="boton(this)">1-0</button></li>
+											<li><button id="partido5_20" value="2-0" name="partido0_20" class="botonBoleto" onclick="boton(this)">2-0</button></li>
+											<li><button id="partido5_m0" value="M-0" name="partido0_m0" class="botonBoleto" onclick="boton(this)">M-0</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido5_01" value="0-1" name="partido0_01" class="botonBoleto" onclick="boton(this)">0-1</button></li>
+											<li><button id="partido5_11" value="1-1" name="partido0_11" class="botonBoleto" onclick="boton(this)">1-1</button></li>
+											<li><button id="partido5_21" value="2-1" name="partido0_21" class="botonBoleto" onclick="boton(this)">2-1</button></li>
+											<li><button id="partido5_m1" value="M-1" name="partido0_m1" class="botonBoleto" onclick="boton(this)">M-1</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center">
+											<li><button id="partido5_02" value="0-2" name="partido0_02" class="botonBoleto" onclick="boton(this)">0-2</button></li>
+											<li><button id="partido5_12" value="1-2" name="partido0_12" class="botonBoleto" onclick="boton(this)">1-2</button></li>
+											<li><button id="partido5_22" value="2-2" name="partido0_22" class="botonBoleto" onclick="boton(this)">2-2</button></li>
+											<li><button id="partido5_m2" value="M-2" name="partido0_m2" class="botonBoleto" onclick="boton(this)">M-2</button></li>
+										</ul>
+										<ul class="d-flex justify-content-center pb-2">
+											<li><button id="partido5_0m" value="0-M" name="partido0_0m" class="botonBoleto" onclick="boton(this)">0-M</button></li>
+											<li><button id="partido5_1m" value="1-M" name="partido0_1m" class="botonBoleto" onclick="boton(this)">1-M</button></li>
+											<li><button id="partido5_2m" value="2-M" name="partido0_2m" class="botonBoleto" onclick="boton(this)">2-M</button></li>
+											<li><button id="partido5_mm" value="M-M" name="partido0_mm" class="botonBoleto" onclick="boton(this)">M-M</button></li>
+										</ul>
+	
+									</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center pb-3">
+      <button
+        class="btn-m-seleccionado mx-2 mb-3"
+        onclick="reset()"
+        style="max-width: 80em; background-color: #40bbd0; color: white"
+      >
+        Volver a empezar
+      </button>
+    </div>
+    <div
+      class="total-block d-flex flex-column justify-content-center align-items-center"
+    >
+      <div class="modulo-total-compra">
+        <strong>Total</strong>
+        <span class="total-compra">0,00 €</span>
+      </div>
+      <form method="post" class="w-100">
+        {% csrf_token %}
+        <input type="hidden" name="sorteo" value="quinigol">
+        <input type="hidden" id="precioinput" name="precio" value="0.00">
+        <input type="hidden" id="variable" name="variable">
+        <button class="w-100 boton-confirmar" disabled="disabled">
+          CONFIRMAR APUESTAS
+        </button>
+      </form>
+    </div>
+    <div class="d-flex justify-content-center flex-wrap pb-5">
+      <p class="">
+        <button
+          class="btn"
+          style="max-width: 50em; background-color: #40bbd0; color: white"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseExample"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          ¿Como Jugar?
+        </button>
+      </p>
+      <div class="collapse w-100" id="collapseExample">
+        <div class="card card-body fw-light lh-sm" style="font-size: small">
+          <pre>Apuestas sencillas:
+
+Marca el equipo vencedor de cada uno de los 14 primeros partidos (incluidas posibles prórrogas):
+
+     - 1 gana el equipo local (señalado en primer lugar)
+
+     - X (empate)
+
+     - 2 gana el equipo visitante (señalado en 2º lugar)
+
+Marca el resultado exacto del encuentro señalado en la posición 15 (“pleno al 15") (incluida la prórroga si hubiera):
+
+     - Marca los goles exactos que tendrá cada equipo al final del encuentro.
+
+     - Si crees que alguno de los equipos marcará 3 o más goles, marca el símbolo M.
+
+Apuestas múltiples:
+
+Marca dos o tres de los símbolos 1x2 en los encuentros donde no tengas claro el resultado o quieras optar a más posibilidades. También puedes marcar más valores en el Pleno al 15, teniendo en cuenta que participas con tantas apuestas como posibles resultados hayas marcado.
+
+Apuestas condicionadas:
+
+Si quieres realizar una apuesta múltiple pero con un importe menor, puedes afinar tu pronóstico jugando condicionadas:
+
+     - Marca la C si quieres afinar tu pronóstico múltiple en aquellos partidos donde tengas claro si se producirán variantes (resultado X o 2).
+
+     - Marca en las columnas correspondientes (Variantes, X, 2) el número de variantes(X o 2), resultados de empate (X) y/o resultados de 2 que crees se producirán.
+
+De este modo has eliminado de tus pronósticos múltiples los pronósticos menos probables, quedándote solamente con los que a tu juicio tienen más posibilidades de ocurrir, con lo que rebajas el precio de tu boleto.
+
+Apuestas reducidas:
+
+Puedes reducir el precio de tu boleto eligiendo solamente un subconjunto de las apuestas múltiples que jugarías si jugaras el boleto múltiple completo.
+
+En este caso Loterías te asigna las combinaciones de pronósticos que jugarías en el caso de que reduzcas tu boleto según el número de múltiples indicado en la tabla.
+</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button id="modal" style="display: none;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Información</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        El juego opcional con tu Quiniela.
+        <p>Elige 8 partidos pulsando encima de ellos.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const casillasMarcadasPorPartido = [[], [], [], [], [], []];
+
+  function calcularPrecioApuesta(casillasMarcadasPorPartido) {
+    const precioPorApuesta = 1; // Precio por cada apuesta (cuando al menos una casilla marcada en cada partido)
+
+    // Verificar si algún partido no tiene al menos una casilla marcada
+    const algunPartidoSinCasillaMarcada = casillasMarcadasPorPartido.some(casillasPorPartido => casillasPorPartido.length === 0);
+
+    // Si algún partido no tiene al menos una casilla marcada, el precio es 0 euros
+    if (algunPartidoSinCasillaMarcada) {
+        document.querySelector('.total-compra').textContent = "0.00 €";
+    } else {
+        // Si todos los partidos tienen al menos una casilla marcada, el precio es 1 euro
+        var precio = precioPorApuesta * casillasMarcadasPorPartido[0].length * casillasMarcadasPorPartido[1].length * casillasMarcadasPorPartido[2].length * casillasMarcadasPorPartido[3].length * casillasMarcadasPorPartido[4].length * casillasMarcadasPorPartido[5].length;
+        document.querySelector('.total-compra').textContent = precio.toFixed(2) + " €";
+    }
+  }
+
+
+ function boton(element) {
+    element.classList.toggle('marcado');
+    var cajon = parseInt(element.id.charAt(7));
+    var partidos = document.querySelectorAll('.accordion-item .accordion-header .marcados');
+    var numero = parseInt(partidos[cajon].textContent);
+    if(element.classList.contains('marcado')){
+      numero++;
+      casillasMarcadasPorPartido[cajon].push(element.id);
+      partidos[cajon].textContent = numero;
+    }else{
+      numero--;
+      var index = casillasMarcadasPorPartido[cajon].indexOf(element.id);
+      if (index !== -1) {
+        casillasMarcadasPorPartido[cajon].splice(index, 1);
+      }
+      partidos[cajon].textContent = numero;
+    }
+    calcularPrecioApuesta(casillasMarcadasPorPartido);
+ }
+
+ function reset(){
+  var activos = document.querySelectorAll('button.marcado');
+  activos.forEach(element => {
+    element.click();
+  });
+}
+
+ function auto(element) {
+  reset();
+  var partidos = document.querySelectorAll('.accordion-item .accordion-body');
+  partidos.forEach(element => {
+    var lis = element.querySelectorAll('li');
+    var numeroAleatorio = generarNumeroAleatorio();
+    lis[numeroAleatorio].querySelector('button').click();
+  });
+
+ }
+
+ function generarNumeroAleatorio() {
+    var randomNumber = Math.random();
+    var scaledNumber = Math.floor(randomNumber * 15);
+    return scaledNumber;
+}
+
+const spanTotalCompra = document.querySelector('.total-compra');
+const botonConfirmar = document.querySelector('.boton-confirmar');
+// Crea un observador de mutaciones para el contenido del span .total-compra
+const observer = new MutationObserver(function(mutationsList, observer) {
+    mutationsList.forEach(mutation => {
+        if (mutation.type === 'childList' && mutation.target === spanTotalCompra) {
+            if (spanTotalCompra.textContent.trim() !== '0,00 €' && spanTotalCompra.textContent.trim() !== '0.00 €') {
+                botonConfirmar.removeAttribute('disabled');
+            } else {
+                botonConfirmar.setAttribute('disabled', '');
+            }
+        }
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    // Observa cambios en el contenido del span .total-compra
+    observer.observe(spanTotalCompra, { childList: true });
+    // Verifica el estado inicial del span
+    if (spanTotalCompra.textContent.trim() !== '0,00 €' && spanTotalCompra.textContent.trim() !== '0.00 €') {
+        botonConfirmar.removeAttribute('disabled');
+    }
+    
+});
+function cambio() {
+    var total = document.querySelector('.total-compra');
+    let partidos = "{{partidos}}"
+    partidos = partidos.replace(/\n/g, "").replace(/\t/g, "");
+    partidos = partidos.replace(/&#x27;/g, "");
+    partidos = partidos.replace(/\s*-\s*/g, "-");
+    const numerosJson = JSON.stringify({
+      orden_partidos: partidos,
+      casillasMarcadasxPartido: casillasMarcadasPorPartido
+    });
+    const miArrayJsonInput = document.getElementById('variable');
+    miArrayJsonInput.value = numerosJson;
+    const prec = document.getElementById('precioinput')
+    prec.value = total.textContent.replace(',', '.')
+    console.log(prec.value);
+        
+  }
+  function observarCambios(targetElement, callback) {
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList') {
+                    callback();
+                }
+            });
+        });
+
+        observer.observe(targetElement, {
+            childList: true
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const span = document.querySelector('.total-compra');
+        observarCambios(span, cambio);
+    });
+</script>
+  {% endif %}
+{% endblock %}
+

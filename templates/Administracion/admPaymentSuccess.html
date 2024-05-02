@@ -1,0 +1,87 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/admProductList.css' %}">
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Pago Realizado Correctamente</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="bg-light pt-2 rounded shadow">
+            <p>Su pago se ha realizado correctamente.</p>
+        </div>
+        <div class="container">
+            <div class="w-100 d-flex justify-content-end align-content-center ">
+                <a  href="{%  url 'admsFactura' nombre_administracion=nombre_administracion order_id=order.id %}" class="btn btn-info text-light shadow"><i class="bi bi-printer"></i> Imprimir</a>
+            </div>
+            <div id="content" class="my-3 bg-light pt-2 rounded shadow">
+                <div class="flex-item f-jc-c logo-contain">
+                    <div class="logo" style="background-image: url('{% static 'imgs/logo.png' %}');"></div>
+                </div>
+                <div class="border-1 border-bottom border-black mx-4"></div>
+                <div class="mx-4">
+                    <div class="d-flex justify-content-between align-content-sm-center pt-3">
+                        <div class="col-sm-6 lh-1">
+                            <p>To: <span class="fw-bold text-capitalize">{{order.nombre}} {{order.apellidos}}</span></p>
+                            <p>{{order.calle}}, {{order.ciudad}}</p>
+                            <p>{{order.cPostal}}</p>
+                            <p>{{order.provincia}}</p>
+                            <p><i class="bi bi-telephone"></i> {{user.telefono}}</p>
+                        </div>
+                        <div class="lh-1">
+                            <p class="d-block">ID: <span class="fw-bolder">#{{order.id}}</span></p>
+                            <p class="d-block">Fecha de asunto: <span class="fw-bolder">{{order.actualizado}}</span></p>
+                            <p class="d-block">Estado <span class="fw-bolder">{% if order.completado == True %}Pagado{% else %}No pagado{% endif %}</span></p>
+                        </div>
+                    </div>
+                    <table class="table table-striped  mt-2">
+                        <thead class="table-primary">
+                          <tr>
+                            <th scope="col ">#</th>
+                            <th scope="col">PACK</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio Unidad</th>
+                            <th scope="col">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                              <th scope="row">{{order.pack.id}}</th>
+                              <td>{{order.pack.nombre}}</td>
+                              <td>1</td>
+                              <td>{{ order.calcular_total_pack }}€</td>
+                              <td>{{ order.calcular_total_pack }}€</td>
+                            </tr>
+
+                        </tbody>
+                      </table>
+                      <div>
+                        <span>
+                            SUBTOTAL: {{ order.calcular_total }}€<br>
+                            TPP: 0.05€<br>
+                            Gasto Gestión + IVA (ES) : 23.9%<br>
+                            <span class="fw-normal fs-3">TOTAL: </span><span class="fw-bolder fs-3">{{ order.total }}€</span> <br>
+                        </span>
+                      </div>
+                </div>
+                <div class="border-1 border-bottom border-black mx-4 my-2"></div>
+                <div class="w-100 mx-4 pb-3"><span>GRACIAS POR CONFIAR EN NOSOTROS</span></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+
+
+{% endblock %}
+

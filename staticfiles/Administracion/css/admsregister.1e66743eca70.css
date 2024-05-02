@@ -1,0 +1,106 @@
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.gradient-ani {
+    background: linear-gradient(270deg, rgba(255, 204, 204, 0.5), rgba(204, 255, 204, 0.5), rgba(97, 255, 215, 0.5));
+    background-size: 500% 500%;
+    -webkit-animation: AnimationName 40s ease infinite;
+    -moz-animation: AnimationName 40s ease infinite;
+    -o-animation: AnimationName 40s ease infinite;
+    animation: AnimationName 40s ease infinite;
+}
+
+body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+}
+
+.bac-opa-w{
+    background-color: #ffffffb5;
+}
+
+.login-body{
+ height: 100;
+}
+
+.flex-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-footer {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.card{
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.nav-pers li a{
+    color: black;
+}
+
+.container a img{
+    padding-top: 0.45rem;
+    padding-right: 4rem;
+}
+
+.level-3 {
+    position: relative;
+    z-index: 8 !important;
+}
+
+.py-15 {
+    padding-top: 7.5rem !important;
+    padding-bottom: 7.5rem !important;
+}
+
+a {
+    transition: all .2s;
+    transition-delay: 0s;
+    text-decoration: none;
+}
+
+
+.border-transition {
+    color: rgb(0, 0, 0);
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.border-transition::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: .5px;
+    background: #000000;
+    transition: width 0.2s ease, left 0.2s ease; 
+}
+
+.border-transition:hover::before {
+    width: 100%;
+    left: 0;
+}

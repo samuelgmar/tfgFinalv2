@@ -1,0 +1,63 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/admProductList.css' %}">
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<div class="container-fluid">
+    <div class="container">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Dudas Clientes</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2"></div>
+        <div class="bg-light pt-2 rounded">
+            <div class=" d-flex justify-content-center align-items-center pt-5 mx-3 flex-column">
+                <div class="w-100 accordion" id="accordionExample">
+                    {% for objeto in object_list %}
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button {% if forloop.first %}  {% else %} collapsed {% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#c{{objeto.id}}" aria-expanded="true" aria-controls="c{{objeto.id}}">
+                          <span>{{objeto.nombre}} - <strong> Asunto: </strong>{{objeto.asunto}}</span>
+                        </button>
+                      </h2>
+                      <div id="c{{objeto.id}}" class="accordion-collapse collapse {% if forloop.first %} show {% endif %}" data-bs-parent="#c{{objeto.id}}">
+                        <div class="accordion-body">
+                            <p><strong>Email: </strong>{{objeto.email}}</p>
+                            {{objeto.mensaje}}
+                            <div class="d-flex justify-content-end">
+                                <form  method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{objeto.id}}">
+                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                      </div>
+                    </div> 
+                    {% endfor %}
+                </div>
+                <div style="border: 1px;border-color:rgb(110, 110, 110);" class="border-bottom w-75 d-flex justify-content-center align-items-center m-auto my-2"></div>
+                <div class="d-flex justify-content-center align-items-center pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; Primero</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        {% endif %}
+                        <span class="current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">Último &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

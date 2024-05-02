@@ -1,0 +1,94 @@
+{% extends 'Global/headers/headerGlobal.html' %}
+{% load static %}
+{% block title %}LotoFinder - Login{% endblock %}
+
+{% block styles %}
+  <style>
+    body,section{
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    header,footer{
+      background-color: rgb(7, 7, 7);
+    }
+    ::-webkit-scrollbar {
+      width: 5px; /* Ancho de la barra de desplazamiento */
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: #f1f1f1; /* Color del fondo de la pista */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #888; /* Color del indicador de desplazamiento */
+        border-radius: 5px; /* Borde redondeado del indicador de desplazamiento */
+    }
+
+    /* Barra de desplazamiento horizontal */
+    ::-webkit-scrollbar-horizontal {
+        height: 10px; /* Altura de la barra de desplazamiento horizontal */
+    }
+  </style>
+{% endblock %}
+{% block extrascripts %} 
+    
+{% endblock %}
+
+{% block content %}
+<section class="overflow-hidden bac-opa-w" style="background-image: url('{% static 'imgs/login.jpg' %}');">
+    <div class="py-15 py-xl-20 d-flex flex-column container level-3 min-vh-100">
+      <div class="row align-items-center justify-content-center my-auto">
+        <div class="col-md-10 col-lg-8 col-xl-5">
+          <div class="card border-light border-0 rounded-0">
+            <div class="card-header rounded-0 bg-white text-center p-4">
+              <h5 class="fs-4 mb-1">Iniciar sesión</h5>
+            </div>
+            <div class="card-body bg-white p-5">
+              <form method="post" action="{% url 'Global:loginAdministracion' %}">
+                {% csrf_token %}
+                {% for field in form %}
+                  <div class="form-floating mb-2">
+                      {{ field }}
+                      <label for="floatingInput">{{ field.label }}</label>
+                      <span style="color: red;">{{ field.errors }}</span>
+                  </div>
+                {% endfor %}
+                <div class="d-grid mb-2">
+                  <button type="submit" class="rounded-0 btn btn-lg btn-primary">Iniciar Sesión</button>
+                </div>
+                <div class="row">
+                  <div class="col text-end">
+                    <a href="{% url 'Global:reset_password' %}" class="underline small">¿Has olvidado tu contraseña?</a>
+                  </div>
+                </div>
+              </form>
+              {% if form.errors %}
+                  <div class="alert alert-danger" role="alert">
+                    <strong>Error:</strong> Por favor, corrige los siguientes errores.
+                    <ul>
+                      {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                          <li>
+                            {% if field != '__all__' %}
+                                <strong>{{ field.label }}:</strong>
+                            {% endif %}
+                            {{ error }}
+                          </li>
+                        {% endfor %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endif %}
+            </div>
+            <div class="rounded-0 card-footer text-center p-4">
+              <p class="text-secondary">¿No tienes una cuenta? <a href="{% url 'Global:registerAdministracion' %}" class="border-transition">Registrate</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+    
+{% endblock %}
