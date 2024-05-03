@@ -94,11 +94,11 @@ WSGI_APPLICATION = 'LotoFinder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db',
-        'USER': 'django',
-        'PASSWORD': 'django12321$',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'EaXDUPNshyobiNWBbUxcRIAUBzKHcsSH',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '52246',
     }
 }
 
