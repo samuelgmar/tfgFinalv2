@@ -1,1 +1,1 @@
-web: gunicorn LotoFinder.wsgi --log-file -
+web: gunicorn LotoFinder.wsgi
