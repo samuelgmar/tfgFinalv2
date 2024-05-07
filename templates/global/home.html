@@ -9,248 +9,6 @@
     <link rel="stylesheet" href="{% static 'Administracion/css/headers/homeAdministracion.css' %}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
-    {% block styles %}{% endblock %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YHBYWXC58"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-3YHBYWXC58');
-    </script>
-    <!-- Google Tag Manager -->
-    <script>
-      (function(w,d,s,l,i){
-        w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-        var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-        j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-K9PZT2X6');
-    </script>
-    <!-- End Google Tag Manager -->
-</head>
-<body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9PZT2X6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top px-3" >
-        <a class="navbar-brand" href="{% url 'Global:index' %}">
-            <img src="{% static 'imgs/logo.png' %}" alt="Logo" width="130" height="40" class="d-inline-block align-text-top">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'Global:index' %}#inicio">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'Global:index' %}#about">Sobre nosotros</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'Global:index' %}#services">Servicios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'Global:index' %}#contact">Contacto</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Iniciar Sesión</a>
-            </li>
-          </ul>
-        </div>
-    </nav>
-
-
-
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" >
-        <a class="navbar-brand" href="#">
-            <img src="{% static 'imgs/logo.png' %}" alt="Logo" width="130" height="40" class="d-inline-block align-text-top">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#inicio">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">Sobre nosotros</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#services">Servicios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Contacto</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="loginAdministracion/">Iniciar Sesión</a>
-            </li>
-          </ul>
-        </div>
-    </nav>
-  
-    <div id="inicio" class="parallax parallax-content-right" style="z-index: 1;background-image: url({% static 'imgs/admintech.png' %});">
-        <div class="parallax-content rounded bg-dark eslogan">
-            <div class="m-3">
-                <h3 style="text-align: start;">¿Tienes una Administración de Loteria?</h3>
-                <p>Haz que tu administración brille con nuestra experiencia en lotería y optimiza tu negocio con nuestro enfoque especializado.</p>
-                <a href="registerAdministracion/"><button type="button" class="btn btn-info">¡Registrarte ya!</button></a>
-            </div>
-        </div>
-    </div>
-
-    <div id="about" class="normal-section sec-about">
-        <div class="container">
-            <h1 style="text-transform: uppercase;">Sobre Nosotros</h1>
-            <p>Bienvenido a LotoFinder donde la innovación y la excelencia se encuentran para ofrecerte la mejor experiencia posible.
-                <br><br>
-                En LotoFinder nos apasiona proporcionar soluciones creativas y eficientes que satisfagan tus necesidades y te ayuden a alcanzar tus objetivos. Nuestro equipo está formado por profesionales altamente cualificados y comprometidos que trabajan incansablemente para ofrecerte productos y servicios de alta calidad.
-                <br><br>
-                Desde nuestra fundación, nos hemos dedicado a crear un entorno donde la creatividad y la tecnología se fusionan para ofrecer soluciones únicas y disruptivas. Nos enorgullece ofrecer un enfoque personalizado a cada cliente, trabajando estrechamente contigo para entender tus necesidades y superar tus expectativas.
-                <br><br>
-                En LotoFinder nos esforzamos por mantener los más altos estándares de integridad, profesionalismo y atención al cliente. Creemos en la transparencia, la honestidad y el trabajo en equipo, valores que guían cada decisión que tomamos y cada acción que emprendemos.
-                <br><br>
-                Gracias por confiar en LotoFinder como tu socio en el éxito. Estamos emocionados de embarcarnos en este viaje contigo y esperamos poder ayudarte a alcanzar tus metas y aspiraciones.
-                <br><br>
-                ¡Bienvenido a LotoFinder!</p>
-                <img height="20%" width="20%" src="{% static 'imgs/sobrenosotros.png' %}" alt="">
-        </div>
-    </div>
-
-    <div id="services" class="parallax my-5" style="height: auto;background-image: url({% static 'imgs/.png' %});">
-        <div class="parallax-content mt-4">
-            <h1 style="text-transform: uppercase;">Servicios</h1>
-            <p style="color: #999;">Servicios excepcionales para resultados extraordinarios.</p>
-            <div class="services-grid">
-                <div class="service service1">
-                    <i class="bi bi-code-square"></i>
-                    <h4>Desarrollo de Software Personalizado</h4>
-                    <p>Creamos soluciones de software a medida para satisfacer las necesidades específicas de tu negocio o proyecto.</p>
-                </div>
-                <div class="service service2">
-                    <i class="bi bi-palette"></i>
-                    <h4>Diseño Web y Experiencia de Usuario (UX/UI)</h4>
-                    <p>Diseñamos y desarrollamos sitios web atractivos y funcionales, optimizados para brindar la mejor experiencia al usuario.</p>
-                </div>
-                <div class="service service3">
-                    <i class="bi bi-phone"></i>
-                    <h4>Aplicaciones Móviles</h4>
-                    <p>Desarrollamos aplicaciones móviles para iOS y Android, desde concepto y diseño hasta implementación y mantenimiento.</p>
-                </div>
-            </div>
-            <div class="services-grid">
-                <div class="service service4">
-                    <i class="bi bi-diagram-2"></i>
-                    <h4>Consultoría Tecnológica</h4>
-                    <p>Ofrecemos asesoramiento experto en tecnología para ayudarte a tomar decisiones informadas y estratégicas para tu negocio.</p>
-                </div>
-                <div class="service service5">
-                    <i class="bi bi-graph-up"></i>
-                    <h4>Optimización de SEO y Marketing Digital</h4>
-                    <p>Mejoramos la visibilidad de tu marca en línea a través de estrategias de SEO y marketing digital efectivas.</p>
-                </div>
-                <div class="service service6">
-                    <i class="bi bi-cart3"></i>
-                    <h4>Desarrollo de eCommerce</h4>
-                    <p>Creamos tiendas en línea personalizadas y escalables para que puedas vender tus productos y servicios en el mercado digital.</p>
-                </div>
-            </div>
-            <div class="services-grid">
-                <div class="service service7">
-                    <i class="bi bi-building"></i>
-                    <h4>Desarrollo de Aplicaciones Empresariales</h4>
-                    <p>Diseñamos y desarrollamos aplicaciones empresariales robustas y seguras para mejorar la eficiencia y productividad de tu negocio.</p>
-                </div>
-                <div class="service service8">
-                    <i class="bi bi-diagram-3"></i>
-                    <h4>Integración de Sistemas</h4>
-                    <p>Integramos sistemas y plataformas existentes para garantizar una comunicación fluida y eficiente entre diferentes componentes de tu infraestructura tecnológica.</p>
-                </div>
-                <div class="service service9">
-                    <i class="bi bi-lightbulb"></i>
-                    <h4>Desarrollo de Prototipos y MVPs</h4>
-                    <p>Ayudamos a transformar tus ideas en prototipos y productos mínimamente viables (MVPs) para validar conceptos y obtener retroalimentación temprana del mercado.</p>
-                </div>
-            </div>
-            <div class="services-grid">
-                <div class="service service10">
-                    <i class="bi bi-wrench"></i>
-                    <h4>Soporte y Mantenimiento</h4>
-                    <p>Brindamos servicios de soporte técnico continuo y mantenimiento para garantizar el funcionamiento óptimo y la seguridad de tus sistemas y aplicaciones.</p>
-                </div>
-                <div class="service service11">
-                    <i class="bi bi-people"></i>
-                    <h4>Formación y Capacitación</h4>
-                    <p>Ofrecemos programas de formación y capacitación personalizados para ayudar a tu equipo a adquirir las habilidades y conocimientos necesarios en tecnología y desarrollo de software.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-  
-    <div id="contact" class="normal-section sec-about">
-        <div class="container">
-            <h1 style="text-transform: uppercase;">Contacto</h1>
-            <p>Conéctate con nosotros y hagamos realidad tus ideas.</p>
-            <div class="services-grid div-center">
-
-                <div type="button" href="tel:+34697276001" class="serviceCircle circulo m-5" style="cursor: pointer;background-image: url({% static 'imgs/whatsapp.png' %});">
-                    <div class="d-flex align-items-center justify-content-center flex-column h-100">
-                        <h4 style="color: black;background-color: rgba(255, 255, 255, 0.6);">WHATSHAPP</h4>
-                        <a style="color: black;background-color: rgba(255, 255, 255, 0.6);" href="tel:+34697276001">+34 697 276 001</a>
-                    </div>
-                </div>
-                <div type="button" href="mailto:sgarcia263@gmail.com" class="serviceCircle circulo m-5" style="background-image: url({% static 'imgs/mail.png' %});">
-                    <div class="d-flex align-items-center justify-content-center flex-column h-100">
-                        <h4 style="color: black;background-color: rgba(255, 255, 255, 0.6);">EMAIL</h4>
-                        <a style="color: black;background-color: rgba(255, 255, 255, 0.6);" href="mailto:sgarcia263@gmail.com">SGARCIA263@GMAIL.COM</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="parallax py-4" style="z-index: 1;background-color: #343A40;height: auto;">
-        <a class="navbar-brand d-flex justify-content-center" style="filter: invert();" href="#">
-            <img src="{% static 'imgs/logo.png' %}" alt="Logo" width="130" height="40" class="d-inline-block align-text-top">
-        </a>
-        <div class="parallax-content ">
-            <div class="services-grid">
-                <div class="servicemenu" style="background-color: #343A40; border: none;">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#inicio">Inicio <span class="sr-only">(current)</span></a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#about">Sobre nosotros</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#services">Servicios</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contacto</a>
-                          </li>
-                    </ul>
-                </div>
-                <div class="servicemenu" style="background-color: #343A40;border: none;">
-                    <ul class="nav flex-column d-flex justify-content-center text-center align-items-center">
-                        <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="loginAdministracion/">Iniciar Sesión</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="registerAdministracion/">Registrarse</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class=" w-100 text-center">
-                <p style="color: white;font-size: small; padding-top: 50px;">©LotoFinder2024</p>
-            </div>
-        </div>
-    </div>
     <style>
         li a{
             color: white;
@@ -552,6 +310,249 @@
         }
 
     </style>
+    {% block styles %}{% endblock %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YHBYWXC58"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-3YHBYWXC58');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-K9PZT2X6');
+    </script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9PZT2X6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top px-3" >
+        <a class="navbar-brand" href="{% url 'Global:index' %}">
+            <img src="{% static 'imgs/logo.png' %}" alt="Logo" width="130" height="40" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Global:index' %}#inicio">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Global:index' %}#about">Sobre nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Global:index' %}#services">Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Global:index' %}#contact">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Iniciar Sesión</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" >
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'imgs/logo.png' %}" alt="Logo" width="130" height="40" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#inicio">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">Sobre nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="loginAdministracion/">Iniciar Sesión</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+  
+    <div id="inicio" class="parallax parallax-content-right" style="z-index: 1;background-image: url({% static 'imgs/admintech.png' %});">
+        <div class="parallax-content rounded bg-dark eslogan">
+            <div class="m-3">
+                <h3 style="text-align: start;">¿Tienes una Administración de Loteria?</h3>
+                <p>Haz que tu administración brille con nuestra experiencia en lotería y optimiza tu negocio con nuestro enfoque especializado.</p>
+                <a href="registerAdministracion/"><button type="button" class="btn btn-info">¡Registrarte ya!</button></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="normal-section sec-about">
+        <div class="container">
+            <h1 style="text-transform: uppercase;">Sobre Nosotros</h1>
+            <p>Bienvenido a LotoFinder donde la innovación y la excelencia se encuentran para ofrecerte la mejor experiencia posible.
+                <br><br>
+                En LotoFinder nos apasiona proporcionar soluciones creativas y eficientes que satisfagan tus necesidades y te ayuden a alcanzar tus objetivos. Nuestro equipo está formado por profesionales altamente cualificados y comprometidos que trabajan incansablemente para ofrecerte productos y servicios de alta calidad.
+                <br><br>
+                Desde nuestra fundación, nos hemos dedicado a crear un entorno donde la creatividad y la tecnología se fusionan para ofrecer soluciones únicas y disruptivas. Nos enorgullece ofrecer un enfoque personalizado a cada cliente, trabajando estrechamente contigo para entender tus necesidades y superar tus expectativas.
+                <br><br>
+                En LotoFinder nos esforzamos por mantener los más altos estándares de integridad, profesionalismo y atención al cliente. Creemos en la transparencia, la honestidad y el trabajo en equipo, valores que guían cada decisión que tomamos y cada acción que emprendemos.
+                <br><br>
+                Gracias por confiar en LotoFinder como tu socio en el éxito. Estamos emocionados de embarcarnos en este viaje contigo y esperamos poder ayudarte a alcanzar tus metas y aspiraciones.
+                <br><br>
+                ¡Bienvenido a LotoFinder!</p>
+                <img height="20%" width="20%" src="{% static 'imgs/sobrenosotros.png' %}" alt="">
+        </div>
+    </div>
+
+    <div id="services" class="parallax my-5" style="height: auto;background-image: url({% static 'imgs/.png' %});">
+        <div class="parallax-content mt-4">
+            <h1 style="text-transform: uppercase;">Servicios</h1>
+            <p style="color: #999;">Servicios excepcionales para resultados extraordinarios.</p>
+            <div class="services-grid">
+                <div class="service service1">
+                    <i class="bi bi-code-square"></i>
+                    <h4>Desarrollo de Software Personalizado</h4>
+                    <p>Creamos soluciones de software a medida para satisfacer las necesidades específicas de tu negocio o proyecto.</p>
+                </div>
+                <div class="service service2">
+                    <i class="bi bi-palette"></i>
+                    <h4>Diseño Web y Experiencia de Usuario (UX/UI)</h4>
+                    <p>Diseñamos y desarrollamos sitios web atractivos y funcionales, optimizados para brindar la mejor experiencia al usuario.</p>
+                </div>
+                <div class="service service3">
+                    <i class="bi bi-phone"></i>
+                    <h4>Aplicaciones Móviles</h4>
+                    <p>Desarrollamos aplicaciones móviles para iOS y Android, desde concepto y diseño hasta implementación y mantenimiento.</p>
+                </div>
+            </div>
+            <div class="services-grid">
+                <div class="service service4">
+                    <i class="bi bi-diagram-2"></i>
+                    <h4>Consultoría Tecnológica</h4>
+                    <p>Ofrecemos asesoramiento experto en tecnología para ayudarte a tomar decisiones informadas y estratégicas para tu negocio.</p>
+                </div>
+                <div class="service service5">
+                    <i class="bi bi-graph-up"></i>
+                    <h4>Optimización de SEO y Marketing Digital</h4>
+                    <p>Mejoramos la visibilidad de tu marca en línea a través de estrategias de SEO y marketing digital efectivas.</p>
+                </div>
+                <div class="service service6">
+                    <i class="bi bi-cart3"></i>
+                    <h4>Desarrollo de eCommerce</h4>
+                    <p>Creamos tiendas en línea personalizadas y escalables para que puedas vender tus productos y servicios en el mercado digital.</p>
+                </div>
+            </div>
+            <div class="services-grid">
+                <div class="service service7">
+                    <i class="bi bi-building"></i>
+                    <h4>Desarrollo de Aplicaciones Empresariales</h4>
+                    <p>Diseñamos y desarrollamos aplicaciones empresariales robustas y seguras para mejorar la eficiencia y productividad de tu negocio.</p>
+                </div>
+                <div class="service service8">
+                    <i class="bi bi-diagram-3"></i>
+                    <h4>Integración de Sistemas</h4>
+                    <p>Integramos sistemas y plataformas existentes para garantizar una comunicación fluida y eficiente entre diferentes componentes de tu infraestructura tecnológica.</p>
+                </div>
+                <div class="service service9">
+                    <i class="bi bi-lightbulb"></i>
+                    <h4>Desarrollo de Prototipos y MVPs</h4>
+                    <p>Ayudamos a transformar tus ideas en prototipos y productos mínimamente viables (MVPs) para validar conceptos y obtener retroalimentación temprana del mercado.</p>
+                </div>
+            </div>
+            <div class="services-grid">
+                <div class="service service10">
+                    <i class="bi bi-wrench"></i>
+                    <h4>Soporte y Mantenimiento</h4>
+                    <p>Brindamos servicios de soporte técnico continuo y mantenimiento para garantizar el funcionamiento óptimo y la seguridad de tus sistemas y aplicaciones.</p>
+                </div>
+                <div class="service service11">
+                    <i class="bi bi-people"></i>
+                    <h4>Formación y Capacitación</h4>
+                    <p>Ofrecemos programas de formación y capacitación personalizados para ayudar a tu equipo a adquirir las habilidades y conocimientos necesarios en tecnología y desarrollo de software.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div id="contact" class="normal-section sec-about">
+        <div class="container">
+            <h1 style="text-transform: uppercase;">Contacto</h1>
+            <p>Conéctate con nosotros y hagamos realidad tus ideas.</p>
+            <div class="services-grid div-center">
+
+                <div type="button" href="tel:+34697276001" class="serviceCircle circulo m-5" style="cursor: pointer;background-image: url({% static 'imgs/whatsapp.png' %});">
+                    <div class="d-flex align-items-center justify-content-center flex-column h-100">
+                        <h4 style="color: black;background-color: rgba(255, 255, 255, 0.6);">WHATSHAPP</h4>
+                        <a style="color: black;background-color: rgba(255, 255, 255, 0.6);" href="tel:+34697276001">+34 697 276 001</a>
+                    </div>
+                </div>
+                <div type="button" href="mailto:sgarcia263@gmail.com" class="serviceCircle circulo m-5" style="background-image: url({% static 'imgs/mail.png' %});">
+                    <div class="d-flex align-items-center justify-content-center flex-column h-100">
+                        <h4 style="color: black;background-color: rgba(255, 255, 255, 0.6);">EMAIL</h4>
+                        <a style="color: black;background-color: rgba(255, 255, 255, 0.6);" href="mailto:sgarcia263@gmail.com">SGARCIA263@GMAIL.COM</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="parallax py-4" style="z-index: 1;background-color: #343A40;height: auto;">
+        <a class="navbar-brand d-flex justify-content-center" style="filter: invert();" href="#">
+            <img src="{% static 'imgs/logo.png' %}" alt="Logo" width="130" height="40" class="d-inline-block align-text-top">
+        </a>
+        <div class="parallax-content ">
+            <div class="services-grid">
+                <div class="servicemenu" style="background-color: #343A40; border: none;">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio <span class="sr-only">(current)</span></a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#about">Sobre nosotros</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#services">Servicios</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contacto</a>
+                          </li>
+                    </ul>
+                </div>
+                <div class="servicemenu" style="background-color: #343A40;border: none;">
+                    <ul class="nav flex-column d-flex justify-content-center text-center align-items-center">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="loginAdministracion/">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="registerAdministracion/">Registrarse</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class=" w-100 text-center">
+                <p style="color: white;font-size: small; padding-top: 50px;">©LotoFinder2024</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         window.addEventListener('scroll', function() {
             const parallax = document.querySelectorAll('.parallax');
