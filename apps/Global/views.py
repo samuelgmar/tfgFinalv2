@@ -6,3 +6,6 @@ from django.views.generic import TemplateView
 class HomePageView(TemplateView):
     template_name = 'global/home.html'
 
+class Error404View(TemplateView):
+    template_name = 'global/error_404.html'
+
