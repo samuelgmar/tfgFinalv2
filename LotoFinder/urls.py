@@ -42,4 +42,4 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = Error404View.as_view()
-handler404 = Error505View.as_error_view()
+handler500 = Error505View.as_error_view()
