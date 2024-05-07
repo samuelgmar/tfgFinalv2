@@ -9,3 +9,14 @@ class HomePageView(TemplateView):
 class Error404View(TemplateView):
     template_name = 'global/error_404.html'
 
+class Error505View(TemplateView):
+    template_name = 'global/error_404.html'
+
+    @classmethod
+    def as_error_view(cls):
+        v = cls.as_view()
+        def view(request):
+            r = v(request)
+            r.render()
+            return r
+        return view
