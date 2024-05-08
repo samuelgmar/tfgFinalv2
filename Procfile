@@ -1,1 +1,1 @@
-web: gunicorn LotoFinder.wsgi
+web: python manage.py collectstatic && gunicorn LotoFinder.wsgi
