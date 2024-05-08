@@ -172,6 +172,25 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Almacena las sesiones 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # La sesión permanece activa incluso después de cerrar el navegador
 SESSION_COOKIE_AGE = 3600 * 12  
 
+import logging
+
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
+
 CART_SESSION_ID = 'cart'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
