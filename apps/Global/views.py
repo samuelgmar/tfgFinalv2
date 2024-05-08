@@ -7,10 +7,10 @@ class HomePageView(TemplateView):
     template_name = 'global/home.html'
 
 class Error404View(TemplateView):
-    template_name = 'global/error_404.html'
+    template_name = 'Cliente/error_404.html'
 
 class Error505View(TemplateView):
-    template_name = 'global/error_404.html'
+    template_name = 'Cliente/error_404.html'
 
     @classmethod
     def as_error_view(cls):
