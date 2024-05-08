@@ -20,7 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from apps.Cliente.views import CustomPasswordResetDoneView
-
+from apps.Global.views import Error404View, Error505View
+from django.conf.urls import handler404, handler500
 
 urlpatterns = [
     #General panel
@@ -40,4 +41,5 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-
+handler404 = Error404View.as_view()
+handler500 = Error505View.as_error_view()
