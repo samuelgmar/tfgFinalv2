@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-9mmysi9%og*e=r
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['*','https://tfgfinalv2-production.up.railway.app']
+ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://lotofinder.es']
 
 # Application definition
