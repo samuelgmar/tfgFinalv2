@@ -135,21 +135,13 @@ USE_TZ = True
 
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_TMP = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
 
-os.makedirs(STATIC_TMP, exist_ok=True)
-os.makedirs(STATIC_ROOT, exist_ok=True)
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
   
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'Global.Usuario'
@@ -163,33 +155,10 @@ EMAIL_HOST_USER = 'sgarcia263@alu.ucam.edu'
 EMAIL_HOST_PASSWORD = 'Srsam12321$'
 PASSWORD_RESET_EMAIL_TEMPLATE = 'registration/password_reset_email.html'
 
-#manejo de archivos no estaticos
-MEDIA_URL = '/imagenes/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
 # Configuración de sesiones
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Almacena las sesiones en la base de datos
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # La sesión permanece activa incluso después de cerrar el navegador
 SESSION_COOKIE_AGE = 3600 * 12  
-
-import logging
-
-LOGGING = {
-    'version': 1,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-    },
-}
-
 
 CART_SESSION_ID = 'cart'
 
