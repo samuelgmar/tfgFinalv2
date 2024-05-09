@@ -1,1 +1,1 @@
-web: python manage.py collectstatic --no-input && gunicorn LotoFinder.wsgi
+web: gunicorn LotoFinder.wsgi
