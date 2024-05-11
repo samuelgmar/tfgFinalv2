@@ -88,7 +88,7 @@
     
     {% block scripts %}{% endblock %}
     <header>
-      <div class="flex-container i-menu" style="background-color=white;">
+      <div class="flex-container i-menu">
         <div class="flex-item f-jc-l menu-contain pd-1">
           <i class="bi bi-filter-left" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample"></i>
         </div>
@@ -193,6 +193,9 @@
                       <li class="nav-item">
                         <a class="nav-link text-dark" aria-current="page" href="{% url 'Administracion:admsProfileInfo' nombre_administracion=nombre_administracion pk=request.user.id  %}">Perfil</a>
                       </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-dark" aria-current="page" href="{% url 'Administracion:PoliticasEditar' nombre_administracion=nombre_administracion %}">Soporte Técnico</a>
+                      </li>
                       <!--li class="nav-item">
                        !-- <a class="nav-link text-dark" aria-current="page" href="{% url 'Administracion:admsProducts' nombre_administracion=nombre_administracion %}">Productos</a>
                       <!--/li>
@@ -216,6 +219,9 @@
                       </li>
                       <li class="nav-item">
                         <a class="nav-link text-dark" aria-current="page" href="{% url 'Administracion:PoliticasEditar' nombre_administracion=nombre_administracion %}">Politicas y Privacidad</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-dark" aria-current="page" href="{% url 'Administracion:admsUbicacion' nombre_administracion=nombre_administracion %}">Ubicación</a>
                       </li>
                     </div>
                     <!--h5 class="text-start pt-3">Ventas</h5>
