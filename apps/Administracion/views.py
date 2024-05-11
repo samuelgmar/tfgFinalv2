@@ -1091,3 +1091,44 @@ class BorrarRedSocial(View):
         redsocial = get_object_or_404(RedSocial, id=self.kwargs.get('pk'))
         redsocial.delete()
         return redirect('Administracion:admsRedesSociales', nombre_administracion=self.kwargs.get('nombre_administracion'))
+
+class pUbicacion(AdministracionRequiredMixin,globalVariablesRequiredMixin, TemplateView):
+    template_name = 'Administracion/ubicacion.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.nombre_administracion = kwargs.get('nombre_administracion')
+        self.administracion = get_object_or_404(LotteryAdministration, nombreAdministración__nombre_administracion=self.nombre_administracion)
+        context['administracion'] = self.administracion
+        context['nombreAdministracion'] = self.nombre_administracion
+        if self.administracion.imagen_cabecera:
+            context['imagenCabecera'] = self.administracion.imagen_cabecera
+        else:
+            context['imagenCabecera'] = ""
+        if self.administracion.logo:
+            context['imagenLogo'] = self.administracion.logo
+        else:
+            context['imagenLogo'] = ""
+        context['form'] = LotteryAdministrationForm(instance=self.administracion)
+        context['usuario'] = self.usuario
+        context['usuarioAdministracion'] = self.usuarioAdministracion
+        context['productos'] = self.productos
+        context['usuarios_normales'] = self.usuarios_normales
+        context['ordenes'] = self.ordenes
+        context['personalizar'] = self.personalizar
+        context['administracion'] = self.administracion
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST': 
+            administracion = get_object_or_404(LotteryAdministration, nombreAdministración__nombre_administracion=kwargs.get('nombre_administracion'))
+            ubi = request.POST.get('ubi')
+            pattern = r'src="([^"]+)"'
+            match = re.search(pattern, ubi)
+            if match:
+                url = match.group(1)  
+                administracion.iframe = url
+            else:
+                print("No se encontró ninguna URL en el iframe.")
+            administracion.save()
+        return redirect('Administracion:admsUbicacion', nombre_administracion=self.kwargs.get('nombre_administracion'))
