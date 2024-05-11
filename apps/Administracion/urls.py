@@ -35,4 +35,6 @@ urlpatterns = [
     path('redesSociales/', login_required(redesSociales.as_view(), login_url=reverse_lazy('Global:loginAdministracion')), name = "admsRedesSociales"),
     path('borrarRedesSociales/<int:pk>/', login_required(BorrarRedSocial.as_view(), login_url=reverse_lazy('Global:loginAdministracion')), name = "admsRedesSocialesBorrar"),
     path('redesSocialesEditar/<int:pk>/', login_required(redesSocialesEditar.as_view(), login_url=reverse_lazy('Global:loginAdministracion')), name = "admsRedesSocialesEditar"),
+    path('ubi/', login_required(pUbicacion.as_view(), login_url=reverse_lazy('Global:loginAdministracion')), name = "admsUbicacion"),
+
 ]
