@@ -322,6 +322,8 @@ class LotteryAdministration(models.Model):
     politicas_privacidad_resumen = RichTextField(null=True, blank=True)
     politicas_privacidad = RichTextField(null=True, blank=True)
     politicas_cookies = RichTextField(null=True, blank=True)
+    iframe = models.TextField(null=True, blank=True)
+
 
     def __str__(self):
         return self.nombreAdministración.nombre_administracion
