@@ -1,0 +1,77 @@
+{% extends 'Administracion/headers/headerHomeAdministracion.html' %}
+{% load static %}
+{% block title %}LotoFinder - Productos{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
+    
+{% block content %}
+<style>
+    #chart {
+      max-width: 760px;
+      margin: 35px auto;
+      opacity: 0.9;
+    }
+</style>
+<div id="q-app" class="q-page q-pa-sm pb-5">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Ubicación</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2 "></div>
+        <div class="bg-light pt-1 rounded shadow pb-1">
+            <h3 class="text-center fs-3">Tutorial Para Añadir Iframe de Ubicación de la Administración</h3>
+            <div class="my-3 d-flex justify-content-center">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Shx8aAqIPMk?si=uk_57GRxAdNK6CS7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="mx-4">
+                <q-field standout hint="Iframe actual" :dense="dense" readonly>
+                    <template v-slot:control>
+                      <div class="self-center full-width no-outline" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{administracion.iframe}}</div>
+                    </template>
+                </q-field>
+            </div>
+            <form method="post" class="m-4" enctype="multipart/form-data">
+                {% csrf_token %}
+                <q-input type="text" name="ubi" outlined v-model="email" label="Iframe Ubicación" :rules="emailRules" :dense="dense"></q-input>
+                <div class="w-100 d-flex justify-content-end my-3">
+                    <button type="submit" class="btn btn-info">Añadir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+
+<script>
+    const { ref, computed } = Vue
+
+    const app = Vue.createApp({
+      setup () {
+        const email = ref('')
+        const emailRules = [
+            (v) => !!v || 'El Iframe es requerido',
+            (v) => {
+                const iframePattern = /<iframe\s.*?src="([^"]+)".*?<\/iframe>/i;
+                return iframePattern.test(v) || 'El valor debe ser un iframe con el formato adecuado';
+            }
+        ]
+        const dense = ref(false)
+        return {
+            email,
+            emailRules,
+            dense
+        }
+      }
+    })
+
+  app.use(Quasar, { config: {} })
+  Quasar.lang.set(Quasar.lang.es)
+  app.mount('#q-app')
+</script>
+{% endblock %}
