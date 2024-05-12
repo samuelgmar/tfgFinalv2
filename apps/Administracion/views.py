@@ -502,7 +502,7 @@ class ProfileInfo(globalVariablesRequiredMixin, FormView):
 
 
 class clientesPedidos(globalVariablesRequiredMixin, ListView):
-    template_name = 'Administracion/ClientePedidos.html'
+    template_name = 'Administracion/OrderListClient.html'
     model = Order
     context_object_name = 'pedidos'
 
