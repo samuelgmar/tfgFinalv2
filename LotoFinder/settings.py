@@ -148,12 +148,13 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # La sesión permanece activa incluso d
 SESSION_COOKIE_AGE = 3600 * 12  
 
 CART_SESSION_ID = 'cart'
-STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = "media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
