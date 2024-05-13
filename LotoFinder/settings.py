@@ -149,7 +149,8 @@ SESSION_COOKIE_AGE = 3600 * 12
 
 CART_SESSION_ID = 'cart'
 
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_HOST = "https://lotofinder.es" if not DEBUG else ""
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / 'static']
