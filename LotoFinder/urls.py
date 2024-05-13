@@ -6,9 +6,7 @@ from django.contrib.auth import views as auth_views
 from apps.Cliente.views import CustomPasswordResetDoneView
 from apps.Global.views import Error404View, Error505View
 from django.conf.urls import handler404, handler500
-from django.conf.urls import url
-from django.conf import settings
-from django.views.static import serve
+
 
 urlpatterns = [
     #General panel
