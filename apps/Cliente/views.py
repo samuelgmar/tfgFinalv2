@@ -634,10 +634,8 @@ class homeCliente(TemplateView):
     template_name = 'Cliente/homeCliente.html'
     form_class = contactoUsForm
     def dispatch(self, request, *args, **kwargs):
-       
         nombre_administracion = kwargs.get('nombre_administracion')
         administracion_existente = UsuarioAdminstracion.objects.filter(nombre_administracion=nombre_administracion).exists()
-        self.user = Usuario.objects.get(username=UsuarioAdminstracion.objects.get(nombre_administracion=nombre_administracion).user.username)
         administracion = get_object_or_404(LotteryAdministration, nombreAdministración__nombre_administracion=nombre_administracion)
         self.administracion = administracion
         if not administracion_existente:
@@ -662,6 +660,7 @@ class homeCliente(TemplateView):
             form.save() 
         nombre_administracion = kwargs.get('nombre_administracion')
         return redirect('Cliente:HomeCliente', nombre_administracion=nombre_administracion)
+
 
 #auth
 class loginCliente(FormView):
