@@ -148,8 +148,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # La sesión permanece activa incluso d
 SESSION_COOKIE_AGE = 3600 * 12  
 
 CART_SESSION_ID = 'cart'
-MEDIA_URL = "media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "mediafinal/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafinal')
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
