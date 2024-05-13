@@ -22,8 +22,7 @@ urlpatterns = [
     path('<str:nombre_administracion>/', include(('apps.Cliente.urls','LotoCliente'))),
     #cookies
     path("cookies/", include("cookie_consent.urls")),
-]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
 
 
 urlpatterns += [
