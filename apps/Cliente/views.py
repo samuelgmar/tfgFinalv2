@@ -41,7 +41,7 @@ class PayPalClient:
     def __init__(self):
         self.client_id = "AQjCzMIsGLZhzj88QdoH4w0R4cPIkXPBgUVZXLO6yZna6vJxl6ldgNsXWfQwwGldvheFMNarFT0y4oXv"
         self.client_secret = "EIJcLHDT-el4mgL97af5un-PS_2pJoBIIRL-jp5WQdrKGE4qP6TNDJyLj5ZbSi2IUmHMa8j2hTB7TT5g"
-
+ 
         """Set up and return PayPal Python SDK environment with PayPal access credentials.
            This sample uses SandboxEnvironment. In production, use LiveEnvironment."""
 
