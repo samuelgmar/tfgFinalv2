@@ -635,7 +635,7 @@ class homeCliente(TemplateView):
     form_class = contactoUsForm
     def dispatch(self, request, *args, **kwargs):
         nombre_administracion = kwargs.get('nombre_administracion')
-        self.user = Usuario.objects.get(username=UsuarioAdminstracion.objects.get(nombre_administracion=nombre_administracion).user.username)
+        self.usuario = Usuario.objects.get(username=UsuarioAdminstracion.objects.get(nombre_administracion=nombre_administracion).user.username)
         administracion_existente = UsuarioAdminstracion.objects.filter(nombre_administracion=nombre_administracion).exists()
         administracion = get_object_or_404(LotteryAdministration, nombreAdministración__nombre_administracion=nombre_administracion)
         self.administracion = administracion
@@ -649,7 +649,7 @@ class homeCliente(TemplateView):
         context['slider'] = sliders
         form = self.form_class()
         context['redessociales'] = RedSocial.objects.filter(nombreAdministración = get_object_or_404(UsuarioAdminstracion, nombre_administracion=kwargs.get('nombre_administracion')))
-        context['user'] = self.user
+        context['usuario'] = self.usuario
         context['form'] = form
         context['administracion'] = self.administracion
         return context
