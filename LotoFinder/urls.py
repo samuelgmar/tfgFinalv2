@@ -6,6 +6,9 @@ from django.contrib.auth import views as auth_views
 from apps.Cliente.views import CustomPasswordResetDoneView
 from apps.Global.views import Error404View, Error505View
 from django.conf.urls import handler404, handler500
+from django.conf.urls import url
+from django.conf import settings
+from django.views.static import serve
 
 urlpatterns = [
     #General panel
@@ -20,11 +23,10 @@ urlpatterns = [
     path('<str:nombre_administracion>/', include(('apps.Cliente.urls','LotoCliente'))),
     #cookies
     path("cookies/", include("cookie_consent.urls")),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ] 
 
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = Error404View.as_view()
 handler500 = Error505View.as_error_view()
