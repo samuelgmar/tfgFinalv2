@@ -576,6 +576,7 @@ class clientesOrders(globalVariablesRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = Order.objects.all()
+        queryset = queryset.filter(administracion=UsuarioAdminstracion.objects.get(nombre_administracion=self.nombre_administracion))
         queryset = queryset.order_by('-creado')
         search_query = self.request.GET.get('q')
         if search_query:
