@@ -149,8 +149,9 @@
                 <ul class="dropdown-menu dropdown-menu-animated" style="border:0">
                     <div class="text-gray-700 dropdown-header" role="heading"><h6 class="text-uppercase font-weight-bold">{{ request.user.username }}</h6><small>{{ nombre_administracion }}</small></div>
                     <li><hr class="dropdown-divider" /></li>
-                    <div class="text-uppercase fw-normal dropdown-header" role="heading">Usuarios</div>
+                    <div class="text-uppercase fw-normal dropdown-header" role="heading">Usuario</div>
                     <a href="{% url 'Administracion:admsProfileInfo' nombre_administracion=nombre_administracion pk=request.user.id  %}" data-rr-ui-dropdown-item="" class="dropdown-item" role="button" tabindex="0">Perfil</a>
+                    <a href="https://lotofinder.es/{{ nombre_administracion }}/" data-rr-ui-dropdown-item="" class="dropdown-item" role="button" tabindex="0">Visitar Tienda</a>
                     <li><hr class="dropdown-divider" /></li>
                     <a href="{% url 'Global:logoutAdministracion' %}" data-rr-ui-dropdown-item="" class="dropdown-item">Logout</a>
                   </ul>
