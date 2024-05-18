@@ -895,10 +895,15 @@ class clienteCarritoDetail(View):
                 producto= Product.objects.get(id=cart.producto.id)
                 carrito= Carrito.objects.get(id=cart.id)
                 carrito.delete()
+                id = json.loads(producto.descripcion)["id"]
+                print('1')
+                print(id)
                 decimos = Product.objects.get(
-                    id= json.loads(producto.descripcion)["id"]
+                    id=id
                 )
+                print('2')
                 decimos.cantidad = decimos.cantidad + int(json.loads(producto.descripcion)["cantidad"])
+                print('3')
                 decimos.save()
                 producto.delete()
         return redirect('Cliente:ClienteCarritoDetail',  nombre_administracion=self.kwargs.get('nombre_administracion'))
