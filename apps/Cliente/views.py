@@ -447,7 +447,7 @@ class loteriaNacional(TemplateView):
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
-        locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+        
         if request.POST.get('sorteo') == 'LNS':
             data = request.POST.get('variable', '')
             datos = {k: v for k, v in request.POST.items()}
@@ -457,7 +457,6 @@ class loteriaNacional(TemplateView):
             fecha_str = request.POST.get('fecha')
             fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
             fecha_formateada = fecha_obj.strftime('%Y-%m-%d')
-            print(request.POST)
             producto = Product.objects.create(
                 administracion = get_object_or_404(UsuarioAdminstracion, nombre_administracion=kwargs.get('nombre_administracion')),
                 categoria= get_object_or_404(Category, slug='LNS'),
@@ -485,7 +484,6 @@ class loteriaNacional(TemplateView):
             fecha_str = request.POST.get('fecha')
             fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
             fecha_formateada = fecha_obj.strftime('%Y-%m-%d')
-            print(request.POST)
             producto = Product.objects.create(
                     administracion = get_object_or_404(UsuarioAdminstracion, nombre_administracion=kwargs.get('nombre_administracion')),
                     categoria= get_object_or_404(Category, slug='LNJ'),
