@@ -64,7 +64,7 @@
                                           <tr>
                                             <th scope="row">{{ producto.id }}</th>
                                             <td>{{ producto.juego }}</td>
-                                            <td><a  href="{%  url 'Cliente:ClienteCarritoInfo' nombre_administracion=nombre_administracion pk=producto.id %}" class=" shadow"><button type="button" class="btn bg-info" aria-label="Close"><i class="bi bi-info-square"></i></button></a></td>
+                                            <td><a  href="{%  url 'Cliente:ClienteOrderListInfo' nombre_administracion=nombre_administracion pk=producto.id %}" class=" shadow"><button type="button" class="btn bg-info" aria-label="Close"><i class="bi bi-info-square"></i></button></a></td>
                                           </tr>
                                         {% endfor %}
                                     </tbody>
