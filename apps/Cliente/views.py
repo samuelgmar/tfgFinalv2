@@ -412,6 +412,41 @@ class Sorteos():
             producto.save()
             carrito = Carrito.objects.create(user=request.user,producto=producto)
             carrito.save()
+        
+class loteriaNacional(TemplateView):
+    template_name = 'Cliente/loteriaNacional.html'
+    def dispatch(self, request, *args, **kwargs):
+        self.nombre_administracion = kwargs.get('nombre_administracion')
+        self.administracion_existente = UsuarioAdminstracion.objects.filter(nombre_administracion=self.nombre_administracion).exists()
+        administracion = get_object_or_404(LotteryAdministration, nombreAdministración__nombre_administracion=self.nombre_administracion)
+        self.administracion = administracion
+        if not self.administracion_existente:
+            return HttpResponseNotFound('Administración no encontrada')
+        return super().dispatch(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        search_query = self.request.GET.get('q')
+        queryset = Product.objects.all()  # Define queryset here
+        if search_query:
+            queryset = queryset.filter(
+                Q(nombre__icontains=search_query)
+            )
+        decimosJ = queryset.filter(
+            administracion=get_object_or_404(UsuarioAdminstracion, nombre_administracion=self.administracion),
+        )
+        decimoS = queryset.filter(
+            administracion=get_object_or_404(UsuarioAdminstracion, nombre_administracion=self.administracion),
+        )
+        decimosJ = decimosJ.exclude(nombre__in=["LNJ", "LNS", "eurodreams", "euromillones", "primitiva", "bonoloto", "elgordo"])
+        decimoS = decimoS.exclude(nombre__in=["LNJ", "LNS", "eurodreams", "euromillones", "primitiva", "bonoloto", "elgordo"])
+        context['administracion'] = self.administracion
+        context['dj'] = decimosJ
+        context['ds'] = decimoS
+        return context
+        
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
         if request.POST.get('sorteo') == 'LNS':
             data = request.POST.get('variable', '')
@@ -470,40 +505,6 @@ class Sorteos():
             productoget = Product.objects.get(id=request.POST.get('id'))
             productoget.cantidad = productoget.cantidad - 1
             productoget.save()
-
-class loteriaNacional(TemplateView):
-    template_name = 'Cliente/loteriaNacional.html'
-    def dispatch(self, request, *args, **kwargs):
-        self.nombre_administracion = kwargs.get('nombre_administracion')
-        self.administracion_existente = UsuarioAdminstracion.objects.filter(nombre_administracion=self.nombre_administracion).exists()
-        administracion = get_object_or_404(LotteryAdministration, nombreAdministración__nombre_administracion=self.nombre_administracion)
-        self.administracion = administracion
-        if not self.administracion_existente:
-            return HttpResponseNotFound('Administración no encontrada')
-        return super().dispatch(request, *args, **kwargs)
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        search_query = self.request.GET.get('q')
-        queryset = Product.objects.all()  # Define queryset here
-        if search_query:
-            queryset = queryset.filter(
-                Q(nombre__icontains=search_query)
-            )
-        decimosJ = queryset.filter(
-            administracion=get_object_or_404(UsuarioAdminstracion, nombre_administracion=self.administracion),
-        )
-        decimoS = queryset.filter(
-            administracion=get_object_or_404(UsuarioAdminstracion, nombre_administracion=self.administracion),
-        )
-        decimosJ = decimosJ.exclude(nombre__in=["LNJ", "LNS", "eurodreams", "euromillones", "primitiva", "bonoloto", "elgordo"])
-        decimoS = decimoS.exclude(nombre__in=["LNJ", "LNS", "eurodreams", "euromillones", "primitiva", "bonoloto", "elgordo"])
-        context['administracion'] = self.administracion
-        context['dj'] = decimosJ
-        context['ds'] = decimoS
-        return context
-        
-    def post(self, request, *args, **kwargs):
-        #Sorteos.SorteoPostMixin(request, **kwargs)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
 class eurodreams(TemplateView):
@@ -539,6 +540,8 @@ class primitiva(TemplateView):
         context['administracion'] = self.administracion
         return context
     def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         Sorteos.SorteoPostMixin(request, **kwargs)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
@@ -575,6 +578,8 @@ class bonoloto(TemplateView):
         context['administracion'] = self.administracion
         return context
     def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         Sorteos.SorteoPostMixin(request, **kwargs)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
@@ -593,6 +598,8 @@ class euromillones(TemplateView):
         context['administracion'] = self.administracion
         return context
     def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         Sorteos.SorteoPostMixin(request, **kwargs)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
@@ -633,6 +640,8 @@ class quiniela(TemplateView):
             return HttpResponseNotFound('Administración no encontrada')
         return super().dispatch(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         Sorteos.SorteoPostMixin(request, **kwargs)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
     
@@ -656,6 +665,8 @@ class quinigol(TemplateView):
             return HttpResponseNotFound('Administración no encontrada')
         return super().dispatch(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         Sorteos.SorteoPostMixin(request, **kwargs)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
  
