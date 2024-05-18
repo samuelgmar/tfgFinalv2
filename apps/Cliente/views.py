@@ -895,7 +895,9 @@ class clienteCarritoDetail(View):
                 producto= Product.objects.get(id=cart.producto.id)
                 carrito= Carrito.objects.get(id=cart.id)
                 carrito.delete()
-                id = json.loads(producto.descripcion)["id"]
+                descripcion = json.loads(producto.descripcion)
+                print(descripcion)
+                id = descripcion["id"]
                 print('1')
                 print(id)
                 decimos = Product.objects.get(
