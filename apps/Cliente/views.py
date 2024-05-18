@@ -273,7 +273,7 @@ def pago(request):
         }
         return JsonResponse(data)
 #all
-class SorteoPostMixin:
+def SorteoPostMixin(self, request):
     if True:
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
@@ -502,7 +502,7 @@ class loteriaNacional(TemplateView):
         return context
         
     def post(self, request, *args, **kwargs):
-        SorteoPostMixin(self, request, *args, **kwargs)
+        self.SorteoPostMixin(request)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
 class eurodreams(TemplateView):
@@ -520,7 +520,7 @@ class eurodreams(TemplateView):
         context['administracion'] = self.administracion
         return context
     def post(self, request, *args, **kwargs):
-        SorteoPostMixin(self, request, *args, **kwargs)
+        self.SorteoPostMixin(request)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
 class primitiva(TemplateView):
@@ -538,7 +538,7 @@ class primitiva(TemplateView):
         context['administracion'] = self.administracion
         return context
     def post(self, request, *args, **kwargs):
-        SorteoPostMixin(self, request, *args, **kwargs)
+        self.SorteoPostMixin(request)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
 class elgordo(TemplateView):
@@ -556,7 +556,7 @@ class elgordo(TemplateView):
         context['administracion'] = self.administracion
         return context
     def post(self, request, *args, **kwargs):
-        SorteoPostMixin(self, request, *args, **kwargs)
+        self.SorteoPostMixin(request)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
 class bonoloto(TemplateView):
@@ -574,7 +574,7 @@ class bonoloto(TemplateView):
         context['administracion'] = self.administracion
         return context
     def post(self, request, *args, **kwargs):
-        SorteoPostMixin(self, request, *args, **kwargs)
+        self.SorteoPostMixin(request)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
 class euromillones(TemplateView):
@@ -592,7 +592,7 @@ class euromillones(TemplateView):
         context['administracion'] = self.administracion
         return context
     def post(self, request, *args, **kwargs):
-        SorteoPostMixin(self, request, *args, **kwargs)
+        self.SorteoPostMixin(request)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
 class quiniela(TemplateView):
@@ -632,7 +632,7 @@ class quiniela(TemplateView):
             return HttpResponseNotFound('Administración no encontrada')
         return super().dispatch(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
-        SorteoPostMixin(self, request, *args, **kwargs)
+        self.SorteoPostMixin(request)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
     
 
@@ -655,7 +655,7 @@ class quinigol(TemplateView):
             return HttpResponseNotFound('Administración no encontrada')
         return super().dispatch(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
-        SorteoPostMixin(self, request, *args, **kwargs)
+        self.SorteoPostMixin(request)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
  
 class homeCliente(TemplateView):
