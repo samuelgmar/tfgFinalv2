@@ -445,7 +445,20 @@ class loteriaNacional(TemplateView):
         return context
         
     def post(self, request, *args, **kwargs):
-        print(dict(request.POST).get('fecha', [''])[0])
+        meses = {
+            "enero": 1,
+            "febrero": 2,
+            "marzo": 3,
+            "abril": 4,
+            "mayo": 5,
+            "junio": 6,
+            "julio": 7,
+            "agosto": 8,
+            "septiembre": 9,
+            "octubre": 10,
+            "noviembre": 11,
+            "diciembre": 12
+        }
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         if request.POST.get('sorteo') == 'LNS':
@@ -498,6 +511,12 @@ class loteriaNacional(TemplateView):
             precio = re.sub(r'\.(?=[^.]*$)', ',', precio).replace(".","")
             print("14")
             fecha_str = dict(request.POST).get('fecha', [''])[0]
+            fecha_str = fecha_str.replace(' de ', ' ')
+            fecha_str = fecha_str.split(' ')
+            mes_nombre = fecha_str[1]
+            mes_numero = meses.get(mes_nombre.lower())
+            fecha = f"{fecha_str[2]}-{mes_numero:02d}-{int(fecha_str[0]):02d}"
+
             print("15")
             fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
             print("16")
@@ -511,7 +530,7 @@ class loteriaNacional(TemplateView):
                     slug="LNJ",
                     descripcion=datos_json,
                     precio=float(precio.replace(",",".")),
-                    fecha_sorteo= fecha_formateada,
+                    fecha_sorteo= fecha ,
                     disponibilidad=True,
                     cantidad=request.POST.get('cantidad')
             )
