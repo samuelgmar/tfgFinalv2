@@ -868,7 +868,11 @@ class clienteCarritoInfo(TemplateView):
             mode = str(mode).replace(" ","").replace("\n","")
         except:
             mode = ""
-        variable = json.loads(variable['variable'])
+        try:
+            variable = json.loads(variable['variable'])
+        except:
+            ultima_clave = list(variable.keys())[-1]
+            variable = variable[ultima_clave]
         todo = []
         apuequip = []
         equipos=""
