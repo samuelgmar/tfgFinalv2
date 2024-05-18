@@ -25,6 +25,7 @@ urlpatterns = [
     #pago
     path('carrito/', clienteCarritoDetail.as_view(), name = "ClienteCarritoDetail"),
     path('carrito/<int:pk>/', clienteCarritoInfo.as_view(), name = "ClienteCarritoInfo"),
+    path('ClienteOrderList/<int:pk>/', ClienteOrderListInfo.as_view(), name = "ClienteOrderListInfo"),
     path('privacy-policy/', politica.as_view(), name = "privacyPolicy"),
     path('ClienteOrderList/', ClienteOrderList.as_view(), name = "ClienteOrderList"),
     path('PaymentFailed/', ClientePaymentFailed.as_view(), name = "ClientePaymentFailed"),
