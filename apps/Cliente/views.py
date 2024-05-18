@@ -516,11 +516,8 @@ class loteriaNacional(TemplateView):
             mes_nombre = fecha_str[1]
             mes_numero = meses.get(mes_nombre.lower())
             fecha = f"{fecha_str[2]}-{mes_numero:02d}-{int(fecha_str[0]):02d}"
-
             print("15")
-            fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
             print("16")
-            fecha_formateada = fecha_obj.strftime('%Y-%m-%d')
             print("17")
             producto = Product.objects.create(
                     administracion = get_object_or_404(UsuarioAdminstracion, nombre_administracion=kwargs.get('nombre_administracion')),
