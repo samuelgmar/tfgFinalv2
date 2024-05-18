@@ -38,7 +38,6 @@
             {%else%}
             <div class="w-100 text-h6 text-center q-mb-xs text-black d-flex pb-4 justify-content-center">{{descripcion.cantidad}} Boleto{%if descripcion.cantidad == 1 %}s{%endif%} - {{descripcion.fecha}} - {{descripcion.precio}}€</div>
             {%endif%}
-            <div class="w-100 text-h6 text-center q-mb-xs text-black d-flex pb-4 justify-content-center">{% if producto.codigovalidez %}{{producto.codigovalidez}}{%else%}El boleto está siendo gestionado, en unos minutos lo tendra disponible.{%endif%}</div>
             <div class="pb-4">
               <q-separator color="black" inset></q-separator>
             </div>
