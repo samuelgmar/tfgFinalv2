@@ -1,0 +1,684 @@
+{% extends 'Cliente/headers/headerCliente.html' %}
+{% load static %}
+{% block title %}{{ nombre_administracion }} - Carrito{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Administracion/css/admProductList.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.15.3/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block extrascripts %}
+
+{% endblock %}
+    
+{% block content %}
+<style>
+  .col{
+    text-align: center;
+  }
+  .sorteo{
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+  }
+  .ed-cubiculo{
+    height: 100px;
+    width: 100%;
+  }
+</style>
+<div class="container-fluid pb-3">
+    <div class="container ">
+        <h1 class="text-start pt-5  text-uppercase m-0 text-wrap" >Producto Info - {{producto.id}}</h1>
+        <div class="border-1 border-bottom border-black mb-3 mt-2 "></div>
+        <div class="bg-body-tertiary pt-1 rounded shadow "> 
+          <div id="q-app" >
+            <div class="w-100 text-h4 text-center q-mb-xs text-black d-flex p-4 justify-content-center">{{producto.juego}}</div>
+            {% if descripcion.sorteo != 'LNJ' and descripcion.sorteo != 'LNS' %}
+            <div class="w-100 text-h6 text-center q-mb-xs text-black d-flex pb-4 justify-content-center">{{descripcion.mode}} - {% if descripcion.dia == 'Semanal' %}{{descripcion.dia}}{%else%}No Semanal{%endif%} - {{descripcion.precio}}</div>
+            {%else%}
+            <div class="w-100 text-h6 text-center q-mb-xs text-black d-flex pb-4 justify-content-center">{{descripcion.cantidad}} Boleto{%if descripcion.cantidad == 1 %}s{%endif%} - {{descripcion.fecha}} - {{descripcion.precio}}€</div>
+            {%endif%}
+            <div class="w-100 text-h6 text-center q-mb-xs text-black d-flex pb-4 justify-content-center">{% if producto.codigovalidez %}{{producto.codigovalidez}}{%else%}El boleto está siendo gestionado, en unos minutos lo tendra disponible.{%endif%}</div>
+            <div class="pb-4">
+              <q-separator color="black" inset></q-separator>
+            </div>
+             {% if producto.juego == 'Eurodreams' %}
+              <div class="w-100 sorteo d-flex justify-content-center flex-column" >
+                {% if descripcion.mode != 'Multiple' %}
+                <div class="h-100 m-2 d-flex justify-content-center flex-column">
+                  {% if variable.numerosSeleccionados.0 != Null %}
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center">1.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.0.0}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.0.1}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.0.2}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.0.3}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.0.4}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.0.5}}</q-avatar>
+                        </div>
+                      </div>
+                      <span class="mx-1 d-block"> - </span>
+                      <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.sueñosSeleccionados.0}}</q-avatar>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% if variable.numerosSeleccionados.1 != Null %}
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center">2.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.1.0}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.1.1}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.1.2}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.1.3}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.1.4}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.1.5}}</q-avatar>
+                        </div>
+                      </div>
+                      <span class="mx-1 d-block"> - </span>
+                      <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.sueñosSeleccionados.1}}</q-avatar>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% if variable.numerosSeleccionados.2 != Null %}
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center">3.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.2.0}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.2.1}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.2.2}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.2.3}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.2.4}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.2.5}}</q-avatar>
+                        </div>
+                      </div>
+                      <span class="mx-1 d-block"> - </span>
+                      <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.sueñosSeleccionados.2}}</q-avatar>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% if variable.numerosSeleccionados.3 != Null %}
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center">4.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.3.0}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.3.1}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.3.2}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.3.3}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.3.4}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.3.5}}</q-avatar>
+                        </div>
+                      </div>
+                      <span class="mx-1 d-block"> - </span>
+                      <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.sueñosSeleccionados.3}}</q-avatar>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% if variable.numerosSeleccionados.4 != Null %}
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center">5.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.4.0}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.4.1}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.4.2}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.4.3}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.4.4}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.4.5}}</q-avatar>
+                        </div>
+                      </div>
+                      <span class="mx-1 d-block"> - </span>
+                      <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.sueñosSeleccionados.4}}</q-avatar>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% if variable.numerosSeleccionados.5 != Null %}
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center">6.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.5.0}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.5.1}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.5.2}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.5.3}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.5.4}}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{{variable.numerosSeleccionados.5.5}}</q-avatar>
+                        </div>
+                      </div>
+                      <span class="mx-1 d-block"> - </span>
+                      <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.sueñosSeleccionados.5}}</q-avatar>
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+                {%else%}
+                <div class="h-100 m-2">
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center ">1.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.0 != 99 %}{{variable.grupoMultiple.0}}{% endif %}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.1 != 99 %}{{variable.grupoMultiple.1}}{% endif %}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.2 != 99 %}{{variable.grupoMultiple.2}}{% endif %}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.3 != 99 %}{{variable.grupoMultiple.3}}{% endif %}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.4 != 99 %}{{variable.grupoMultiple.4}}{% endif %}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.5 != 99 %}{{variable.grupoMultiple.5}}{% endif %}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.6 != 99 %}{{variable.grupoMultiple.6}}{% endif %}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.7 != 99 %}{{variable.grupoMultiple.7}}{% endif %}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.8 != 99 %}{{variable.grupoMultiple.8}}{% endif %}</q-avatar>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if variable.grupoMultiple.9 != 99 %}{{variable.grupoMultiple.9}}{% endif %}</q-avatar>
+                        </div>
+                      </div>
+                      <span class="mx-1 d-block"> - </span>
+                      <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.multipleSueño.0}}</q-avatar>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+             {% endif %}
+             {% if producto.juego == 'Primitiva' %}
+              <div class="w-100 sorteo d-flex justify-content-center flex-column" >
+              {% if descripcion.mode != 'Multiple' %}
+              <div class="h-100 m-2">
+                {% for valor in variable.numerosSeleccionados %}
+                <div class="text-h6 q-mb-xs text-black d-flex justify-content-center ">{{ forloop.counter }}.
+                  <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                    <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        {% for numero in valor %}
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if valor != 99 %}{{numero}}{% endif %}</q-avatar>
+                        </div>
+                        {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <div class="w-100 d-flex justify-content-center flex-column">
+                {%if variable.joker == True%}
+                  <q-avatar class="m-auto" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.reintegro.0}}</q-avatar>
+                  <img class="m-auto" width="200px" src="{% static 'imgs/sorteos/logojoker.svg' %}" alt="" srcset="">
+                {%endif%}
+                </div>
+              </div>
+              {%else%}
+              <div class="h-100 m-2">
+                <div class="text-h6 q-mb-xs text-black d-flex justify-content-center ">1.
+                  <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                    <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                      {% for valor in variable.grupoMultiple %}
+                      <div class="d-flex align-items-center justify-content-center p-1">
+                        <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if valor != 99 %}{{valor}}{% endif %}</q-avatar>
+                      </div>
+                      {%endfor%}
+                    </div>
+                    <span class="mx-1 d-block"> - </span>
+                    <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.reintegro.0}}</q-avatar>
+                  </div>
+                </div>
+                {%if variable.joker == True%}
+                <div class="w-100 d-flex justify-content-center">
+                  <img width="200px" src="{% static 'imgs/sorteos/logojoker.svg' %}" alt="" srcset="">
+                </div>
+                {%endif%}
+              </div>
+              {% endif %}
+              </div>
+             {% endif %}
+             {% if producto.juego == 'Bonoloto' %}
+              <div class="w-100 sorteo d-flex justify-content-center flex-column" >
+                {% if descripcion.mode != 'Multiple' %}
+                <div class="h-100 m-2">
+                  {% for valor in variable.numerosSeleccionados %}
+                <div class="text-h6 q-mb-xs text-black d-flex justify-content-center ">{{ forloop.counter }}.
+                  <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                    <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        {% for numero in valor %}
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if valor != 99 %}{{numero}}{% endif %}</q-avatar>
+                        </div>
+                        {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                </div>
+                {%else%}
+                <div class="h-100 m-2">
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center ">1.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        {% for valor in variable.grupoMultiple %}
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if valor != 99 %}{{valor}}{% endif %}</q-avatar>
+                        </div>
+                        {%endfor%}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             {% endif %}
+             
+              
+             {% endif %}
+             {% if producto.juego == 'Euromillón' %}
+             <div class="w-100 sorteo d-flex justify-content-center flex-column" >
+              {% if descripcion.mode != 'Multiple' %}
+                <div class="h-100 m-2">
+                  {% for valor in variable.apuestasSencillas %}
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center ">{{ forloop.counter }}.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                          {% for numero in valor %}
+                            {%if forloop.counter != 6 %}
+                              <div class="d-flex align-items-center justify-content-center p-1">
+                                <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if valor != 99 %}{{numero}}{% endif %}</q-avatar>
+                              </div>
+                            {%else%}
+                              <span class="mx-1 d-block"> - </span>
+                              <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{numero}}</q-avatar>
+                            {%endif%}
+                          {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              {%else%}
+              <div class="h-100 m-2">
+                <div class="text-h6 q-mb-xs text-black d-flex justify-content-center ">1.
+                  <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                    <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                      {% for valor in variable.apuestasMultiple.0 %}
+                      <div class="d-flex align-items-center justify-content-center p-1">
+                        <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if valor != 99 %}{{valor}}{% endif %}</q-avatar>
+                      </div>
+                      {%endfor%}
+                      <span class="mx-1 d-block"> - </span>
+                      {% for valor in variable.apuestasMultipleEstrellas.0 %}
+                      <div class="d-flex align-items-center justify-content-center p-1">
+                        <q-avatar  size="40px" font-size="20px" color="blue-4" text-color="white" >{{valor}}</q-avatar>
+                      </div>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+             </div>
+             {% endif %}
+             {% if producto.juego == 'Quiniela' %}
+             <div class="decimo-box d-flex justify-content-center m-auto flex-column">
+              <div class="q-pa-md">
+                <q-table
+                  style="height: 400px"
+                  flat bordered
+                  title="Apuesta"
+                  :rows="rows"
+                  :columns="columns"
+                  row-key="index"
+                  virtual-scroll
+                  v-model:pagination="pagination"
+                  :rows-per-page-options="[0]"
+                ></q-table>
+              </div>
+              <div class="text-h6 px-3 d-flex justify-content-center flex-column text-center">
+                Elige 8
+                <br>
+                <div class="d-flex justify-content-center flex-column py-2">
+                  {%for var in  variable.elige8%}
+                  <div>
+                  <span class="" style="font-size: medium; font-weight: normal;">{{var}}</span>
+                  </div>
+                  {%endfor%}
+                </div>
+              </div>
+             </div>
+             {% endif %}
+             {% if producto.juego == 'Quinigol' %}
+             <div class="decimo-box d-flex justify-content-center m-auto flex-column">
+              <div class="fs-5 fw-bold">
+                <div class="q-pa-md row items-start q-gutter-md d-flex justify-content-center">
+                  <q-card class="my-card">
+                    <q-card-section class="bg-grey-8 text-white">
+                      <div class="text-h6">{{todo.0.0}}</div>
+                    </q-card-section>
+              
+                    <q-card-actions vertical align="center">
+                      {%for apu in todo.0%}
+                        {% if forloop.counter != 1 %}
+                        <div class="text-subtitle2">{{apu}}</div>  
+                        {%endif%}
+                      {%endfor%}
+                    </q-card-actions>
+                  </q-card>
+                  <q-card class="my-card">
+                    <q-card-section class="bg-grey-8 text-white">
+                      <div class="text-h6">{{todo.1.0}}</div>
+                    </q-card-section>
+              
+                    <q-card-actions vertical align="center">
+                      {%for apu in todo.1%}
+                        {% if forloop.counter != 1 %}
+                        <div class="text-subtitle2">{{apu}}</div>  
+                        {%endif%}
+                      {%endfor%}
+                    </q-card-actions>
+                  </q-card>
+                  <q-card class="my-card">
+                    <q-card-section class="bg-grey-8 text-white">
+                      <div class="text-h6">{{todo.2.0}}</div>
+                    </q-card-section>
+              
+                    <q-card-actions vertical align="center">
+                      {%for apu in todo.2%}
+                        {% if forloop.counter != 1 %}
+                        <div class="text-subtitle2">{{apu}}</div>  
+                        {%endif%}
+                      {%endfor%}
+                    </q-card-actions>
+                  </q-card>
+                  <q-card class="my-card">
+                    <q-card-section class="bg-grey-8 text-white">
+                      <div class="text-h6">{{todo.3.0}}</div>
+                    </q-card-section>
+              
+                    <q-card-actions vertical align="center">
+                      {%for apu in todo.3%}
+                        {% if forloop.counter != 1 %}
+                        <div class="text-subtitle2">{{apu}}</div>  
+                        {%endif%}
+                      {%endfor%}
+                    </q-card-actions>
+                  </q-card>
+                  <q-card class="my-card">
+                    <q-card-section class="bg-grey-8 text-white">
+                      <div class="text-h6">{{todo.4.0}}</div>
+                    </q-card-section>
+              
+                    <q-card-actions vertical align="center">
+                      {%for apu in todo.4%}
+                        {% if forloop.counter != 1 %}
+                        <div class="text-subtitle2">{{apu}}</div>  
+                        {%endif%}
+                      {%endfor%}
+                    </q-card-actions>
+                  </q-card>
+                  <q-card class="my-card">
+                    <q-card-section class="bg-grey-8 text-white">
+                      <div class="text-h6">{{todo.5.0}}</div>
+                    </q-card-section>
+              
+                    <q-card-actions vertical align="center">
+                      {%for apu in todo.5%}
+                        {% if forloop.counter != 1 %}
+                        <div class="text-subtitle2">{{apu}}</div>  
+                        {%endif%}
+                      {%endfor%}
+                    </q-card-actions>
+                  </q-card>
+                </div>
+                
+                
+              </div>
+             </div>
+             {% endif %}
+             {% if descripcion.sorteo == 'LNS' %}
+             <div class="decimo-box d-flex justify-content-center m-auto flex-column">
+              <div class="text-center" style="color: red;font-weight: bold;"><span style="color: black;">Número: </span>{{descripcion.variable}}</div>
+              <div class="m-auto decimo-box-img  position-relative d-flex justify-content-center" style="background-image: url({% static 'imgs/sorteos/s20_2024_pc.jpg' %}); background-repeat:no-repeat;height:45vw;width:68vw;background-size: contain;max-height: 268px;max-width: 380px;">
+              </div>
+             </div>
+             {% endif %}
+             {% if descripcion.sorteo == 'LNJ' %}
+             <div class="decimo-box d-flex justify-content-center m-auto flex-column">
+              <div class="text-center" style="color: red;font-weight: bold;"><span style="color: black;">Número: </span>{{descripcion.variable}}</div>
+              <div class="m-auto decimo-box-img  position-relative d-flex justify-content-center" style="background-image: url({% static 'imgs/sorteos/s19_2024_pc.jpg' %}); background-repeat:no-repeat;height:45vw;width:68vw;background-size: contain;max-height: 268px;max-width: 380px;">
+              </div>
+             </div>
+             {% endif %}
+             {% if producto.juego == 'El Gordo' %}
+              <div class="w-100 sorteo d-flex justify-content-center flex-column" >
+              {% if descripcion.mode != 'Multiple' %}
+                <div class="h-100 m-2">
+                  {% for valor in variable.numerosSeleccionados %}
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center ">{{ forloop.counter }}.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                          {% for numero in valor %}
+                          <div class="d-flex align-items-center justify-content-center p-1">
+                            <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if valor != 99 %}{{numero}}{% endif %}</q-avatar>
+                          </div>
+                          {% endfor %}
+                          <span class="mx-1 d-block"> - </span>
+                          <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{% if forloop.counter == 1%}{{variable.clavesSeleccionados.0}}{% endif %}{% if forloop.counter == 2%}{{variable.clavesSeleccionados.1}}{% endif %}{% if forloop.counter == 3%}{{variable.clavesSeleccionados.2}}{% endif %}{% if forloop.counter == 4%}{{variable.clavesSeleccionados.3}}{% endif %}{% if forloop.counter == 5%}{{variable.clavesSeleccionados.4}}{% endif %}{% if forloop.counter == 6%}{{variable.clavesSeleccionados.5}}{% endif %}</q-avatar>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              {%else%}
+                <div class="h-100 m-2">
+                  <div class="text-h6 q-mb-xs text-black d-flex justify-content-center ">1.
+                    <div class=" d-flex px-1 justify-content-evenly align-items-center">
+                      <div class="full-width row wrap justify-content-evenly items-start align-items-center content-start">
+                        {% for valor in variable.numerosSeleccionados.0 %}
+                        <div class="d-flex align-items-center justify-content-center p-1">
+                          <q-avatar  size="40px" font-size="20px" color="teal" text-color="white" >{% if valor != 99 %}{{valor}}{% endif %}</q-avatar>
+                        </div>
+                        {%endfor%}
+                        <span class="mx-1 d-block"> - </span>
+                        <q-avatar class="" size="40px" font-size="20px" color="blue-4" text-color="white" >{{variable.clavesSeleccionados.0}}</q-avatar>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+             {% endif %}
+          </div>
+        </div>
+    </div>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/quasar.umd.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quasar@2.15.2/dist/lang/es.umd.prod.js"></script>
+  {% if "Multiple" not in mode %}
+  <script>
+    const columns = [
+  {
+    name: 'index',
+    label: '#',
+    field: 'index'
+  },
+  {
+    name: 'name',
+    required: true,
+    label: 'PARTIDOS',
+    align: 'left',
+    field: row => row.name,
+    format: val => `${val}`,
+    sortable: true
+  },
+  { name: 'A1', align: 'center', label: 'A1', field: 'A1', sortable: true },
+  { name: 'A2', align: 'center', label: 'A2', field: 'A2', sortable: true },
+  { name: 'A3', align: 'center', label: 'A3', field: 'A3', sortable: true },
+  { name: 'A4', align: 'center', label: 'A4', field: 'A4', sortable: true },
+  { name: 'A5', align: 'center', label: 'A5', field: 'A5', sortable: true },
+  { name: 'A6', align: 'center', label: 'A6', field: 'A6', sortable: true },
+  { name: 'A7', align: 'center', label: 'A7', field: 'A7', sortable: true },
+  { name: 'A8', align: 'center', label: 'A8', field: 'A8', sortable: true },
+  
+]
+const rows = [
+{% for equipo in todo %}
+  {
+    name: "{{equipo.0}}",
+    A1: "{{equipo.1}}",
+    A2: "{{equipo.2}}",
+    A3: "{{equipo.3}}",
+    A4: "{{equipo.4}}",
+    A5: "{{equipo.5}}",
+    A6: "{{equipo.6}}",
+    A7: "{{equipo.7}}",
+    A8: "{{equipo.8}}"
+  },
+{%endfor%}
+]
+  </script>
+  {% else %}
+  <script>
+const columns = [
+  {
+    name: 'index',
+    label: '#',
+    field: 'index'
+  },
+  {
+    name: 'name',
+    required: true,
+    label: 'PARTIDOS',
+    align: 'left',
+    field: row => row.name,
+    format: val => `${val}`,
+    sortable: true
+  },
+  { name: 'A1', align: 'center', label: 'A1', field: 'A1', sortable: true },
+
+  
+]
+const rows = [
+{% for equipo in todo %}
+  {
+    name: "{{equipo.0|safe}}",
+    A1: "{{equipo.1|safe}}",
+    A2: "{{equipo.2|safe}}",
+    A3: "{{equipo.3|safe}}",
+    A4: "{{equipo.4|safe}}",
+    A5: "{{equipo.5|safe}}",
+    A6: "{{equipo.6|safe}}",
+    A7: "{{equipo.7|safe}}",
+    A8: "{{equipo.8|safe}}"
+  },
+{%endfor%}
+]
+  </script>
+  {% endif %}
+
+<script>
+    
+    
+
+
+const { ref } = Vue
+
+
+
+
+// we generate lots of rows here
+
+rows.forEach((row, index) => {
+  row.index = index
+})
+
+    const app = Vue.createApp({
+      setup () {
+        return {
+          columns,
+          rows,
+
+          pagination: ref({
+            rowsPerPage: 0
+          })
+        }
+      }
+    })
+
+    app.use(Quasar, { config: {} })
+    Quasar.lang.set(Quasar.lang.es)
+    app.mount('#q-app')
+</script>
+{% endblock %}
