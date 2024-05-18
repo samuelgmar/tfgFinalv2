@@ -93,7 +93,7 @@
               </a>
               {%endif%}
               <button type="button" id="menu-icon" class="bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#cart">
-                <i class="bi bi-list fs-1" data-bs-toggle="collapse" data-bs-target="#collapseExample" style="color: {{ administracion.color_secundario }};" aria-expanded="true" aria-controls="collapseExample"></i>
+                <i class="bi bi-list fs-1" data-bs-toggle="collapse" data-bs-target="#collapseExampledos" style="color: {{ administracion.color_secundario }};" aria-expanded="true" aria-controls="collapseExampledos"></i>
               </button>
             </div>
           </div>
@@ -156,7 +156,7 @@
                     </a>
                   </li-->
                 </ul>
-                <ul id="collapseExample" class="collapse nav col-12 col-lg-auto my-2 justify-content-center align-items-center my-md-0 text-small">
+                <ul id="collapseExampledos" class="collapse nav col-12 col-lg-auto my-2 justify-content-center align-items-center my-md-0 text-small">
                   <li class="sorteo-link">
                     <a href="{% url 'Cliente:loteriaNacional' nombre_administracion=nombre_administracion %}" class="nav-link" style="color: {{ administracion.color_secundario }};">
                       <div style="background-image:url('{% static 'imgs/sorteos/m1_loteria.png' %}') ;" class="sorteo-icon icon-nav-menu d-block mx-auto mb-1 d-flex flex-wrap align-items-center justify-content-center" width="24px" height="24px"></div>
