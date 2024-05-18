@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-
+import logging
 # Create your views here.
 class HomePageView(TemplateView):
     template_name = 'global/home.html'
@@ -13,6 +13,7 @@ class Error404View(TemplateView):
             return super().dispatch(request, *args, **kwargs)
         except Exception as e:
             # Registra el error en el logger
+            logger = logging.getLogger(__name__)
             logger.exception("Error 404: %s", e)
             # Re-lanza la excepción para que Django maneje el error como de costumbre
             raise
