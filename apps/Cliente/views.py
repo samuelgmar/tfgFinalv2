@@ -520,7 +520,7 @@ class loteriaNacional(TemplateView):
             carrito = Carrito.objects.create(user=request.user,producto=producto)
             carrito.save()
             productoget = Product.objects.get(id=request.POST.get('id'))
-            productoget.cantidad = productoget.cantidad - 1
+            productoget.cantidad = productoget.cantidad - int(request.POST.get('cantidad'))
             productoget.save()
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=self.nombre_administracion)
 
