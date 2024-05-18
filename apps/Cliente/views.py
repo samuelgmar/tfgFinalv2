@@ -457,9 +457,11 @@ class loteriaNacional(TemplateView):
             precio = re.sub(r'\.(?=[^.]*$)', ',', precio).replace(".","")
             fecha_str = dict(request.POST).get('fecha', [''])[0]
             print("------------------>")
-            print(fecha_str)
+            print("1")
             fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
+            print("2")
             fecha_formateada = fecha_obj.strftime('%Y-%m-%d')
+            print("3")
             producto = Product.objects.create(
                 administracion = get_object_or_404(UsuarioAdminstracion, nombre_administracion=kwargs.get('nombre_administracion')),
                 categoria= get_object_or_404(Category, slug='LNS'),
@@ -472,22 +474,36 @@ class loteriaNacional(TemplateView):
                 disponibilidad=True,
                 cantidad=request.POST.get('cantidad')
             )
+            print("4")
             producto.save()
+            print("5")
             carrito = Carrito.objects.create(user=request.user,producto=producto)
+            print("6")
             carrito.save()
+            print("7")
             productoget = Product.objects.get(id=request.POST.get('id'))
+            print("8")
             productoget.cantidad = productoget.cantidad - int(request.POST.get('cantidad'))
+            print("9")
             productoget.save()
+            print("10")
         if request.POST.get('sorteo') == 'LNJ':
             data = request.POST.get('variable', '')
+            print("------------------>")
+            print("11")
             datos = {k: v for k, v in request.POST.items()}
             datos_json = json.dumps(datos)
+            print("12")
             precio = request.POST.get('precio').replace(" ", "").replace("€", "")
+            print("13")
             precio = re.sub(r'\.(?=[^.]*$)', ',', precio).replace(".","")
-            fecha_str = request.POST.get('fecha')
-            print
+            print("14")
+            fecha_str = dict(request.POST).get('fecha', [''])[0]
+            print("15")
             fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
+            print("16")
             fecha_formateada = fecha_obj.strftime('%Y-%m-%d')
+            print("17")
             producto = Product.objects.create(
                     administracion = get_object_or_404(UsuarioAdminstracion, nombre_administracion=kwargs.get('nombre_administracion')),
                     categoria= get_object_or_404(Category, slug='LNJ'),
@@ -500,13 +516,19 @@ class loteriaNacional(TemplateView):
                     disponibilidad=True,
                     cantidad=request.POST.get('cantidad')
             )
+            print("18")
             producto.save()
+            print("19")
             carrito = Carrito.objects.create(user=request.user,producto=producto)
-
+            print("20")
             carrito.save()
+            print("21")
             productoget = Product.objects.get(id=request.POST.get('id'))
+            print("22")
             productoget.cantidad = productoget.cantidad - 1
+            print("23")
             productoget.save()
+        print("final")
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=self.nombre_administracion)
 
 class eurodreams(TemplateView):
