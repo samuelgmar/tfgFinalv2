@@ -907,6 +907,90 @@ class clienteCarritoDetail(View):
                 producto.delete()
         return redirect('Cliente:ClienteCarritoDetail',  nombre_administracion=self.kwargs.get('nombre_administracion'))
             
+class ClienteOrderListInfo(TemplateView):
+    template_name = 'Cliente/carritoinfodos.html'
+    def dispatch(self, request, *args, **kwargs):
+        self.nombre_administracion = kwargs.get('nombre_administracion')
+        administracion_existente = UsuarioAdminstracion.objects.filter(nombre_administracion=self.nombre_administracion).exists()
+        administracion = get_object_or_404(LotteryAdministration, nombreAdministración__nombre_administracion=self.nombre_administracion)
+        self.administracion = administracion
+        if not administracion_existente:
+            return HttpResponseNotFound('Administración no encontrada')
+        if not request.user.is_authenticated:
+            return redirect('Cliente:loginCliente', nombre_administracion= self.nombre_administracion)
+        return super().dispatch(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        id_product = kwargs.get('pk')
+        producto = Product.objects.get(id=id_product)
+        variable = json.loads(producto.descripcion)
+        try:
+            mode = variable['mode']
+            mode = str(mode).replace(" ","").replace("\n","")
+        except:
+            mode = ""
+        try:
+            variable = json.loads(variable['variable'])
+        except:
+            ultima_clave = list(variable.keys())[-1]
+            variable = variable[ultima_clave]
+        todo = []
+        apuequip = []
+        equipos=""
+        if producto.juego == "Quiniela":
+            equipos = str(variable['equiposOrden'][0]).replace("[",'["')
+            equipos = equipos.replace("]",'"]')
+            equipos = equipos.replace(",",'","')
+            equipos = equipos.replace('" ','"')
+            equipos = eval(equipos)
+            apuestas = eval(str(variable['fullApuesta']))
+            todo = []
+            apuequip = []
+            if mode.__contains__("Sencilla"):
+                for i,equipo in enumerate(equipos):
+                    apuequip.append(equipo)
+                    for index in range(0,8):
+                        try:
+                            apuequip.append(str(apuestas[0][index][i][0]))
+                        except:
+                            apuequip.append(" ")
+                    todo.append(apuequip)
+                    apuequip = []
+            else:
+                for i,equipo in enumerate(equipos):
+                    apuequip.append(equipo)
+                    print(str(apuestas[0][0][i]))
+                    apuequip.append(apuestas[0][0][i])
+                    todo.append(apuequip)
+                    apuequip = []
+
+        if producto.juego == "Quinigol":
+            apuestas = eval(str(variable['casillasMarcadasxPartido']))
+            equipos = str(variable['orden_partidos']).replace("[",'["')
+            equipos = equipos.replace("]",'"]')
+            equipos = equipos.replace(",",'","')
+            equipos = equipos.replace('" ','"')
+            equipos = eval(equipos)
+            for i in range(0,6):
+                apuequip.append(equipos[i]) 
+                for apu in apuestas[i]:
+                    partido =  "partido"+str(i)+"_"
+                    apuesta = str(apu).replace(partido,"")
+                    apuesta = "-".join(apuesta)
+                    apuesta = apuesta.upper()
+                    apuequip.append(apuesta)
+                todo.append(apuequip)
+                apuequip = []
+            
+
+        context['mode'] = mode        
+        context['todo']= todo
+        context['equipos'] = equipos
+        context['descripcion'] = json.loads(producto.descripcion)
+        context['variable'] = variable
+        context['producto'] = producto
+        context['administracion'] = self.administracion
+        return context
 class clienteCarritoInfo(TemplateView):
     template_name = 'Cliente/carritoinfo.html'
     def dispatch(self, request, *args, **kwargs):
