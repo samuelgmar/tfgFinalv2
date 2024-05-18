@@ -900,7 +900,7 @@ class clienteCarritoDetail(View):
                     decimos = Product.objects.get(
                         id=id
                     )
-                     decimos.cantidad = decimos.cantidad + int(json.loads(producto.descripcion)["cantidad"])
+                    decimos.cantidad = decimos.cantidad + int(json.loads(producto.descripcion)["cantidad"])
                     decimos.save()
                 except:  
                     print('')
