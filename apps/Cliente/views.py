@@ -482,10 +482,9 @@ class loteriaNacional(TemplateView):
             precio = request.POST.get('precio').replace(" ", "").replace("€", "")
             precio = re.sub(r'\.(?=[^.]*$)', ',', precio).replace(".","")
             fecha_str = request.POST.get('fecha')
+            print(fecha_str)
             fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
-            print("7")
             fecha_formateada = fecha_obj.strftime('%Y-%m-%d')
-            print("8")
             producto = Product.objects.create(
                     administracion = get_object_or_404(UsuarioAdminstracion, nombre_administracion=kwargs.get('nombre_administracion')),
                     categoria= get_object_or_404(Category, slug='LNJ'),
