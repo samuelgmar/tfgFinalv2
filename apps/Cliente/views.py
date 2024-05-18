@@ -503,7 +503,7 @@ class loteriaNacional(TemplateView):
         return context
         
     def post(self, request, *args, **kwargs):
-        Sorteos.SorteoPostMixin(request, **kwargs)
+        #Sorteos.SorteoPostMixin(request, **kwargs)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
 class eurodreams(TemplateView):
