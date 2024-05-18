@@ -901,7 +901,6 @@ class clienteCarritoDetail(View):
                         id=id
                     )
                 except:
-                    descripcion = json.loads(producto.descripcion)["id"]
                     decimos = Product.objects.get(
                         descripcion=producto.descripcion
                     )
