@@ -582,9 +582,9 @@ class quiniela(SorteoPostMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         response = requests.get("https://juegos.loteriasyapuestas.es/jugar/la-quiniela/apuesta")
         soup = BeautifulSoup(response.text, "html.parser")
-        print(soup)
         # Obtener nombres de partidos de la primera sección
         contenedor_nombres = soup.find("div", class_="contenedor-nombres-completos")
+        print(contenedor_nombres)
         if contenedor_nombres:
             nombres_partidos = contenedor_nombres.find_all("span", class_="nombre-partido-completo")
             partidos_1 = [nombre_partido.get_text(strip=True) for nombre_partido in nombres_partidos]
