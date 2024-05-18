@@ -274,7 +274,7 @@ def pago(request):
         return JsonResponse(data)
 #all
 class SorteoPostMixin:
-    def post(self, request, *args, **kwargs):
+    if True:
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         if request.POST.get('sorteo') == 'eurodreams':
@@ -470,7 +470,7 @@ class SorteoPostMixin:
             productoget.save()
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))  
     
-class loteriaNacional(SorteoPostMixin,TemplateView):
+class loteriaNacional(TemplateView):
     template_name = 'Cliente/loteriaNacional.html'
     def dispatch(self, request, *args, **kwargs):
         self.nombre_administracion = kwargs.get('nombre_administracion')
@@ -500,8 +500,12 @@ class loteriaNacional(SorteoPostMixin,TemplateView):
         context['dj'] = decimosJ
         context['ds'] = decimoS
         return context
+        
+    def post(self, request, *args, **kwargs):
+        SorteoPostMixin(self, request, *args, **kwargs)
+        return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
-class eurodreams(SorteoPostMixin, TemplateView):
+class eurodreams(TemplateView):
     template_name = 'Cliente/eurodreams.html'
     def dispatch(self, request, *args, **kwargs):
         nombre_administracion = kwargs.get('nombre_administracion')
@@ -515,8 +519,11 @@ class eurodreams(SorteoPostMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['administracion'] = self.administracion
         return context
+    def post(self, request, *args, **kwargs):
+        SorteoPostMixin(self, request, *args, **kwargs)
+        return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
-class primitiva(SorteoPostMixin, TemplateView):
+class primitiva(TemplateView):
     template_name = 'Cliente/primitiva.html'
     def dispatch(self, request, *args, **kwargs):
         nombre_administracion = kwargs.get('nombre_administracion')
@@ -530,8 +537,11 @@ class primitiva(SorteoPostMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['administracion'] = self.administracion
         return context
+    def post(self, request, *args, **kwargs):
+        SorteoPostMixin(self, request, *args, **kwargs)
+        return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
-class elgordo(SorteoPostMixin, TemplateView):
+class elgordo(TemplateView):
     template_name = 'Cliente/elgordo.html'
     def dispatch(self, request, *args, **kwargs):
         nombre_administracion = kwargs.get('nombre_administracion')
@@ -545,8 +555,11 @@ class elgordo(SorteoPostMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['administracion'] = self.administracion
         return context
+    def post(self, request, *args, **kwargs):
+        SorteoPostMixin(self, request, *args, **kwargs)
+        return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
-class bonoloto(SorteoPostMixin, TemplateView):
+class bonoloto(TemplateView):
     template_name = 'Cliente/bonoloto.html'
     def dispatch(self, request, *args, **kwargs):
         nombre_administracion = kwargs.get('nombre_administracion')
@@ -560,8 +573,11 @@ class bonoloto(SorteoPostMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['administracion'] = self.administracion
         return context
+    def post(self, request, *args, **kwargs):
+        SorteoPostMixin(self, request, *args, **kwargs)
+        return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
-class euromillones(SorteoPostMixin, TemplateView):
+class euromillones(TemplateView):
     template_name = 'Cliente/euromillones.html'
     def dispatch(self, request, *args, **kwargs):
         nombre_administracion = kwargs.get('nombre_administracion')
@@ -575,8 +591,11 @@ class euromillones(SorteoPostMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['administracion'] = self.administracion
         return context
+    def post(self, request, *args, **kwargs):
+        SorteoPostMixin(self, request, *args, **kwargs)
+        return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
 
-class quiniela(SorteoPostMixin, TemplateView):
+class quiniela(TemplateView):
     template_name = 'Cliente/quiniela.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -612,9 +631,12 @@ class quiniela(SorteoPostMixin, TemplateView):
         if not administracion_existente:
             return HttpResponseNotFound('Administración no encontrada')
         return super().dispatch(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        SorteoPostMixin(self, request, *args, **kwargs)
+        return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
     
 
-class quinigol(SorteoPostMixin, TemplateView):
+class quinigol(TemplateView):
     template_name = 'Cliente/quinigol.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -632,6 +654,9 @@ class quinigol(SorteoPostMixin, TemplateView):
         if not administracion_existente:
             return HttpResponseNotFound('Administración no encontrada')
         return super().dispatch(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        SorteoPostMixin(self, request, *args, **kwargs)
+        return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
  
 class homeCliente(TemplateView):
     template_name = 'Cliente/homeCliente.html'
