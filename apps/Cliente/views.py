@@ -445,7 +445,7 @@ class loteriaNacional(TemplateView):
         return context
         
     def post(self, request, *args, **kwargs):
-        print(dict(request.POST))
+        print(dict(request.POST).get('fecha', [''])[0])
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
@@ -455,7 +455,9 @@ class loteriaNacional(TemplateView):
             datos_json = json.dumps(datos)
             precio = request.POST.get('precio').replace(" ", "").replace("€", "")
             precio = re.sub(r'\.(?=[^.]*$)', ',', precio).replace(".","")
-            fecha_str = request.POST.get('fecha')
+            fecha_str = dict(request.POST).get('fecha', [''])[0]
+            print("------------------>")
+            print(fecha_str)
             fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
             fecha_formateada = fecha_obj.strftime('%Y-%m-%d')
             producto = Product.objects.create(
@@ -483,7 +485,7 @@ class loteriaNacional(TemplateView):
             precio = request.POST.get('precio').replace(" ", "").replace("€", "")
             precio = re.sub(r'\.(?=[^.]*$)', ',', precio).replace(".","")
             fecha_str = request.POST.get('fecha')
-            
+            print
             fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
             fecha_formateada = fecha_obj.strftime('%Y-%m-%d')
             producto = Product.objects.create(
