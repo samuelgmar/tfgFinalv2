@@ -448,7 +448,6 @@ class loteriaNacional(TemplateView):
         print(dict(request.POST).get('fecha', [''])[0])
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
-        locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
         if request.POST.get('sorteo') == 'LNS':
             data = request.POST.get('variable', '')
             datos = {k: v for k, v in request.POST.items()}
