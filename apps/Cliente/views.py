@@ -447,7 +447,7 @@ class loteriaNacional(TemplateView):
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
-        print(request.POST.get('sorteo'))
+        locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
         if request.POST.get('sorteo') == 'LNS':
             data = request.POST.get('variable', '')
             datos = {k: v for k, v in request.POST.items()}
@@ -477,17 +477,11 @@ class loteriaNacional(TemplateView):
             productoget.save()
         if request.POST.get('sorteo') == 'LNJ':
             data = request.POST.get('variable', '')
-            print("1")
             datos = {k: v for k, v in request.POST.items()}
-            print("2")
             datos_json = json.dumps(datos)
-            print("3")
             precio = request.POST.get('precio').replace(" ", "").replace("€", "")
-            print("4")
             precio = re.sub(r'\.(?=[^.]*$)', ',', precio).replace(".","")
-            print("5")
             fecha_str = request.POST.get('fecha')
-            print("6")
             fecha_obj = datetime.datetime.strptime(fecha_str, '%d de %B de %Y')
             print("7")
             fecha_formateada = fecha_obj.strftime('%Y-%m-%d')
