@@ -624,26 +624,17 @@ class quiniela(TemplateView):
     template_name = 'Cliente/quiniela.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        proxies = {
-            "http": "http://185.238.228.187:80"
-        }
-        response = requests.get("https://juegos.loteriasyapuestas.es/jugar/la-quiniela/apuesta/", proxies=proxies, timeout=10)
-        soup = BeautifulSoup(response.text, "html.parser")
-        # Obtener nombres de partidos de la primera sección
-        contenedor_nombres = soup.find("div", class_="contenedor-nombres-completos")
-        print(contenedor_nombres)
-        if contenedor_nombres:
-            nombres_partidos = contenedor_nombres.find_all("span", class_="nombre-partido-completo")
-            partidos_1 = [nombre_partido.get_text(strip=True) for nombre_partido in nombres_partidos]
-            # Obtener nombres de partidos de la segunda sección
-
-            contenedor_partidos = soup.find("div", class_="partidos pleno-15")
-            nombre_local = contenedor_partidos.find("p", class_="equipo").text
-            nombre_visitante = contenedor_partidos.find_all("p", class_="equipo")[1].text
-            partido_2 = [nombre_local, nombre_visitante]
-
-            context['partidos_1'] = partidos_1
-            context['partido_2'] = partido_2
+        response_dos = requests.get("https://www.loteriasperolo.es/quiniela-online/")
+        soup_dos = BeautifulSoup(response_dos.text, "html.parser")
+        contenedor_nombres_dos = soup_dos.find("div", id="partidos_boleto")
+        if contenedor_nombres_dos:
+            partidos = contenedor_nombres_dos.find_all("tr", class_="partido_f")
+            nombres_partidos = []
+            for partido in partidos:
+                div_partido = partido.find("div", class_="partido")
+                if div_partido:
+                    nombres_partidos.append(div_partido.get_text())
+            context['partidos'] = nombres_partidos
         else:
             context['error'] = 'La sección actual esta en mantenimiento pronto estaremos de vuelta.'
         context['administracion'] = self.administracion
@@ -657,8 +648,6 @@ class quiniela(TemplateView):
             return HttpResponseNotFound('Administración no encontrada')
         return super().dispatch(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         Sorteos.SorteoPostMixin(request, **kwargs)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
     
