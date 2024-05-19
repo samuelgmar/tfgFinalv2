@@ -123,7 +123,7 @@
           </select>
         </div>
         <div class="d-flex justify-content-center align-items-center mx-1 pb-3">
-          <button id="" onclick="autom(this)" class="btn-d mx-2 apu-mul-btn" type="button">GENERAR A.MULTIPLE AUto.</button>
+          <button id="" onclick="autom(this)" class="btn-d mx-2 apu-mul-btn p-0" type="button">GENERAR A.MULTIPLE AUto.</button>
         </div>
         <div class="w-25 m-auto mb-3 border-bottom border-black"></div>
         <div class="position-relative d-flex justify-content-center flex-column pt-4">
@@ -148,7 +148,7 @@
                     <tr id="partido_f1" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(1)">
-                          {{ partidos_1.0 }}
+                          {{ partidos.0 }}
                         </div>
                       </td>
                       <td><div class="partido_index">1</div></td>
@@ -157,7 +157,7 @@
                     <tr id="partido_f2" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(2)">
-                          {{ partidos_1.1 }}
+                          {{ partidos.1 }}
                         </div>
                       </td>
                       <td><div class="partido_index">2</div></td>
@@ -166,7 +166,7 @@
                     <tr id="partido_f3" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(3)">
-                          {{ partidos_1.2 }}
+                          {{ partidos.2 }}
                         </div>
                       </td>
                       <td><div class="partido_index">3</div></td>
@@ -175,7 +175,7 @@
                     <tr id="partido_f4" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(4)">
-                          {{ partidos_1.3 }}
+                          {{ partidos.3 }}
                         </div>
                       </td>
                       <td><div class="partido_index">4</div></td>
@@ -184,7 +184,7 @@
                     <tr id="partido_f5" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(5)">
-                          {{ partidos_1.4 }}
+                          {{ partidos.4 }}
                         </div>
                       </td>
                       <td><div class="partido_index">5</div></td>
@@ -193,7 +193,7 @@
                     <tr id="partido_f6" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(6)">
-                          {{ partidos_1.5 }}
+                          {{ partidos.5 }}
                         </div>
                       </td>
                       <td><div class="partido_index">6</div></td>
@@ -202,7 +202,7 @@
                     <tr id="partido_f7" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(7)">
-                          {{ partidos_1.6 }}
+                          {{ partidos.6 }}
                         </div>
                       </td>
                       <td><div class="partido_index">7</div></td>
@@ -211,7 +211,7 @@
                     <tr id="partido_f8" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(8)">
-                          {{ partidos_1.7 }}
+                          {{ partidos.7 }}
                         </div>
                       </td>
                       <td><div class="partido_index">8</div></td>
@@ -220,7 +220,7 @@
                     <tr id="partido_f9" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(9)">
-                          {{ partidos_1.8 }}
+                          {{ partidos.8 }}
                         </div>
                       </td>
                       <td><div class="partido_index">9</div></td>
@@ -229,7 +229,7 @@
                     <tr id="partido_f10" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(10)">
-                          {{ partidos_1.9 }}
+                          {{ partidos.9 }}
                         </div>
                       </td>
                       <td><div class="partido_index">10</div></td>
@@ -238,7 +238,7 @@
                     <tr id="partido_f11" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(11)">
-                          {{ partidos_1.10 }}
+                          {{ partidos.10 }}
                         </div>
                       </td>
                       <td><div class="partido_index">11</div></td>
@@ -247,7 +247,7 @@
                     <tr id="partido_f12" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(12)">
-                          {{ partidos_1.11 }}
+                          {{ partidos.11 }}
                         </div>
                       </td>
                       <td><div class="partido_index">12</div></td>
@@ -256,7 +256,7 @@
                     <tr id="partido_f13" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(13)">
-                          {{ partidos_1.12 }}
+                          {{ partidos.12 }}
                         </div>
                       </td>
                       <td><div class="partido_index">13</div></td>
@@ -265,7 +265,7 @@
                     <tr id="partido_f14" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(14)">
-                          {{ partidos_1.13 }}
+                          {{ partidos.13 }}
                         </div>
                       </td>
                       <td><div class="partido_index">14</div></td>
@@ -274,7 +274,7 @@
                     <tr id="partido_f15" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(15)">
-                          {{ partido_2.0 }}
+                          {{ partidos.14 }}
                         </div>
                       </td>
                       <td><div class="partido_index">P15</div></td>
@@ -283,7 +283,7 @@
                     <tr id="partido_f16" class="partido_f">
                       <td>
                         <div class="partido" onclick="return setE8(16)">
-                          {{ partido_2.1 }}
+                          {{ partidos.15 }}
                         </div>
                       </td>
                       <td><div class="partido_index">P15</div></td>
@@ -5578,8 +5578,15 @@ function toggleHighlight(div) {
 // Función para manejar el clic en los div .partido_f
 function handleDivClick(event) {
     // Si el checkbox está marcado
-    if (checkboxElige8.checked) {
+    if (checkboxElige8.checked ) {
         const targetDiv = event.target.closest('.partido_f .partido');
+        let textContent = targetDiv.textContent;
+        textContent = textContent.replace(/\s+/g, ' ').trim();
+        let nombreuno = "{{partidos.14}}";
+        let nombredos = "{{partidos.15}}";
+        if (textContent === nombreuno || textContent === nombredos) {
+          return;
+        }
         if (targetDiv) {
             toggleHighlight(targetDiv);
         }
@@ -6036,19 +6043,16 @@ function handleDivClick(event) {
        texto = texto.replace("      ","")
        elige.push(texto)
     });
-    let partidos_1 = "{{partidos_1}}"
+    let partidos_1 = "{{partidos}}"
     partidos_1 = partidos_1.replace(/\n/g, "").replace(/\t/g, "");
     partidos_1 = partidos_1.replace(/&#x27;/g, "");
     partidos_1 = partidos_1.replace(/\s*-\s*/g, "-");
-    let partidos_2 = "{{partido_2}}"
-    partidos_2 = partidos_2.replace(/\n/g, "").replace(/\t/g, "");
-    partidos_2 = partidos_2.replace(/&#x27;/g, "");
-    partidos_2 = partidos_2.replace(/\s*-\s*/g, "-");
-    
+    let partidos_2 = "{{partidos.14}}-{{partidos.15}}"
+    let orden= ["{{ partidos.0 }}","{{partidos.1}}","{{partidos.2}}","{{partidos.3}}","{{partidos.4}}","{{partidos.5}}","{{partidos.6}}","{{partidos.7}}","{{partidos.8}}","{{partidos.9}}","{{partidos.10}}","{{partidos.11}}","{{partidos.12}}","{{partidos.13}}",partidos_2];
     const numerosJson = JSON.stringify({
       fullApuesta: fullApuesta,
       elige8: elige,
-      equiposOrden: [partidos_1,partidos_2]
+      equiposOrden: orden
     });
     const miArrayJsonInput = document.getElementById('variable');
     miArrayJsonInput.value = numerosJson;
