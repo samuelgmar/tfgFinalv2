@@ -656,10 +656,20 @@ class quinigol(TemplateView):
     template_name = 'Cliente/quinigol.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        response = requests.get("https://juegos.loteriasyapuestas.es/jugar/quinigol/apuesta")
-        soup = BeautifulSoup(response.text, "html.parser")
-        nombre_list_partidos_texts = [nombre.text.strip() for nombre in soup.find_all('div', class_='nombre-list-partidos')]
-        context['partidos'] = nombre_list_partidos_texts
+        context['partidos'] = ""
+        response_dos = requests.get("https://www.loteriasperolo.es/quinigol/")
+        soup_dos = BeautifulSoup(response_dos.text, "html.parser")
+        contenedor_nombres_dos = soup_dos.find("div", id="equipos_boleto")
+        if contenedor_nombres_dos:
+            partidos = contenedor_nombres_dos.find_all("tr", class_="equipo_f")
+            nombres_partidos = []
+            for partido in partidos:
+                div_partido = partido.find("div", class_="equipo")
+                if div_partido:
+                    nombres_partidos.append(div_partido.get_text())
+            context['partidos'] = nombres_partidos
+        else:
+            context['error'] = 'La sección actual esta en mantenimiento pronto estaremos de vuelta.'
         context['administracion'] = self.administracion
         return context
     def dispatch(self, request, *args, **kwargs):
@@ -671,8 +681,6 @@ class quinigol(TemplateView):
             return HttpResponseNotFound('Administración no encontrada')
         return super().dispatch(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return HttpResponseRedirect(reverse_lazy('Cliente:loginCliente', kwargs={'nombre_administracion': kwargs.get('nombre_administracion')}))
         Sorteos.SorteoPostMixin(request, **kwargs)
         return redirect('Cliente:ClienteCarritoDetail', nombre_administracion=kwargs.get('nombre_administracion'))
  
