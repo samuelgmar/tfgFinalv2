@@ -595,15 +595,15 @@
 const rows = [
 {% for equipo in todo %}
   {
-    name: "{{equipo.0}}",
-    A1: "{{equipo.1}}",
-    A2: "{{equipo.2}}",
-    A3: "{{equipo.3}}",
-    A4: "{{equipo.4}}",
-    A5: "{{equipo.5}}",
-    A6: "{{equipo.6}}",
-    A7: "{{equipo.7}}",
-    A8: "{{equipo.8}}"
+    name: "{{equipo.0|safe}}",
+    A1: "{{equipo.1|safe}}",
+    A2: "{{equipo.2|safe}}",
+    A3: "{{equipo.3|safe}}",
+    A4: "{{equipo.4|safe}}",
+    A5: "{{equipo.5|safe}}",
+    A6: "{{equipo.6|safe}}",
+    A7: "{{equipo.7|safe}}",
+    A8: "{{equipo.8|safe}}"
   },
 {%endfor%}
 ]
