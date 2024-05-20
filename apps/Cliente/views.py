@@ -1024,6 +1024,7 @@ class clienteCarritoInfo(TemplateView):
             equipos = equipos.replace(",",'","')
             equipos = equipos.replace('" ','"')
             equipos = eval(equipos)
+            equipos = [partido.strip("'") for partido in equipos]
             apuestas = eval(str(variable['fullApuesta']))
             todo = []
             apuequip = []
