@@ -672,14 +672,12 @@ class clientesValidarOrder(globalVariablesRequiredMixin,LoginRequiredMixin, Temp
         context = super().get_context_data(**kwargs)
         id = kwargs.get('pk')
         order = Order.objects.get(id=id)
-
-        
-
         context['order'] = order
         self.nombre_administracion = UsuarioAdminstracion.objects.filter(user=self.request.user).first() 
         context['nombre_administracion'] = self.nombre_administracion
         context['usuario'] = self.usuario
         context['productos'] = order.productos
+        eli8 = ""
         productos = order.obtener_productos()
         todo=[]
         productosMostrar=[]
@@ -694,7 +692,7 @@ class clientesValidarOrder(globalVariablesRequiredMixin,LoginRequiredMixin, Temp
             productosMostrar.append(str(producto.categoria))
             productosMostrar.append(json.loads(producto.descripcion))
             
-            variable = json.loads(producto.descripcion)     
+            variable = json.loads(producto.descripcion)
             try:
                 mode = variable['mode']
                 mode = str(mode).replace(" ","").replace("\n","")
@@ -715,6 +713,7 @@ class clientesValidarOrder(globalVariablesRequiredMixin,LoginRequiredMixin, Temp
                 
                 productosMostrar.append(equipos)
                 apuestas = eval(str(variable['fullApuesta']))
+                eli8 = eval(str(variable['elige8']))
                 tododos = []
                 apuequip = []
                 if mode.__contains__("Sencilla"):
@@ -745,6 +744,7 @@ class clientesValidarOrder(globalVariablesRequiredMixin,LoginRequiredMixin, Temp
                 tododos = []
                 apuequip = []
                 productosMostrar.append(equipos)
+                
                 for i in range(0,6):
                     apuequip.append(equipos[i]) 
                     for apu in apuestas[i]:
@@ -757,6 +757,7 @@ class clientesValidarOrder(globalVariablesRequiredMixin,LoginRequiredMixin, Temp
                     apuequip = []
                 productosMostrar.append(tododos)
             productosMostrar.append(str(producto.codigovalidez))
+            productosMostrar.append(eli8)
             todo.append(productosMostrar)
             productosMostrar=[]
 
@@ -766,6 +767,8 @@ class clientesValidarOrder(globalVariablesRequiredMixin,LoginRequiredMixin, Temp
         context['descripcion'] = json.loads(producto.descripcion)
         context['variable'] = variable
         context['producto'] = producto
+        print('----------->')
+        
         return context
     def post(self, request, **kwargs):
         if request.method == 'POST':
