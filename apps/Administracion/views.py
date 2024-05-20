@@ -707,7 +707,7 @@ class clientesValidarOrder(globalVariablesRequiredMixin,LoginRequiredMixin, Temp
             productosMostrar.append(variable)
             
             if producto.juego == "Quiniela":
-                equipos = str(variable['equiposOrden'][0]).replace("[",'["')
+                equipos = str(variable['equiposOrden']).replace("[",'["')
                 equipos = equipos.replace("]",'"]')
                 equipos = equipos.replace(",",'","')
                 equipos = equipos.replace('" ','"')
